@@ -173,7 +173,7 @@ export default function Header ({ actualTheme, switchTheme }) {
                 </ListItem>
                 <ListItem to='/resources' button component={Link} onClick={toggle}>
                   <ListItemIcon><AppShortcutIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Miners / Wallets' secondary='Mochimo Software' />
+                  <ListItemText primary='Wallets / Miners' secondary='Mochimo Software' />
                 </ListItem>
                 <ListItem to='/api' button component={Link} onClick={toggle}>
                   <ListItemIcon><ApiIcon fontSize='large' /></ListItemIcon>

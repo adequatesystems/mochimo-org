@@ -122,36 +122,42 @@ export function Resources () {
           <Grid item sm={8} md={6} lg={4}>
             <List>
               <ListSubheader inset>
-                <Typography variant='h3' align='left'>Node/API</Typography>
+                <Typography variant='h3' align='left'>Wallets</Typography>
               </ListSubheader>
-              <ListItem
-                button component={Link}
-                href='https://github.com/mochimodev/mojo-java-wallet/releases'
-              >
+              <ListItem button component={Link} href='https://github.com/mochimodev/mochimo'>
                 <ListItemIcon>
                   <img alt='linux icon' src='/assets/icons/linux.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='Mochimo Full Node'
-                  secondary='Mochimo Crypto Engine'
+                  primary="Linux CLI Developer's Wallet"
+                  secondary='Packaged with Full Node'
                 />
               </ListItem>
-              <ListItem button disabled>
+              <ListItem button component={Link} href='https://github.com/mochimodev/mojo-java-wallet/releases'>
                 <ListItemIcon>
                   <img alt='java icon' src='/assets/icons/java.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='Mochimo API (Java)'
-                  secondary='Full Node API (on request)'
+                  primary='Mojo Java Wallet'
+                  secondary='Cross Platform'
                 />
               </ListItem>
-              <ListItem button component={Link} href='https://github.com/adequatesystems/mochimo-api-nodejs'>
+              <ListItem button disabled>
                 <ListItemIcon>
-                  <img alt='nodejs icon' src='/assets/icons/nodejs.png' width={32} />
+                  <img alt='apple icon' src='/assets/icons/apple.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='Mochimo API (Node.js)'
-                  secondary='Detached API'
+                  primary='iOS Wallet'
+                  secondary='Awaiting Apple approval...'
+                />
+              </ListItem>
+              <ListItem button disabled>
+                <ListItemIcon>
+                  <img alt='www icon' src='/assets/icons/www.png' width={32} />
+                </ListItemIcon>
+                <ListItemText
+                  primary='Web Wallet'
+                  secondary='Under Development...'
                 />
               </ListItem>
             </List>
@@ -193,33 +199,36 @@ export function Resources () {
           <Grid item sm={8} md={6} lg={4}>
             <List>
               <ListSubheader inset>
-                <Typography variant='h3' align='left'>Wallets</Typography>
+                <Typography variant='h3' align='left'>Node/API</Typography>
               </ListSubheader>
-              <ListItem button component={Link} href='https://github.com/mochimodev/mochimo'>
+              <ListItem
+                button component={Link}
+                href='https://github.com/mochimodev/mojo-java-wallet/releases'
+              >
                 <ListItemIcon>
                   <img alt='linux icon' src='/assets/icons/linux.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Linux CLI Developer's Wallet"
-                  secondary='Packaged with Full Node'
-                />
-              </ListItem>
-              <ListItem button component={Link} href='https://github.com/mochimodev/mojo-java-wallet/releases'>
-                <ListItemIcon>
-                  <img alt='java icon' src='/assets/icons/java.png' width={32} />
-                </ListItemIcon>
-                <ListItemText
-                  primary='Mojo Java Wallet'
-                  secondary='Cross Platform'
+                  primary='Mochimo Full Node'
+                  secondary='Mochimo Crypto Engine'
                 />
               </ListItem>
               <ListItem button disabled>
                 <ListItemIcon>
-                  <img alt='www icon' src='/assets/icons/www.png' width={32} />
+                  <img alt='java icon' src='/assets/icons/java.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='Web Wallet'
-                  secondary='Under Development...'
+                  primary='Mochimo API (Java)'
+                  secondary='Full Node API (on request)'
+                />
+              </ListItem>
+              <ListItem button component={Link} href='https://github.com/adequatesystems/mochimo-api-nodejs'>
+                <ListItemIcon>
+                  <img alt='nodejs icon' src='/assets/icons/nodejs.png' width={32} />
+                </ListItemIcon>
+                <ListItemText
+                  primary='Mochimo API (Node.js)'
+                  secondary='Detached API'
                 />
               </ListItem>
             </List>

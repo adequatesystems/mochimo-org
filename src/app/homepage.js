@@ -523,11 +523,8 @@ export default function Homepage () {
         <HomepageDivider>Frequently Asked Questions</HomepageDivider>
         <Masonry
           columns={{ sm: 1, md: 2, lg: 3 }} spacing={2} sx={{
-            backgroundImage: 'url(/assets/backgrounds/markus-spiske-iar-afB0QQw-unsplash.jpg)',
-            backgroundPosition: 'center top',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            boxShadow: 'inset 0 0 4em 4em #1e1e1e'
+            boxShadow: 'inset 0 0 4em 4em #1e1e1e',
+            background: 'black'
           }}
         >
           <RaisedCard>
