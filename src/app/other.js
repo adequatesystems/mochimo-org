@@ -234,7 +234,7 @@ export function Exchanges () {
   useEffect(() => scrollToTopNow(), []);
   return (
     <Container>
-      <Grid container spacing={4} padding={4} align='center'>
+      <Grid container spacing={4} align='center'>
         <Grid item xs={12}>
           <Typography variant='h2'>
             <u style={{ textDecorationColor: '#0059ff' }}>
@@ -356,7 +356,7 @@ export function MeetTheTeam () {
 
   return (
     <Container>
-      <Grid container spacing={2} padding={4} align='center'>
+      <Grid container spacing={4} align='center'>
         <Grid item xs={12}>
           <Typography variant='h2'>
             <u style={{ textDecorationColor: '#0059ff' }}>
@@ -398,7 +398,7 @@ export function MeetTheTeam () {
 export function Privacy () {
   return (
     <Container>
-      <Grid container spacing={4} padding={4}>
+      <Grid container spacing={4}>
         <Grid item xs={12} align='center'>
           <Typography variant='h2'>
             <u style={{ textDecorationColor: '#0059ff' }}>

@@ -107,7 +107,7 @@ function Headerbutton ({ title, ...props }) {
     <Tooltip title={title} arrow>
       <IconButton
         component={props.href ? 'a' : null} {...props}
-        sx={props.href ? { display: { xs: 'none', sm: 'inline-flex' } } : {}}
+        sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
       />
     </Tooltip>
   );
