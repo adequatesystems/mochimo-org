@@ -294,8 +294,6 @@ export function Exchanges () {
               <DirectionsIcon fontSize='inherit' />&nbsp;
               <Link href='https://trade.citex.co.kr/trade/MCM_BTC'>BTC</Link>
               <span> • </span>
-              <Link href='https://trade.citex.co.kr/trade/MCM_ETH'>ETH</Link>
-              <span> • </span>
               <Link href='https://trade.citex.co.kr/trade/MCM_USDT'>USDT</Link>
             </Typography>
           </Grid>
