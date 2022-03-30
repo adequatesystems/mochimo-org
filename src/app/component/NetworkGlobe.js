@@ -61,7 +61,7 @@ export default function NetworkGlobe () {
   }, [nodes]);
 
   useEffect(() => {
-    if (points.length) {
+    if (points.length && !countries.features.length) {
       /* eslint-disable-next-line no-undef */// fetch is defined globally
       fetch('/assets/data/countries-hex-data.json')
         .then((res) => res.json())
