@@ -524,7 +524,8 @@ export default function Homepage () {
         <Masonry
           columns={{ sm: 1, md: 2, lg: 3 }} spacing={2} sx={{
             boxShadow: 'inset 0 0 4em 4em #1e1e1e',
-            background: 'black'
+            background: 'black',
+            margin: 0
           }}
         >
           <RaisedCard>
