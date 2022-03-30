@@ -11,6 +11,7 @@ const FLIGHT_TIME = 1000;
 export default function NetworkGlobe () {
   const mql = window.matchMedia('(max-width: 600px)');
   const globe = useRef();
+  const [options, setOptions] = useState({ autoRotate: true });
   const [width, setWidth] = useState();
   const [height, setHeight] = useState();
   const [points, setPoints] = useState([]);
@@ -20,15 +21,17 @@ export default function NetworkGlobe () {
   const [nodes] = useState(new Map());
   const { data } = useGetNetworkQuery();
 
+  const stopRotate = useCallback((p) => setOptions((opts) => (
+    { ...opts, autoRotate: Boolean(!p) })), [setOptions]);
+
   const resolution = useCallback(() => mql.matches ? 2 : 3, [mql.matches]);
   const hexBinColor = useCallback(({ sumWeight }) => {
-    // location is considered "congested" when location weight reaches 15%
-    const congested = points.length * 0.2;
-    const weight = (512 * (sumWeight / congested)) | 0;
+    // location is considered "congested" when location weight reaches 12.5%
+    const weight = (512 * (sumWeight / (points.length * 0.125))) | 0;
     const r = ('0' + Math.min(255, weight).toString(16)).slice(-2);
     const g = ('0' + Math.min(255, (512 - weight)).toString(16)).slice(-2);
     return `#${r + g}00`;
-  }, [points]);
+  }, [points.length]);
 
   const updatePoints = useCallback((update) => {
     if (!update) return;
@@ -48,11 +51,10 @@ export default function NetworkGlobe () {
       setPoints(() => {
         const next = [];
         nodes.forEach((node) => {
-          if ('loc' in node) {
-            const [nlat, nlng] = node.loc.split(',').map((n) => +n);
-            let pos = next.find(({ lat, lng }) => lat === nlat && lng === nlng);
-            if (!pos) next.push(pos = { lat: nlat, lng: nlng, pop: 1 });
-            else pos.pop++;
+          if ('loc' in node && !next.find(({ ip }) => ip === node.ip)) {
+            const { ip, loc } = node;
+            const [lat, lng] = loc.split(',').map((n) => +n);
+            next.push({ ip, lat, lng });
           }
         });
         return next;
@@ -68,7 +70,7 @@ export default function NetworkGlobe () {
         .then(setCountries)
         .finally(() => setLoading(0));
     }
-  }, [points]);
+  }, [points, countries.features.length]);
 
   // ////////////////////
   // Update Network State
@@ -148,6 +150,43 @@ export default function NetworkGlobe () {
     }
   }, [mql.matches]);
 
+  useEffect(() => {
+    if (globe.current) {
+      globe.current.controls().autoRotate = options.autoRotate;
+    }
+  }, [options.autoRotate]);
+
+  const getTooltip = useCallback((d) => {
+    const { countryCode, region } = nodes.get(d.points[0].ip);
+    const density = d.sumWeight / (points.length * 0.125);
+    const levels = ['light', 'medium', 'high', 'congested'];
+    const levelsMax = levels.length - 1;
+    const level = levels[Math.min(levelsMax, Math.floor((density * levelsMax)))];
+    return `
+      <div style="font-family: 'Roboto Mono';background: rgba(32,32,32,0.75); border: 0.25em solid white; border-radius: 1em; padding:1em;font-weight:bold;text-shadow:0 0 0.25em black,0 0 0.25em black;">
+        <div>${countryCode}, ${region}</div>
+        <div>Node density: ${level}</div>
+        <ul style="margin:0;padding:0 1em 0 1.5em;">${
+          d.points
+            .map(({ ip }) => nodes.get(ip))
+            .map(({ ip, uptimestamp }) => {
+            let str = '';
+            let uptime = uptimestamp ? Date.now() - uptimestamp : 0;
+            const seconds = ((uptime /= 1000) | 0) % 60;
+            if (seconds) str = seconds + ' second' + (seconds > 1 ? 's' : '');
+            const minutes = ((uptime /= 60) | 0) % 60;
+            if (minutes) str = minutes + ' minute' + (minutes > 1 ? 's' : '');
+            const hours = ((uptime /= 60) | 0) % 24;
+            if (hours) str = hours + ' hour' + (hours > 1 ? 's' : '');
+            const days = (uptime /= 24) | 0;
+            if (days) str = days + ' day' + (days > 1 ? 's' : '');
+            return `<li style="white-space:pre;">${ip}, ${str} uptime</li>`;
+          }).join('')
+        }</ul>
+      </div>
+    `;
+  }, [nodes, points.length]);
+
   return (
     <>
       <Globe
@@ -156,11 +195,12 @@ export default function NetworkGlobe () {
         height={height}
         backgroundImageUrl='/assets/globe/night-sky.png'
         hexBinPointsData={points}
-        hexBinPointWeight='pop'
         hexBinResolution={3}
         hexAltitude={useCallback((d) => d.sumWeight / points.length, [points])}
         hexSideColor={hexBinColor}
         hexTopColor={hexBinColor}
+        hexLabel={getTooltip}
+        onHexHover={stopRotate}
         hexPolygonsData={useMemo(() => countries.features, [countries])}
         hexPolygonAltitude={0.005}
         hexPolygonColor={useCallback(() => 'rgba(0,89,255,1)', [])}
