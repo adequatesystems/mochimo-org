@@ -56,7 +56,6 @@ const regionPreferenceBaseQuery = retry(
               });
               // set sorted true
               regionPreference.sorted = true;
-              console.log('sorted regions', regionPreference.regions);
               // resolve
               resolve();
             });
