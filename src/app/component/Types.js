@@ -102,6 +102,7 @@ export function Properties
     let value = data[key];
     let shortened = false;
     let to = false;
+    if (href && !value) href = false;
     if (href) {
       switch (key) {
         case 'txid': to = '/explorer/transaction/' + value; break;
@@ -154,7 +155,11 @@ export function Properties
 
   return (
     <Typography noWrap {...props}>
-      {pre}{pre && ' '}{children}
+      {(pre && (
+        <Inline key={`props-${PUID++}`} color='textSecondary'>
+          {pre}:&nbsp;
+        </Inline>
+      ))}{children}
     </Typography>
   );
 }
