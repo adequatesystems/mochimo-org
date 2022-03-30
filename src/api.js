@@ -1,5 +1,6 @@
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { geodist } from 'util';
 
 export const CoingeckoApi = createApi({
   reducerPath: 'CoingeckoApi',
@@ -21,9 +22,72 @@ export const GithubApi = createApi({
   })
 });
 
+const regions = [
+  { name: 'deu-api', lat: 52.520008, lng: 13.404954, dist: Math.random() },
+  { name: 'sgp-api', lat: 1.290270, lng: 103.851959, dist: Math.random() },
+  { name: 'usc-api', lat: 38.627003, lng: -90.199402, dist: Math.random() },
+  { name: 'use-api', lat: 40.730610, lng: -73.935242, dist: Math.random() },
+  { name: 'usw-api', lat: 47.608013, lng: -122.335167, dist: Math.random() }
+];
+const regionHost = 'mochimap.com';
+const regionPreference = { regions, sorted: false };
+const regionPreferenceBaseQuery = retry(
+  async (...args) => {
+    // check available region order
+    if (regionPreference.sorted === false) {
+      if (regionPreference.promise) await regionPreference.promise;
+      else {
+        await (regionPreference.promise = new Promise((resolve) => {
+          /* eslint-disable-next-line no-undef */
+          fetch('/', { method: 'HEAD' })
+            .then(({ headers }) => {
+              if (headers.has('x-geo-loc')) {
+                const loc = headers.get('x-geo-loc');
+                const [nlat, nlng] = loc.split(',').map((n) => +n);
+                regionPreference.regions.forEach((r) => {
+                  // recalculate distances
+                  r.dist = geodist(nlat, nlng, r.lat, r.lng);
+                });
+              }
+            }).catch(console.error).finally(() => {
+              // sort regions based on distances
+              regionPreference.regions.sort((a, b) => {
+                return a.dist < b.dist ? -1 : a.dist > b.dist ? 1 : 0;
+              });
+              // set sorted true
+              regionPreference.sorted = true;
+              console.log('sorted regions', regionPreference.regions);
+              // resolve
+              resolve();
+            });
+        }));
+      }
+    }
+
+    let result;
+    // attempt fetches from regions in order
+    for (const region of regionPreference.regions) {
+      // build URL and await fetch
+      const baseUrl = `https://${region.name}.${regionHost}`;
+      result = await fetchBaseQuery({ baseUrl })(...args);
+      // determine results
+      if (result.data) break;
+      if (result.error?.status >= 400 && result.error?.status < 499) {
+        // BAD / NO RESULTS - halt retries
+        retry.fail(result.error);
+        break;
+      }
+    }
+
+    // return result
+    return result;
+  },
+  { maxRetries: 1 }
+);
+
 export const MochimapApi = createApi({
   reducerPath: 'MochimapApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://new-api.mochimap.com' }),
+  baseQuery: regionPreferenceBaseQuery,
   endpoints: (builder) => ({
     getBase: builder.query({ query: (params) => '' }),
     getBlocks: builder.query({

@@ -34,6 +34,19 @@ export const dupObj = (obj) => {
   return JSON.parse(JSON.stringify(obj));
 };
 
+export function geodist (lat1, lon1, lat2, lon2) {
+  const [DEG_C, RAD_C] = [180 / Math.PI, Math.PI / 180];
+  if ((lat1 === lat2) && (lon1 === lon2)) return 0;
+  const lat1r = lat1 * RAD_C;
+  const lat2r = lat2 * RAD_C;
+  const thetar = (lon1 - lon2) * RAD_C;
+  let distdeg = Math.sin(lat1r) * Math.sin(lat2r) +
+    Math.cos(lat1r) * Math.cos(lat2r) * Math.cos(thetar);
+  if (distdeg > 1) distdeg = 1;
+  distdeg = Math.acos(distdeg) * DEG_C;
+  return distdeg;
+}
+
 export const isTagged = (tag) => {
   return Boolean(
     typeof tag === 'string' && !['00', '42'].includes(tag.slice(0, 2))
