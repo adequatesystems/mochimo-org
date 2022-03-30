@@ -25,7 +25,7 @@ export const WebWallet = {
   primary: 'WebWallet (Soon™)'
 };
 export const Merchandise = {
-  href: 'https://merch.mochimo.org/',
+  href: 'https://my-store-b9cfd9.creator-spring.com',
   Icon: StorefrontIcon,
   secondary: 'Mochimo Apparel',
   primary: 'Merchandise'
