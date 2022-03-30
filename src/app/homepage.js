@@ -13,7 +13,7 @@ import Network from './network';
 
 function HomepageDivider ({ dense, ...props }) {
   return (
-    <Divider sx={{ padding: dense ? 4 : 8 }}>
+    <Divider sx={{ paddingTop: dense ? 4 : 8, paddingBottom: dense ? 2 : 4 }}>
       <Typography fontSize='1.25em' variant='caption' {...props} />
     </Divider>
   );
