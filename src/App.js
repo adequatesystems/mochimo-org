@@ -140,7 +140,7 @@ export default function App () {
             </Routes>
             <Routes>{/* Page content Routes */}
               <Route index element={<Homepage />} />
-              <Route path='what-is-adq' element={<Adq />} />
+              <Route path='adq' element={<Adq />} />
               <Route path='meet-the-team' element={<MeetTheTeam />} />
               <Route path='resources' element={<Resources />} />
               <Route path='exchanges' element={<Exchanges />} />
