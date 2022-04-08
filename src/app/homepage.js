@@ -145,7 +145,7 @@ export default function Homepage () {
             </Link>
           </Tooltip>
           <Tooltip title='Get your Mojo on!' arrow>
-            <Link to='/resources'>
+            <Link to='/downloads-and-resources'>
               <Button variant='contained'>Miners / Wallets</Button>
             </Link>
           </Tooltip>

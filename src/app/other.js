@@ -101,7 +101,7 @@ export function Adq () {
   );
 }
 
-export function Resources () {
+export function Downloads () {
   useEffect(() => scrollToTopNow(), []);
   return (
     <Container>
@@ -109,7 +109,7 @@ export function Resources () {
         <Grid item xs={12}>
           <Typography variant='h2'>
             <u style={{ textDecorationColor: '#0059ff' }}>
-              Resources
+              Downloads and Resources
             </u>
           </Typography>
         </Grid>

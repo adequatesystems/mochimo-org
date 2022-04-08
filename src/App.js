@@ -8,9 +8,10 @@ import ScrollToTop from 'app/component/ScrollToTop';
 import Header from './app/component/Header';
 
 import {
-  Adq, Resources, Exchanges, MeetTheTeam, Privacy
+  Adq, Downloads, Exchanges, MeetTheTeam, Privacy
 } from 'app/other';
 import Network from 'app/network';
+import Store from 'app/store';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
 import Explorer from 'app/explorer';
@@ -142,10 +143,11 @@ export default function App () {
               <Route index element={<Homepage />} />
               <Route path='adq' element={<Adq />} />
               <Route path='meet-the-team' element={<MeetTheTeam />} />
-              <Route path='resources' element={<Resources />} />
+              <Route path='downloads-and-resources' element={<Downloads />} />
               <Route path='exchanges' element={<Exchanges />} />
               <Route path='privacy' element={<Privacy />} />
               <Route path='status' element={<Status />} />
+              <Route path='store' element={<Store />} />
               <Route path='network' element={<Network />} />
               <Route path='explorer'>
                 <Route index element={<Explorer />} />
