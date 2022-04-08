@@ -11,7 +11,7 @@ import {
   Adq, Downloads, Exchanges, MeetTheTeam, Privacy
 } from 'app/other';
 import Network from 'app/network';
-import Store from 'app/store';
+// import Store from 'app/store';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
 import Explorer from 'app/explorer';
@@ -147,7 +147,7 @@ export default function App () {
               <Route path='exchanges' element={<Exchanges />} />
               <Route path='privacy' element={<Privacy />} />
               <Route path='status' element={<Status />} />
-              <Route path='store' element={<Store />} />
+              {/* <Route path='store' element={<Store />} /> */}
               <Route path='network' element={<Network />} />
               <Route path='explorer'>
                 <Route index element={<Explorer />} />
