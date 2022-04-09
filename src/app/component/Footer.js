@@ -67,7 +67,7 @@ export default function Footer () {
               <Typography variant='h5' gutterBottom>About</Typography>
               <FooterLink to='/adq' onClick={scrollToTopNow}>Adequate</FooterLink>
               <FooterLink to='/' onClick={scrollToTopNow}>Mochimo</FooterLink>
-              <FooterLink to='/privacy'>Privacy</FooterLink>
+              <FooterLink to='/privacy-policy'>Privacy</FooterLink>
             </Grid>
             <Grid item xs={6} padding={2} align='left'>
               <Typography variant='h5' gutterBottom>Links</Typography>

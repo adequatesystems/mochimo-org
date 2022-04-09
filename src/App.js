@@ -144,8 +144,8 @@ export default function App () {
               <Route path='adq' element={<Adq />} />
               <Route path='meet-the-team' element={<MeetTheTeam />} />
               <Route path='downloads-and-resources' element={<Downloads />} />
-              <Route path='exchanges' element={<Exchanges />} />
-              <Route path='privacy' element={<Privacy />} />
+              <Route path='exchanges-mcm' element={<Exchanges />} />
+              <Route path='privacy-policy' element={<Privacy />} />
               <Route path='status' element={<Status />} />
               {/* <Route path='store' element={<Store />} /> */}
               <Route path='network' element={<Network />} />

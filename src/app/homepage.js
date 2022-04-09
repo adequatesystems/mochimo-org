@@ -140,7 +140,7 @@ export default function Homepage () {
           }}
         >
           <Tooltip title='Trade MCM!' arrow>
-            <Link to='/exchanges'>
+            <Link to='/exchanges-mcm'>
               <Button variant='contained'>Exchanges</Button>
             </Link>
           </Tooltip>
@@ -431,7 +431,7 @@ export default function Homepage () {
                   <Typography variant='caption'>THE TICKER</Typography>
                   <Typography variant='h2' gutterBottom>MCM</Typography>
                   <Box>
-                    <Link to='/exchanges'>
+                    <Link to='/exchanges-mcm'>
                       <Button variant='contained'>Trade Mochimo</Button>
                     </Link>
                   </Box>

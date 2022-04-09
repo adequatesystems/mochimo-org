@@ -167,7 +167,7 @@ export default function Header ({ actualTheme, switchTheme }) {
                   <ListItemIcon><LanguageIcon fontSize='large' /></ListItemIcon>
                   <ListItemText primary='Network Visualization' secondary='Interactive Network' />
                 </ListItem>
-                <ListItem to='/exchanges' button component={Link} onClick={toggle}>
+                <ListItem to='/exchanges-mcm' button component={Link} onClick={toggle}>
                   <ListItemIcon><CurrencyExchangeIcon fontSize='large' /></ListItemIcon>
                   <ListItemText primary='Exchanges' secondary='Trade Mochimo' />
                 </ListItem>
