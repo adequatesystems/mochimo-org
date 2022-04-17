@@ -9,7 +9,7 @@ export default function Status () {
       <iframe
         title='embedded services status and uptime monitor'
         className='htframe' width='100%' style={{ border: 'none' }}
-        src='https://wl.hetrixtools.com/r/267effaab38c3e5b51cde2012b41898b/'
+        src='https://wl.hetrixtools.com/r/b41a90593288f05a8dfb15f3af2863bf/'
         sandbox='allow-scripts allow-same-origin allow-popups'
         onLoad={() => iFrameResize([{ log: false }], '.htframe')}
       />
