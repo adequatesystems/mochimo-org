@@ -14,7 +14,6 @@ import {
   Collapse,
   Divider,
   Grid,
-  IconButton,
   Link,
   Paper,
   Tab,
@@ -27,6 +26,15 @@ import TimePrep from 'app/component/TimePrep';
 import Pagination from 'app/component/Pagination';
 import { Address, Amount, Properties } from 'app/component/Types';
 import { capitalize } from 'util';
+import { refType } from '@mui/utils';
+
+export function GridSpacer (props) {
+  return (
+    <Grid item xs={12}>
+      <Divider sx={{ marginTop: '0.25em', marginBottom: '0.25em' }} />
+    </Grid>
+  );
+}
 
 export function LoadingScreen (props) {
   return (
@@ -107,7 +115,7 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
       <Grid item fontWeight='bold' {...itemProps[1]}>Block Hash</Grid>
       <Grid item fontWeight='bold' {...itemProps[2]}>Miner</Grid>
       <Grid item fontWeight='bold' {...itemProps[3]}>Time</Grid>
-      <Grid item xs={12}><Divider /></Grid>
+      <GridSpacer />
       <Grid container item spacing={0.5} sx={{ position: 'relative' }}>
         {(request.isError && (
           <Grid item xs={12} align='center'>
@@ -136,7 +144,7 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
             <Grid item {...itemProps[3]}>
               <TimePrep epoch={Date.parse(row.created)} />
             </Grid>
-            <Grid item xs={12}><Divider /></Grid>
+            <GridSpacer />
           </React.Fragment>
         )))}
         {request.isFetching && (<LoadingScreen />)}
@@ -164,7 +172,7 @@ export function LedgerEntries ({ query }) {
       <Grid container component={Paper} spacing={0.5} sx={{ padding: '0.5em' }}>
         <Grid item xs={6} align='center' fontWeight='bold'>Tag</Grid>
         <Grid item xs={6} align='center' fontWeight='bold'>WOTS+</Grid>
-        <Grid item xs={12}><Divider /></Grid>
+        <GridSpacer />
         <Grid container item spacing={0.5}>
           {requests.map((request, i, { length }) => (
             <React.Fragment key={`ledger-entry-${i}`}>
@@ -262,7 +270,7 @@ export function LedgerHistory ({ type, value, query }) {
       <Grid item fontWeight='bold' {...itemProps[2]}>Time</Grid>
       <Grid item fontWeight='bold' {...itemProps[3]}>Delta</Grid>
       <Grid item fontWeight='bold' {...itemProps[4]}>Balance</Grid>
-      <Grid item xs={12}><Divider /></Grid>
+      <GridSpacer />
       <Grid container item spacing={0.5} sx={{ position: 'relative' }}>
         {(request.isError && (
           <Grid item xs={12} align='center'>
@@ -288,7 +296,7 @@ export function LedgerHistory ({ type, value, query }) {
             <Grid item {...itemProps[4]}>
               <Amount value={row.balance} />
             </Grid>
-            <Grid item xs={12}><Divider /></Grid>
+            <GridSpacer />
           </React.Fragment>
         )))}
         {request.isFetching && (<LoadingScreen />)}
@@ -394,7 +402,7 @@ export function RichlistEntries ({ query }) {
                 )).toLocaleString(undefined, localeOptions)}%`
               )}
             </Grid>
-            <Grid item xs={12}><Divider /></Grid>
+            <GridSpacer />
           </React.Fragment>
         )))}
         {request.isFetching && (<LoadingScreen />)}
@@ -411,48 +419,22 @@ export function RichlistEntries ({ query }) {
   );
 }
 
-const splitTransaction = (tx, reference) => {
-  const stxs = [];
-  // deconstruct transaction elements
-  const { srcaddr, srctag, dstaddr, dsttag, chgaddr, chgtag } = tx;
+const interpretAmount = (tx, type, address) => {
+  let amount = 0;
   // reduce variables footprint
   const sT = tx.sendtotal;
   const cT = tx.changetotal;
-  const src = ['00', '42'].includes(srctag.slice(0, 2)) ? srcaddr : srctag;
-  // const dst = ['00', '42'].includes(dsttag.slice(0, 2)) ? dsttag : dstaddr;
-  const chg = ['00', '42'].includes(chgtag.slice(0, 2)) ? chgaddr : chgtag;
-  // derive reference type
-  if ((srctag + srcaddr).includes(reference)) reference = 'src';
-  if ((dsttag + dstaddr).includes(reference)) reference = 'dst';
-  if ((chgtag + chgaddr).includes(reference)) reference = 'chg';
-  if (!['src', 'dst', 'chg'].includes(reference)) reference = 'txid';
-  // build simple transactions' base object
-  const add = { time: tx.confirmed || tx.created, block: tx.bnum };
-  // determine simple transactions by conditional transaction element comparison
-  if (reference === 'txid') {
-    // 1 of 2 simple transactions take place
-    if (sT || !cT) { // dst @ -(sT), else chg @ -(cT)
-      stxs.push({ ...add, tag: dsttag, address: dstaddr, amount: sT });
-    } else stxs.push({ ...add, tag: chgtag, address: chgaddr, amount: cT });
-  } else if ((reference === 'src' && src === chg)) {
-    // 1 of 2 simple transactions take place
-    if (sT || !cT) { // dst @ -(sT), else chg @ -(cT)
-      stxs.push({ ...add, tag: dsttag, address: dstaddr, amount: -(sT) });
-    } else stxs.push({ ...add, tag: chgtag, address: chgaddr, amount: -(cT) });
-  } else { // 1 OR 2 simple transactions take place
-    if ((sT && reference !== 'chg') || reference === 'dst') {
-      if (reference === 'src') { // dst @ -(sT), else src @ sT
-        stxs.push({ ...add, tag: dsttag, address: dstaddr, amount: -(sT) });
-      } else stxs.push({ ...add, tag: srctag, address: srcaddr, amount: sT });
-    } // and/or
-    if (reference && ((cT && reference !== 'dst') || reference === 'chg')) {
-      if (reference === 'src') { // chg @ -(cT), else src @ cT
-        stxs.push({ ...add, tag: chgtag, address: chgaddr, amount: -(cT) });
-      } else stxs.push({ ...add, tag: srctag, address: srcaddr, amount: cT });
-    }
-  }
-  // return simple transactions
-  return stxs;
+  // build output
+  if (type === 'address') {
+    if (tx.srcaddr.startsWith(address)) amount -= (sT + cT);
+    if (tx.dstaddr.startsWith(address)) amount += sT;
+    if (tx.chgaddr.startsWith(address)) amount += cT;
+  } else if (type === 'tag') {
+    if (tx.srctag.startsWith(address)) amount -= (sT + cT);
+    if (tx.dsttag.startsWith(address)) amount += sT;
+    if (tx.chgtag.startsWith(address)) amount += cT;
+  } else return (cT + sT);
+  return amount;
 };
 
 function DestinationRow ({ amount, change, fee, header, tag, wots }) {
@@ -482,7 +464,7 @@ function DestinationRow ({ amount, change, fee, header, tag, wots }) {
           : (<Address href {...{ tag, wots }} />)}
       </Grid>
       <Grid item xs={1.5} sm={1.25} md={1} align='right'>
-        <Amount value={fee} noUnits />
+        {change ? null : <Amount value={fee} noUnits />}
       </Grid>
       <Grid item xs={3.5} sm={2.5} md={1.5} align='right'>
         <Amount value={amount} />
@@ -491,11 +473,11 @@ function DestinationRow ({ amount, change, fee, header, tag, wots }) {
   );
 }
 
-function TransactionRow ({ header, open, reference, tx }) {
+function TransactionRow ({ header, open, type, address, tx }) {
   const [active, setActive] = useState(open);
   const handleActive = () => setActive(!active);
   const itemProps = [
-    { xs: 1, sm: 0.75, md: 0.5 },
+    { xs: 1, sm: 0.75, md: 0.5, align: 'center' },
     { xs: 4, sm: 4.5, md: 7.5 },
     { sm: 1.75, md: 1, align: 'right', display: { xs: 'none', sm: 'block' } },
     { xs: 3.5, sm: 2.5, md: 1.5, align: 'right' },
@@ -505,55 +487,49 @@ function TransactionRow ({ header, open, reference, tx }) {
   return (header && (
     <>
       <Grid item fontWeight='bold' {...itemProps[0]} />
-      <Grid item fontWeight='bold' {...itemProps[1]}>Reference</Grid>
+      <Grid item fontWeight='bold' {...itemProps[1]}>TXID</Grid>
       <Grid item fontWeight='bold' {...itemProps[2]}>Block</Grid>
       <Grid item fontWeight='bold' {...itemProps[3]}>Time</Grid>
       <Grid item fontWeight='bold' {...itemProps[4]}>Amount</Grid>
     </>
   )) || (
     <>
-      {splitTransaction(tx, reference).map((stx, i, { length }) => (
-        <React.Fragment key={`${stx.txid}-stx-${i}`}>
-          <Grid item {...itemProps[0]}>
-            {(++i === length && (
-              <IconButton size='small' onClick={handleActive}>
-                {active
-                  ? <KeyboardArrowUpIcon fontSize='small' />
-                  : <KeyboardArrowDownIcon fontSize='small' />}
-              </IconButton>
-            ))}
-          </Grid>
-          <Grid item {...itemProps[1]}>
-            {(reference && (
-              <Address href tag={stx.tag} wots={stx.address} />
-            )) || (
-              <Properties href txid={tx.txid} />
-            )}
-          </Grid>
-          <Grid item {...itemProps[2]}>
-            {stx.block || 'unconfirmed'}
-          </Grid>
-          <Grid item {...itemProps[3]}>
-            <TimePrep epoch={Date.parse(stx.time)} />
-          </Grid>
-          <Grid item {...itemProps[4]}>
-            <Amount value={stx.amount} />
-          </Grid>
-        </React.Fragment>
-      ))}
+      <Grid
+        container item onClick={handleActive} sx={{
+          '&:hover': {
+            cursor: 'pointer',
+            background: 'rgba(255,255,255,0.125)'
+          }
+        }}
+      >
+        <Grid item {...itemProps[0]}>
+          {active
+            ? <KeyboardArrowUpIcon fontSize='inherit' />
+            : <KeyboardArrowDownIcon fontSize='inherit' />}
+        </Grid>
+        <Grid item {...itemProps[1]}>
+          <Properties href txid={tx.txid} />
+        </Grid>
+        <Grid item {...itemProps[2]}>
+          {(tx.bnum && (
+            <Link href={`/explorer/block/${tx.bnum}/${tx.bhash}`}>
+              {tx.bnum}
+            </Link>
+          )) || 'unconfirmed'}
+        </Grid>
+        <Grid item {...itemProps[3]}>
+          <TimePrep epoch={Date.parse(tx.confirmed || tx.created)} />
+        </Grid>
+        <Grid item {...itemProps[4]}>
+          <Amount value={interpretAmount(tx, type, address)} />
+        </Grid>
+      </Grid>
       <Collapse in={active} timeout='auto' unmountOnExit sx={{ width: '100%' }}>
         <Grid container item spacing={0}>
           <Grid item xs>
             <Properties signature={tx.txsig} />
           </Grid>
         </Grid>
-        {reference && (
-          <Grid container item spacing={0}>
-            <Grid item xs>
-              <Properties txid={tx.txid} />
-            </Grid>
-          </Grid>
-        )}
         <Grid container item spacing={0}>
           <Grid item xs>
             <Address href pre='Source' tag={tx.srctag} wots={tx.srcaddr} />
@@ -616,7 +592,7 @@ export function TransactionHistory ({ bnum, bhash, query, type, value }) {
   const length = request.data?.length;
 
   return (
-    <Grid container component={Paper} spacing={0.5} sx={{ padding: '0.5em' }}>
+    <Grid container component={Paper} sx={{ padding: '0.5em' }}>
       {query && (
         <Grid item xs={12} align='center'>
           <Tabs
@@ -630,8 +606,8 @@ export function TransactionHistory ({ bnum, bhash, query, type, value }) {
         </Grid>
       )}
       <TransactionRow header />
-      <Grid item xs={12}><Divider /></Grid>
-      <Grid container item spacing={0.5} sx={{ position: 'relative' }}>
+      <GridSpacer />
+      <Grid container item sx={{ position: 'relative' }}>
         {(request.isError && (
           <Grid item xs={12} align='center'>
             {request.error.data?.error || 'Unknown Error'}...
@@ -643,8 +619,8 @@ export function TransactionHistory ({ bnum, bhash, query, type, value }) {
           <Grid item xs={12} align='center'>No Results...</Grid>
         )) || (request.data?.map((row, i) => (
           <React.Fragment key={`transaction-row${i}`}>
-            <TransactionRow tx={row} reference={value} />
-            <Grid item xs={12}><Divider /></Grid>
+            <TransactionRow tx={row} type={type} address={value} />
+            <GridSpacer />
           </React.Fragment>
         )))}
         {request.isFetching && (<LoadingScreen />)}
