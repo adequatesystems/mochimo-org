@@ -26,7 +26,6 @@ import TimePrep from 'app/component/TimePrep';
 import Pagination from 'app/component/Pagination';
 import { Address, Amount, Properties } from 'app/component/Types';
 import { capitalize } from 'util';
-import { refType } from '@mui/utils';
 
 export function GridSpacer (props) {
   return (
