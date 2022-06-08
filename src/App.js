@@ -93,6 +93,13 @@ export default function App () {
           },
           caption: {
             fontFamily: 'Roboto Mono'
+          },
+          haiku: {
+            fontFamily: 'Redressed',
+            fontSize: '2em',
+            fontWeight: 'bold',
+            letterSpacing: 1.5,
+            whiteSpace: 'pre'
           }
         }
       })

@@ -26,6 +26,7 @@ import TimePrep from 'app/component/TimePrep';
 import Pagination from 'app/component/Pagination';
 import { Address, Amount, Properties } from 'app/component/Types';
 import { capitalize } from 'util';
+import Trigg from 'mochimo/src/trigg';
 
 export function GridSpacer (props) {
   return (
@@ -106,13 +107,13 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
           >
             <Tab label='Block Number' value='bnum' />
             <Tab label='Block Hash' value='bhash' />
-            <Tab label='Miner' value='maddr' />
+            <Tab label='Mining Address' value='maddr' />
           </Tabs>
         </Grid>
       )}
       <Grid item fontWeight='bold' {...itemProps[0]}>Number</Grid>
       <Grid item fontWeight='bold' {...itemProps[1]}>Block Hash</Grid>
-      <Grid item fontWeight='bold' {...itemProps[2]}>Miner</Grid>
+      <Grid item fontWeight='bold' {...itemProps[2]}>Haiku</Grid>
       <Grid item fontWeight='bold' {...itemProps[3]}>Time</Grid>
       <GridSpacer />
       <Grid container item spacing={0.5} sx={{ position: 'relative' }}>
@@ -134,7 +135,13 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
               </Link>
             </Grid>
             <Grid item {...itemProps[2]}>
-              {(row.maddr && (<Properties href wots={row.maddr} />)) || (
+              {(row.nonce && (
+                <Typography
+                  fontFamily='Redressed' fontSize='1.25em'
+                  lineHeight={1} noWrap
+                >{ Trigg.expand(row.nonce).replace(/\n/g, "/ ") }
+                </Typography>
+              )) || (
                 <Typography noWrap>
                   {`> [ ${capitalize(row.type)} Block ]`}
                 </Typography>

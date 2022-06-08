@@ -8,6 +8,7 @@ import { Address, Amount, Bytes, Properties } from 'app/component/Types';
 import { TransactionHistory } from 'app/component/Results';
 import { asUint64String } from 'util';
 import TimePrep from './component/TimePrep';
+import Trigg from 'mochimo/src/trigg';
 
 const getid = (bnum, bhash) => `b${asUint64String(bnum)}x${bhash.slice(0, 8)}`;
 
@@ -26,6 +27,17 @@ export default function ExplorerBlock ({ type }) {
   return (
     <Container sx={{ position: 'relative', padding: ({ spacing }) => spacing(2) }}>
       <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} align='center'>
+          {(block?.nonce && (
+            <Typography variant='haiku'>
+              { Trigg.expand(block.nonce) }
+            </Typography>
+          )) || (
+            <Typography align='center'>
+              Waiting for Block data
+            </Typography>
+          )}
+        </Grid>
         <Grid item xs={12} sm={6} align='left'>
           <Card sx={{ padding: ({ spacing }) => spacing(2) }}>
             <Tabs
@@ -90,19 +102,6 @@ export default function ExplorerBlock ({ type }) {
                   </>
                 ))}
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} align='center'>
-          {(block?.nonce && (
-            <>
-              <Typography>
-                Haiku art coming soon!
-              </Typography>
-            </>
-          )) || (
-            <Typography align='center'>
-              Waiting for Block data
-            </Typography>
-          )}
         </Grid>
         <Grid item xs={12}>
           <Divider>Block Transactions</Divider>
