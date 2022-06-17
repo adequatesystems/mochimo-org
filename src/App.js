@@ -11,6 +11,7 @@ import {
   Adq, Downloads, Exchanges, MeetTheTeam, Privacy
 } from 'app/other';
 import Network from 'app/network';
+import NetworkGlobe from 'app/network-globe';
 // import Store from 'app/store';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
@@ -115,7 +116,15 @@ export default function App () {
       <CssBaseline />
       <BrowserRouter>
         {/* Header (always shown) */}
-        <Header actualTheme={mode} switchTheme={switchTheme} />
+        {/* Header removed on /network/globe */}
+        <Routes>
+          <Route path='network/globe' element={null} />
+          <Route
+            path='*' element={(
+              <Header actualTheme={mode} switchTheme={switchTheme} />
+            )}
+          />
+        </Routes>        
         {/* Page layout container (minimum 100% "visual height") */}
         <Box
           sx={{
@@ -146,6 +155,7 @@ export default function App () {
                 )}
               />
             </Routes>
+            
             <Routes>{/* Page content Routes */}
               <Route index element={<Homepage />} />
               <Route path='adq' element={<Adq />} />
@@ -180,8 +190,10 @@ export default function App () {
           <Routes>
             {/* Page footer (not shown on interactive network page) */}
             <Route path='network' element={null} />
+            <Route path='network/globe' element={<NetworkGlobe />} />
             <Route path='*' element={<Footer />} />
           </Routes>
+          
         </Box>
       </BrowserRouter>
       {/* ScrollToTop component sits above all other components */}
