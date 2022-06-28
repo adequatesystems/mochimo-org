@@ -11,7 +11,7 @@ import {
   Adq, Downloads, Exchanges, MeetTheTeam, Privacy
 } from 'app/other';
 import Network from 'app/network';
-import NetworkGlobe from 'app/network-globe';
+import MFXGlobe from 'app/mfx-globe';
 // import Store from 'app/store';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
@@ -106,25 +106,37 @@ export default function App () {
       })
     );
   }, [mode]);
-  /*
-  const alwaysDarkTheme = createTheme({
-    ...customTheme, palette: { mode: 'dark' }
-  }); */
+  const mfxTheme = createTheme({
+    ...customTheme, palette: {
+      mode: 'dark', background: { default: 'transparent' }
+    }
+  });
 
   return (
     <ThemeProvider theme={customTheme}>
-      <CssBaseline />
       <BrowserRouter>
         {/* Header (always shown) */}
         {/* Header removed on /network/globe */}
         <Routes>
-          <Route path='network/globe' element={null} />
+          <Route path='mfx'>
+            <Route
+              path='globe' element={(
+                <ThemeProvider theme={mfxTheme}>
+                  <CssBaseline />
+                  <MFXGlobe />
+                </ThemeProvider>
+              )}
+            />
+          </Route>
           <Route
             path='*' element={(
-              <Header actualTheme={mode} switchTheme={switchTheme} />
+              <>
+                <CssBaseline />
+                <Header actualTheme={mode} switchTheme={switchTheme} />
+              </>
             )}
           />
-        </Routes>        
+        </Routes>
         {/* Page layout container (minimum 100% "visual height") */}
         <Box
           sx={{
@@ -144,8 +156,12 @@ export default function App () {
               flexGrow: 1
             }}
           >
-            <Routes>{/* Background effects Routes */}
+            <Routes>
+              {/* Background effects Routes */}
               <Route index element={null} />
+              <Route path='mfx'>
+                <Route path='*' element={null} />
+              </Route>
               <Route path='network' element={null} />
               <Route
                 path='*' element={(
@@ -155,10 +171,13 @@ export default function App () {
                 )}
               />
             </Routes>
-            
-            <Routes>{/* Page content Routes */}
+            <Routes>
+              {/* Page content Routes */}
               <Route index element={<Homepage />} />
               <Route path='adq' element={<Adq />} />
+              <Route path='mfx'>
+                <Route path='*' element={null} />
+              </Route>
               <Route path='meet-the-team' element={<MeetTheTeam />} />
               <Route path='downloads-and-resources' element={<Downloads />} />
               <Route path='exchanges-mcm' element={<Exchanges />} />
@@ -190,7 +209,9 @@ export default function App () {
           <Routes>
             {/* Page footer (not shown on interactive network page) */}
             <Route path='network' element={null} />
-            <Route path='network/globe' element={<NetworkGlobe />} />
+            <Route path='mfx'>
+              <Route path='*' element={null} />
+            </Route>
             <Route path='*' element={<Footer />} />
           </Routes>
           
