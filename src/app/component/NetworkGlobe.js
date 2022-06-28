@@ -8,7 +8,7 @@ import Globe from 'react-globe.gl';
 
 const ARC_REL_LEN = 0.4; // relative to whole arc
 const FLIGHT_TIME = 1000;
-export default function NetworkGlobe () {
+export default function NetworkGlobe ({ mfx }) {
   const mql = window.matchMedia('(max-width: 600px)');
   const globe = useRef();
   const [options, setOptions] = useState({ autoRotate: true });
@@ -79,6 +79,7 @@ export default function NetworkGlobe () {
     // expose EventSource API and create new stream
     const { EventSource } = window;
     const source = new EventSource('https://new-api.mochimap.com/stream?network');
+    const pending = [];
     // set stream event handlers
     // source.onopen = () => console.log('Network stream opened...');
     source.onerror = (error) => console.error(error);
@@ -98,19 +99,14 @@ export default function NetworkGlobe () {
           const now = Date.now();
           const expires = now + (FLIGHT_TIME * 2);
           const [endLat, endLng] = fromloc.split(',').map((n) => +n);
-          const arcs = peers.reduce((acc, peer) => {
+          peers.forEach((peer) => {
             if (peer && nodes.has(peer) && 'loc' in nodes.get(peer)) {
               // determine start loc
               const { loc } = nodes.get(peer);
               const [startLat, startLng] = loc.split(',').map((n) => +n);
-              acc.push({ startLat, startLng, endLat, endLng, expires });
+              pending.push({ startLat, startLng, endLat, endLng, expires });
             }
-            return acc;
-          }, []);
-          if (arcs.length) {
-            // add arcs to state
-            setArcsData(curArcsData => [...curArcsData, ...arcs]);
-          }
+          });
         }
       } catch (error) {
         // catch process breaking error
@@ -119,7 +115,13 @@ export default function NetworkGlobe () {
     };
     const interval = setInterval(() => {
       const now = Date.now();
-      setArcsData((arcs) => arcs.filter((a) => a.expires > now));
+      const next = [];
+      for (let i = 0; i < Math.ceil(pending.length / 10); i++) {
+        const arc = pending.shift();
+        arc.expires = (now + (FLIGHT_TIME * 2));
+        next.push(arc);
+      }
+      setArcsData((arcs) => [...arcs.filter((a) => a.expires > now), ...next]);
     }, 100);
     // return unmount/cleanup function
     return () => {
@@ -138,10 +140,14 @@ export default function NetworkGlobe () {
         if (current) {
           current.camera().aspect = window.innerWidth / window.innerHeight;
           current.camera().updateProjectionMatrix();
-          current.controls().autoRotate = true;
-          if (mql.matches) current.controls().autoRotateSpeed = 1;
-          else current.controls().autoRotateSpeed = 0.25;
           current.renderer().setSize(window.innerWidth, window.innerHeight);
+          current.controls().autoRotate = true;
+          current.controls().autoRotateSpeed = mql.matches ? 1 : 0.25;
+          if (mfx) {
+            current.controls().enableZoom = false;
+            current.controls().minDistance = 300;
+            current.controls().maxDistance = 300;
+          }
         }
       }
       resize();
@@ -193,7 +199,8 @@ export default function NetworkGlobe () {
         ref={globe}
         width={width}
         height={height}
-        backgroundImageUrl='/assets/globe/night-sky.png'
+        backgroundImageUrl={mfx ? '' : '/assets/globe/night-sky.png'}
+        backgroundColor={mfx ? 'rgba(0, 0, 0, 0)' : '#121212'}
         hexBinPointsData={points}
         hexBinResolution={3}
         hexAltitude={useCallback((d) => d.sumWeight / points.length, [points])}
