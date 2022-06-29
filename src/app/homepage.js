@@ -510,7 +510,7 @@ export default function Homepage () {
                 wish to contribute to Mochimo, Pull Requests are always open.
                 If you wish to discuss something specific, please reach out to
                 the active community on&nbsp;
-                <Link href='https://discord.mochimap.com/'>
+                <Link href='https://discord.mochimo.org/'>
                   Discord
                 </Link>, or&nbsp;
                 <Link href='mailto:support@mochimo.org'>
@@ -701,7 +701,7 @@ export default function Homepage () {
         <Typography display='block' variant='caption' gutterBottom>
           Come join the community
         </Typography>
-        <Button variant='contained' href='https://discord.mochimap.com/'>
+        <Button variant='contained' href='https://discord.mochimo.org/'>
           <DiscordIcon />&emsp;Mochimo Official Discord
         </Button>
       </Paper>
