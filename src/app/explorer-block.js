@@ -1,16 +1,16 @@
 
 import { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { Card, CircularProgress, Container, Divider, Grid, Tab, Tabs, Typography } from '@mui/material';
+import { Card, CircularProgress, Container, Divider, Grid, Tab, Tabs, Tooltip, Typography } from '@mui/material';
 
 import { useGetBlocksQuery } from 'api';
 import { Address, Amount, Bytes, Properties } from 'app/component/Types';
 import { TransactionHistory } from 'app/component/Results';
 import { asUint64String } from 'util';
-import TimePrep from './component/TimePrep';
+import TimeLocale from './component/TimeLocale';
 import Trigg from 'mochimo/src/trigg';
 
-const getid = (bnum, bhash) => `b${asUint64String(bnum)}x${bhash.slice(0, 8)}`;
+const getid = (bnum, bhash) => `0x${Number(bnum).toString(16)} #${bhash.slice(0, 8)}...`;
 
 export default function ExplorerBlock ({ type }) {
   const [tab, setTab] = useState('block');
@@ -55,6 +55,7 @@ export default function ExplorerBlock ({ type }) {
               ? (<CircularProgress size='6rem' color='secondary' />)
               : (tab === 'block' && (
                 <>
+                  <Properties created={<TimeLocale epoch={Date.parse(block.created)} />} />
                   <Properties copy identifier={getid(bnum, bhash)} />
                   <Properties
                     filesize={(
@@ -87,9 +88,6 @@ export default function ExplorerBlock ({ type }) {
                     )}
                   />
                   <Properties blocktime={(<span>{block.time} seconds</span>)} />
-                  <Properties
-                    created={<TimePrep epoch={Date.parse(block.created)} />}
-                  />
                   <Properties difficulty={block.difficulty} />
                 </>
                 )) || (tab === 'mining' && (
