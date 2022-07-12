@@ -95,7 +95,7 @@ export default function Footer () {
         <Grid item xs={12}><Divider /></Grid>
         <Grid item xs={12}>
           <Typography variant='caption' fontSize={{ xs: 'auto', sm: '1em' }}>
-            Website Copyright 2022 &copy; All rights Reserved.
+            Copyright 2022 &copy; All rights Reserved.
             <Box component='span' display={{ xs: 'none', sm: 'inline' }}>&nbsp;</Box>
             <Box component='span' display={{ xs: 'inline', sm: 'none' }}><br /></Box>
             The Mochimo Foundation.

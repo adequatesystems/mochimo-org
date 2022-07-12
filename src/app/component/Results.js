@@ -105,9 +105,9 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
             value={queryType} onChange={handleTypeChange}
             centered aria-label='block history search type'
           >
-            <Tab label='Block Number' value='bnum' />
-            <Tab label='Block Hash' value='bhash' />
-            <Tab label='Mining Address' value='maddr' />
+            <Tab label='Number' value='bnum' />
+            <Tab label='Hash' value='bhash' />
+            <Tab label='Miner' value='maddr' />
           </Tabs>
         </Grid>
       )}
