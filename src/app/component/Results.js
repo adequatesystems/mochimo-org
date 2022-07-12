@@ -91,10 +91,10 @@ export function BlockHistory ({ bnum, bhash, maddr, query }) {
   const request = useGetBlocksQuery({ bnum, bhash, search });
   const length = request.data?.length;
   const itemProps = [
-    { xs: 2, sm: 1.75, md: 1.25 },
-    { xs: 6.75, sm: 4, md: 4.5 },
+    { xs: 2.5, sm: 1.75, md: 1.25 },
+    { xs: 6, sm: 4, md: 4.5 },
     { sm: 4, md: 4.5, display: { xs: 'none', sm: 'block' } },
-    { xs: 3.25, sm: 2.25, md: 1.75, align: 'right' }
+    { xs: 3.5, sm: 2.25, md: 1.75, align: 'right' }
   ];
 
   return (
@@ -251,11 +251,11 @@ export function LedgerHistory ({ type, value, query }) {
   const request = useGetLedgerHistoryQuery({ type, value, search });
   const length = request.data?.length;
   const itemProps = [
-    { xs: 5, sm: 3.5, md: 5 },
+    { xs: 4, sm: 3.5, md: 5 },
     { md: 1.25, align: 'right', display: { xs: 'none', sm: 'none', md: 'block' } },
-    { xs: 3.5, sm: 2.5, md: 1.75, align: 'right' },
+    { xs: 4, sm: 2.5, md: 1.75, align: 'right' },
     { sm: 3, md: 2, align: 'right', display: { xs: 'none', sm: 'block' } },
-    { xs: 3.5, sm: 3, md: 2, align: 'right' }
+    { xs: 4, sm: 3, md: 2, align: 'right' }
   ];
 
   return (
@@ -356,9 +356,9 @@ export function RichlistEntries ({ query }) {
   const length = request.data?.length;
   const itemProps = [
     { xs: 2, sm: 1.5, md: 1, align: 'center' },
-    { xs: 4, sm: 6.5, md: 8 },
-    { xs: 3.5, sm: 2.5, md: 2, align: 'right' },
-    { xs: 2.5, sm: 1.5, md: 1, align: 'right' }
+    { xs: 6, sm: 6.5, md: 8 },
+    { xs: 4, sm: 2.5, md: 2, align: 'right' },
+    { sm: 1.5, md: 1, align: 'right', display: { xs: 'none', sm: 'block' } }
   ];
   const localeOptions = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
 
@@ -446,17 +446,17 @@ const interpretAmount = (tx, type, address) => {
 function DestinationRow ({ amount, change, fee, header, tag, wots }) {
   return (header && (
     <Grid container item>
-      <Grid item xs={7} sm={8.25} md={9.5}>
+      <Grid item xs={6} sm={8.25} md={9.5}>
         <Typography fontWeight='bold' sx={{ textDecoration: 'underline' }}>
           Destinations
         </Typography>
       </Grid>
-      <Grid item xs={1.5} sm={1.25} md={1} align='right'>
+      <Grid item xs={2} sm={1.25} md={1} align='right'>
         <Typography fontWeight='bold' sx={{ textDecoration: 'underline' }}>
           Fee
         </Typography>
       </Grid>
-      <Grid item xs={3.5} sm={2.5} md={1.5} align='right'>
+      <Grid item xs={4} sm={2.5} md={1.5} align='right'>
         <Typography fontWeight='bold' sx={{ textDecoration: 'underline' }}>
           Amount
         </Typography>
@@ -464,15 +464,15 @@ function DestinationRow ({ amount, change, fee, header, tag, wots }) {
     </Grid>
   )) || (
     <Grid container item spacing={0}>
-      <Grid item xs={7} sm={8.25} md={9.5}>
+      <Grid item xs={6} sm={8.25} md={9.5}>
         {change
-          ? (<Address href pre='Change' {...{ tag, wots }} />)
+          ? (<Address href pre='chg' {...{ tag, wots }} />)
           : (<Address href {...{ tag, wots }} />)}
       </Grid>
-      <Grid item xs={1.5} sm={1.25} md={1} align='right'>
+      <Grid item xs={2} sm={1.25} md={1} align='right'>
         {change ? null : <Amount value={fee} noUnits />}
       </Grid>
-      <Grid item xs={3.5} sm={2.5} md={1.5} align='right'>
+      <Grid item xs={4} sm={2.5} md={1.5} align='right'>
         <Amount value={amount} />
       </Grid>
     </Grid>
@@ -484,10 +484,10 @@ function TransactionRow ({ header, open, type, address, tx }) {
   const handleActive = () => setActive(!active);
   const itemProps = [
     { xs: 1, sm: 0.75, md: 0.5, align: 'center' },
-    { xs: 4, sm: 4.5, md: 7.5 },
+    { xs: 3, sm: 4.5, md: 7.5 },
     { sm: 1.75, md: 1, align: 'right', display: { xs: 'none', sm: 'block' } },
-    { xs: 3.5, sm: 2.5, md: 1.5, align: 'right' },
-    { xs: 3.5, sm: 2.5, md: 1.5, align: 'right' }
+    { xs: 4, sm: 2.5, md: 1.5, align: 'right' },
+    { xs: 4, sm: 2.5, md: 1.5, align: 'right' }
   ];
 
   return (header && (
@@ -514,7 +514,7 @@ function TransactionRow ({ header, open, type, address, tx }) {
             : <KeyboardArrowDownIcon fontSize='inherit' />}
         </Grid>
         <Grid item {...itemProps[1]}>
-          <Properties href txid={tx.txid} />
+          <Properties href tx={tx.txid} />
         </Grid>
         <Grid item {...itemProps[2]}>
           {(tx.bnum && (
@@ -538,7 +538,7 @@ function TransactionRow ({ header, open, type, address, tx }) {
         </Grid>
         <Grid container item spacing={0}>
           <Grid item xs>
-            <Address href pre='Source' tag={tx.srctag} wots={tx.srcaddr} />
+            <Address href pre='src' tag={tx.srctag} wots={tx.srcaddr} />
           </Grid>
         </Grid>
         <DestinationRow header />
