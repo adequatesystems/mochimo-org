@@ -25,9 +25,7 @@ export const GithubApi = createApi({
 const regions = [
   { name: 'deu-api', lat: 52.520008, lng: 13.404954, dist: Math.random() },
   { name: 'sgp-api', lat: 1.290270, lng: 103.851959, dist: Math.random() },
-  { name: 'usc-api', lat: 38.627003, lng: -90.199402, dist: Math.random() },
-  { name: 'use-api', lat: 40.730610, lng: -73.935242, dist: Math.random() },
-  { name: 'usw-api', lat: 47.608013, lng: -122.335167, dist: Math.random() }
+  { name: 'usc-api', lat: 38.627003, lng: -90.199402, dist: Math.random() }
 ];
 const regionHost = 'mochimap.com';
 const regionPreference = { regions, sorted: false };
