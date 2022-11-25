@@ -286,28 +286,6 @@ export function Exchanges () {
               </Link>
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4} padding={4}>
-            <Link href='https://www.citex.co.kr/#/home'>
-              <img alt='citex logo' src='/assets/images/citex.png' width='100%' />
-            </Link>
-            <Typography color='textSecondary'>
-              <DirectionsIcon fontSize='inherit' />&nbsp;
-              <Link href='https://trade.citex.co.kr/trade/MCM_BTC'>BTC</Link>
-              <span> • </span>
-              <Link href='https://trade.citex.co.kr/trade/MCM_USDT'>USDT</Link>
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={4} padding={4}>
-            <Link href='https://www.finexbox.com/market/pair/MCM-BTC.htm'>
-              <img alt='finexbox logo' src='/assets/images/finexbox.png' width='100%' />
-            </Link>
-            <Typography color='textSecondary'>
-              <DirectionsIcon fontSize='inherit' />&nbsp;
-              <Link href='https://www.finexbox.com/market/pair/MCM-BTC.html'>
-                BTC
-              </Link>
-            </Typography>
-          </Grid>
         </Grid>
       </Grid>
     </Container>
