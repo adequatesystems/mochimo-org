@@ -176,22 +176,22 @@ export function Downloads () {
                   secondary='Linux only'
                 />
               </ListItem>
-              <ListItem button component={Link} href='https://github.com/mochimodev/winminer/releases'>
+              <ListItem button component={Link} href='https://github.com/mochimodev/mochimo/wiki/mochimo-miner-wsl'>
                 <ListItemIcon>
                   <img alt='windows icon' src='/assets/icons/windows.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='Headless Solo Miner'
-                  secondary='Windows only'
+                  primary='Advanced Windows Miner'
+                  secondary='Windows Subsystem for Linux (WSL)'
                 />
               </ListItem>
-              <ListItem button component={Link} href='https://github.com/chrisdigity/blood-miner/releases'>
+              <ListItem button component={Link} href='https://github.com/chrisdigity/mochimo-binaries/releases'>
                 <ListItemIcon>
-                  <img alt='blood icon' src='/assets/images/logo.png' width={32} />
+                  <img alt='mochimo icon' src='/assets/images/logo.png' width={32} />
                 </ListItemIcon>
                 <ListItemText
-                  primary='MochiMiner'
-                  secondary='Windows/Linux Pool Miner'
+                  primary='MCMMiner'
+                  secondary='Windows/Linux Pool & Solo Miner'
                 />
               </ListItem>
             </List>
