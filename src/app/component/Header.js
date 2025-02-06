@@ -5,30 +5,13 @@ import {
   AppBar,
   Box,
   Container,
-  Divider,
-  Drawer,
   IconButton,
   Link,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
   Toolbar,
   Tooltip,
   Typography,
   useScrollTrigger
 } from '@mui/material';
-
-import SearchIcon from '@mui/icons-material/Search';
-import LanguageIcon from '@mui/icons-material/Language';
-// import NightsStayIcon from '@mui/icons-material/NightsStay';
-// import BrightnessHighIcon from '@mui/icons-material/BrightnessHigh';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
-import AppShortcutIcon from '@mui/icons-material/AppShortcut';
-import ApiIcon from '@mui/icons-material/Api';
 
 import { service } from 'links';
 
@@ -148,52 +131,6 @@ export default function Header ({ actualTheme, switchTheme }) {
               </Headerbutton>
             ))}
           </Box>
-          <IconButton edge='end' onClick={toggle}><MenuIcon /></IconButton>
-          <Drawer anchor='right' open={Boolean(menuAnchor)} onClose={toggle}>
-            <Box sx={{ width: 250, overflowX: 'hidden' }}>
-              <List dense>
-                <ListItem button onClick={toggle}>
-                  <ListItemIcon><ChevronRightIcon /></ListItemIcon>
-                  <ListItemText primary='Close Menu' />
-                </ListItem>
-                <Divider />
-                <ListSubheader>Discover Mochimo</ListSubheader>
-                <Divider />
-                <ListItem to='/explorer' button component={Link} onClick={toggle}>
-                  <ListItemIcon><SearchIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Block Explorer' secondary='Search Mochimo' />
-                </ListItem>
-                <ListItem to='/network' button component={Link} onClick={toggle}>
-                  <ListItemIcon><LanguageIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Network Visualization' secondary='Interactive Network' />
-                </ListItem>
-                <ListItem to='/exchanges-mcm' button component={Link} onClick={toggle}>
-                  <ListItemIcon><CurrencyExchangeIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Exchanges' secondary='Trade Mochimo' />
-                </ListItem>
-                <ListItem to='/downloads-and-resources' button component={Link} onClick={toggle}>
-                  <ListItemIcon><AppShortcutIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Wallets / Miners' secondary='Mochimo Software' />
-                </ListItem>
-                <ListItem to='/api' button component={Link} onClick={toggle}>
-                  <ListItemIcon><ApiIcon fontSize='large' /></ListItemIcon>
-                  <ListItemText primary='Public API' secondary='Blockchain Data' />
-                </ListItem>
-                <Divider />
-                <ListSubheader>Services</ListSubheader>
-                <Divider />
-                {service.map(({ href, Icon, primary, secondary }, i) => (
-                  <ListItem
-                    key={`menu-social-${i}`} onClick={toggle}
-                    button component='a' href={href}
-                  >
-                    <ListItemIcon><Icon fontSize='large' /></ListItemIcon>
-                    <ListItemText {...{ primary, secondary }} />
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-          </Drawer>
         </Toolbar>
       </Container>
     </AppBar>

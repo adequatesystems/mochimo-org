@@ -128,8 +128,8 @@ export default function Homepage () {
             <Box component='span' display={{ xs: 'inline', sm: 'none' }}><br /></Box>
             Cryptocurrency Network
           </Typography>
-          A complete reimplementation of Blockchain.
-          Currency for the Post-Quantum era.
+          A complete reimplementation of Blockchain /
+          Currency for the Post-Quantum era
         </Typography>
         <Box
           sx={{
@@ -144,9 +144,9 @@ export default function Homepage () {
               <Button variant='contained'>Exchanges</Button>
             </Link>
           </Tooltip>
-          <Tooltip title='Get your Mojo on!' arrow>
-            <Link to='/downloads-and-resources'>
-              <Button variant='contained'>Miners / Wallets</Button>
+          <Tooltip title='Github' arrow>
+            <Link href='https://github.com/mochimodev/mochimo/releases'>
+              <Button variant='contained'>Mochimo Releases</Button>
             </Link>
           </Tooltip>
           <Tooltip title='Much detail, many interesting!' arrow>
@@ -338,7 +338,7 @@ export default function Homepage () {
                 to solve a block originates from a syntactically correct Haiku.
                 <br /><br />
                 With nearly 5 Trillion possible combinations of possible Haiku,
-                Mochimo is a gold mine of poetry. Here's the latest...
+                Mochimo is a gold mine of poetry.
                 <ListItemText inset>
                   <Typography lineHeight={1} fontFamily='Redressed' fontSize='1.5em'>
                     {(chain.isFetching && (<CircularProgress />)) || (

@@ -1,6 +1,5 @@
 
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
-import ExploreIcon from '@mui/icons-material/Explore';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import WalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -12,17 +11,11 @@ import RedditIcon from '@mui/icons-material/Reddit';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
 // services
-export const AddExplorer = {
-  href: 'http://bx.mochimo.org/',
-  Icon: ExploreIcon,
-  secondary: 'Including Mempool',
-  primary: 'Additional Explorer'
-};
 export const WebWallet = {
-  href: '',
+  href: 'https://chromewebstore.google.com/detail/mochimo-wallet/fkogefgjocnflhankmffnibdofdiiiho',
   Icon: WalletIcon,
-  secondary: 'Website Wallet Access',
-  primary: 'WebWallet (Soon™)'
+  secondary: 'Chromium Wallet',
+  primary: 'Mochimo Web Wallet'
 };
 export const Merchandise = {
   href: 'https://my-store-b9cfd9.creator-spring.com',
@@ -75,7 +68,7 @@ export const YouTube = {
 };
 
 // tl exports
-export const service = [Status, AddExplorer, WebWallet, Merchandise];
+export const service = [Status, WebWallet, Merchandise];
 export const social = [Discord, Medium, Reddit, Telegram, Twitter, YouTube];
 const Links = { service, social };
 
