@@ -138,8 +138,8 @@ export function Exchanges () {
             </Link>
             <Typography color='textSecondary'>
               <DirectionsIcon fontSize='inherit' />&nbsp;
-              <Link href='https://vindax.com/exchange-advanced.html?symbol=MCM_BTC'>
-                BTC
+              <Link href='https://vindax.com/exchange-advanced.html?symbol=MCM_USDT'>
+                USDT
               </Link>
             </Typography>
           </Grid>
