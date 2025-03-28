@@ -78,7 +78,7 @@ export default function NetworkGlobe ({ mfx }) {
   useEffect(() => {
     // expose EventSource API and create new stream
     const { EventSource } = window;
-    const source = new EventSource('https://new-api.mochimap.com/stream?network');
+    const source = new EventSource('http://35.208.202.76:8081/stream?network');
     const pending = [];
     // set stream event handlers
     // source.onopen = () => console.log('Network stream opened...');
