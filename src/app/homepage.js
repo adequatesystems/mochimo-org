@@ -144,6 +144,11 @@ export default function Homepage () {
               <Button variant='contained'>Exchanges</Button>
             </Link>
           </Tooltip>
+          <Tooltip title="Mining software and pools" arrow>
+            <Link to='/mining'>
+              <Button variant='contained'>Mining</Button>
+            </Link>
+          </Tooltip>
           <Tooltip title='Github' arrow>
             <Link href='https://github.com/mochimodev/mochimo/releases'>
               <Button variant='contained'>Mochimo Releases</Button>
@@ -286,21 +291,8 @@ export default function Homepage () {
             Mochimo apart...
           </Grid>
           <Grid item xs={12} sm={10} md={8}>
-            <HomepageAccordion {...{ active, handleChange, panel: '3way' }}>
-              <HomepageAccordianSummary
-                alt='handshake icon'
-                src='/assets/icons/handshake.png'
-              >Three-Way Handshake
-              </HomepageAccordianSummary>
-              <AccordionDetails>
-                The Three-Way handshake is a network communication protocol
-                requiring the collection of "acknowledgements" providing fast,
-                simple and disposable security for secure requests to the
-                decentralized network of nodes that make up the Mochimo Network.
-              </AccordionDetails>
-            </HomepageAccordion>
-            <HomepageAccordion {...{ active, handleChange, panel: 'crunch' }}>
-              <HomepageAccordianSummary
+          <HomepageAccordion {...{ active, handleChange, panel: 'crunch' }}>
+            <HomepageAccordianSummary
                 alt='compress icon'
                 src='/assets/icons/compress.png'
               >ChainCrunch™ Compression
@@ -312,11 +304,43 @@ export default function Homepage () {
                 called ChainCrunch™, which solves this issue without compromising
                 on blockchain integrity.
                 <br /><br />
-                At almost 4 years of age and more than 350k blocks in length, the
+                At almost 4 years of age and more than 670k blocks, the
                 core component used to verify the integrity of the Blockchain is
                 a mere 50MB in size. A full node need only download an additional
                 and tiny, compressed portion of the historical blockchain and
                 begin contributing to the network immediately.
+              </AccordionDetails>
+            </HomepageAccordion>
+            <HomepageAccordion {...{ active, handleChange, panel: 'pseudo' }}>
+              <HomepageAccordianSummary
+                alt='pseudoblock icon'
+                src='/assets/icons/pseudoblock.png'
+              >Pseudo-block Failsafe
+              </HomepageAccordianSummary>
+              <AccordionDetails>
+                What happens when a large portion power suddenly disappears from
+                the network? With the remaining power left to solve tremendously
+                high difficulties in order to clear transactions, how long should
+                you wait? Days? WEEKS? MoNtHs? Not around these parts...
+                <br /><br />
+                The Mochimo network detects long block times and agrees to lower
+                the difficulty with a special kind of block. The "pseudo-block".
+                With the power of friendship (and of course, a little "pseudo"
+                blockchain magic), the Mochimo network restores normal clearing
+                times to transactions within hours of a 90% mining power loss.
+              </AccordionDetails>
+            </HomepageAccordion>
+            <HomepageAccordion {...{ active, handleChange, panel: '3way' }}>
+              <HomepageAccordianSummary
+                alt='handshake icon'
+                src='/assets/icons/handshake.png'
+              >Three-Way Handshake
+              </HomepageAccordianSummary>
+              <AccordionDetails>
+                The Three-Way handshake is a network communication protocol
+                requiring the collection of "acknowledgements" providing fast,
+                simple and disposable security for secure requests to the
+                decentralized network of nodes that make up the Mochimo Network.
               </AccordionDetails>
             </HomepageAccordion>
             <HomepageAccordion {...{ active, handleChange, panel: 'haiku' }}>
@@ -354,34 +378,18 @@ export default function Homepage () {
               <HomepageAccordianSummary
                 alt='tag icon'
                 src='/assets/icons/tag.png'
-              >Quantum Resistant Tags
+              >Quantum Resistant Addresses
               </HomepageAccordianSummary>
               <AccordionDetails>
                 Address size is one of the major hurdles with Quantum Resistant
-                addresses. At 2208 bytes (or 4416 hexadecimal characters), it's
-                more than a handful to remember. Fortunately, Mochimo deploys
-                a custom tagging feature allowing the enormous addresses to
-                (optionally) be "tagged" with a short and easily memorable tag
-                of a mere 12 bytes (24 hexadecimal characters) in length.
-              </AccordionDetails>
-            </HomepageAccordion>
-            <HomepageAccordion {...{ active, handleChange, panel: 'pseudo' }}>
-              <HomepageAccordianSummary
-                alt='pseudoblock icon'
-                src='/assets/icons/pseudoblock.png'
-              >Pseudo-block Failsafe
-              </HomepageAccordianSummary>
-              <AccordionDetails>
-                What happens when a large portion power suddenly disappears from
-                the network? With the remaining power left to solve tremendously
-                high difficulties in order to clear transactions, how long should
-                you wait? Days? WEEKS? MoNtHs? Not around these parts...
-                <br /><br />
-                The Mochimo network detects long block times and agrees to lower
-                the difficulty with a special kind of block. The "pseudo-block".
-                With the power of friendship (and of course, a little "pseudo"
-                blockchain magic), the Mochimo network restores normal clearing
-                times to transactions within hours of a 90% mining power loss.
+                public keys. At 2208 bytes, it's
+                more than a handful to remember or to share. Fortunately, Mochimo deploys 
+                a custom tagging feature that automatically generates an address from the very 
+                first quantum resistant public key ever used. This address will never change, 
+                even if the public keys change.
+                This allows enormous public keys to be "tagged" with a short and easily memorable address
+                of a mere 20 bytes in length. The official way of sharing these 20 bytes follows the Bitcoin standard 
+                of using base58, and including a crc16 checksum at the end.
               </AccordionDetails>
             </HomepageAccordion>
             <HomepageAccordion {...{ active, handleChange, panel: 'peach' }}>
