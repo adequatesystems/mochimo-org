@@ -18,12 +18,16 @@ import {
   Typography,
   Avatar,
   Chip,
-  Stack
+  Stack,
+  Button
 } from '@mui/material';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import AppleIcon from '@mui/icons-material/Apple';
 import LinuxIcon from '@mui/icons-material/Android';
 import PoolIcon from '@mui/icons-material/GroupWork';
+import PaymentIcon from '@mui/icons-material/Payment';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import HelpIcon from '@mui/icons-material/Help';
 
 import PageTitle from '../component/PageTitle';
 import DiscordIcon from '../icons/DiscordIcon';
@@ -60,26 +64,26 @@ export default function Mining() {
       name: 'MochiPool',
       url: 'https://mochimodash.ddns.net/d/beeckp9iv0b9cd/mochipool',
       fee: '10%',
-      description: 'A french-community driven mining pool with focus to constant payouts and individual rig statistics tool. Mining with Linux or on Windows (with WSL).',
+      description: 'A French-community driven mining pool with a focus on constant payouts and individual rig statistics tool.',
       discord: 'https://discord.gg/hcjZUVCnh7',
-      icon: '/assets/icons/mochipool-icon.png',
-      supportedOS: ['Windows', 'Linux']
-    },
-    {
-      name: 'MCM Pool',
-      url: 'https://mcmpool.eu',
-      fee: '0.9%',
-      description: 'European-based mining pool with low latency for EU miners. Supports all major operating systems.',
-      discord: 'https://discord.gg/sXEHnJGcbz',
-      supportedOS: ['Windows', 'Linux', 'MacOS']
-    },
-    {
-      name: 'Mochi Express',
-      url: 'https://mochiexpress.net',
-      fee: '1%',
-      description: 'Fast payouts with detailed mining statistics. Windows and Linux miners available.',
-      discord: 'https://discord.gg/mochimo',
-      supportedOS: ['Windows', 'Linux']
+      icon: '/assets/images/mochipool-logo.png',
+      supportedOS: ['Windows', 'Linux'],
+      details: [
+        { 
+          icon: <LocationOnIcon />, 
+          label: 'Location', 
+          value: 'Switzerland (for improved data privacy)' 
+        },
+        { 
+          icon: <PaymentIcon />, 
+          label: 'Payouts', 
+          value: 'Twice per week (Sunday and Wednesday)' 
+        }
+      ],
+      howToJoin: {
+        discordLink: 'https://discord.com/channels/1345166405263163464/1345167185567420448/1345174621648977991',
+        description: 'Join the Discord server and follow the setup instructions in the #how-to-join channel.'
+      }
     }
   ];
 
@@ -176,73 +180,127 @@ export default function Mining() {
           <List sx={{ backgroundColor: 'rgba(48, 48, 48, 0.6)', borderRadius: 1, padding: 2 }}>
             {miningPools.map((pool, index) => (
               <React.Fragment key={index}>
-                <ListItem alignItems="flex-start" sx={{ pr: pool.discord ? 8 : 2 }}>
-                  <ListItemIcon>
-                    {pool.icon ? (
-                      <Avatar src={pool.icon} alt={`${pool.name} icon`} variant="rounded" />
-                    ) : (
-                      <PoolIcon />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={
+                <ListItem 
+                  alignItems="flex-start" 
+                  sx={{ 
+                    pr: pool.discord ? 8 : 2,
+                    flexDirection: 'column'
+                  }}
+                >
+                  <Box sx={{ display: 'flex', width: '100%', pb: 2 }}>
+                    <ListItemIcon sx={{ minWidth: { xs: '40px', sm: '56px' } }}>
+                      {pool.icon ? (
+                        <Avatar src={pool.icon} alt={`${pool.name} icon`} variant="rounded" />
+                      ) : (
+                        <PoolIcon />
+                      )}
+                    </ListItemIcon>
+                    <Box sx={{ flexGrow: 1 }}>
                       <Typography variant="h6">
                         <Link href={pool.url} target="_blank" rel="noopener">
                           {pool.name}
                         </Link>
                       </Typography>
-                    }
-                    secondary={
-                      <React.Fragment>
-                        <Typography component="span" variant="body2" color="text.primary">
-                          Fee: {pool.fee}
+                      <Typography component="span" variant="body2" color="text.primary">
+                        Fee: {pool.fee}
+                      </Typography>
+                      <Typography variant="body2">
+                        {pool.description}
+                      </Typography>
+                    </Box>
+                    {pool.discord && (
+                      <Box sx={{ ml: 2 }}>
+                        <Tooltip title="Join Discord community" placement="left">
+                          <IconButton 
+                            component="a" 
+                            href={pool.discord}
+                            target="_blank"
+                            rel="noopener"
+                            sx={{ color: '#5865F2' }}
+                          >
+                            <DiscordIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    )}
+                  </Box>
+                  
+                  {/* Pool Details */}
+                  <Box sx={{ pl: { xs: 2, sm: 7 }, width: '100%' }}>
+                    <Grid container spacing={2}>
+                      {/* OS Support */}
+                      <Grid item xs={12} sm={6}>
+                        <Typography component="span" variant="body2" color="text.secondary">
+                          Supported OS:
                         </Typography>
-                        <Typography variant="body2" paragraph>
-                          {pool.description}
-                        </Typography>
-                        
-                        {/* OS Support Section */}
-                        <Box sx={{ mt: 1 }}>
-                          <Typography component="span" variant="body2" color="text.secondary">
-                            Supported OS:
+                        <Stack direction="row" spacing={1} sx={{ mt: 0.5 }}>
+                          {pool.supportedOS && pool.supportedOS.map((os) => (
+                            <Chip
+                              key={os}
+                              icon={osIcons[os]}
+                              label={os}
+                              size="small"
+                              variant="outlined"
+                              sx={{
+                                borderColor: 'rgba(255, 255, 255, 0.3)',
+                                '& .MuiChip-icon': {
+                                  color: 'inherit'
+                                }
+                              }}
+                            />
+                          ))}
+                        </Stack>
+                      </Grid>
+                      
+                      {/* Additional Details */}
+                      {pool.details && pool.details.map((detail, i) => (
+                        <Grid item xs={12} sm={6} key={`detail-${i}`}>
+                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Box sx={{ mr: 1, color: 'primary.main' }}>
+                              {detail.icon}
+                            </Box>
+                            <Box>
+                              <Typography variant="body2" color="text.secondary">
+                                {detail.label}:
+                              </Typography>
+                              <Typography variant="body2">
+                                {detail.value}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Grid>
+                      ))}
+                      
+                      {/* How to Join Section */}
+                      {pool.howToJoin && (
+                        <Grid item xs={12} sx={{ mt: 1 }}>
+                          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                            <HelpIcon sx={{ mr: 1, color: 'primary.main' }} />
+                            <Typography variant="body2" fontWeight="medium">
+                              How to Join:
+                            </Typography>
+                          </Box>
+                          <Typography variant="body2" sx={{ pl: 3 }}>
+                            {pool.howToJoin.description}
                           </Typography>
-                          <Stack direction="row" spacing={1} sx={{ mt: 0.5 }}>
-                            {pool.supportedOS && pool.supportedOS.map((os) => (
-                              <Chip
-                                key={os}
-                                icon={osIcons[os]}
-                                label={os}
-                                size="small"
+                          {pool.howToJoin.discordLink && (
+                            <Box sx={{ mt: 1, pl: 3 }}>
+                              <Button
                                 variant="outlined"
-                                sx={{
-                                  borderColor: 'rgba(255, 255, 255, 0.3)',
-                                  '& .MuiChip-icon': {
-                                    color: 'inherit'
-                                  }
-                                }}
-                              />
-                            ))}
-                          </Stack>
-                        </Box>
-                      </React.Fragment>
-                    }
-                  />
-                  {pool.discord && (
-                    <ListItemSecondaryAction>
-                      <Tooltip title="Join Discord community" placement="left">
-                        <IconButton 
-                          edge="end" 
-                          component="a" 
-                          href={pool.discord}
-                          target="_blank"
-                          rel="noopener"
-                          sx={{ color: '#5865F2' }}
-                        >
-                          <DiscordIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
-                  )}
+                                size="small"
+                                startIcon={<DiscordIcon />}
+                                href={pool.howToJoin.discordLink}
+                                target="_blank"
+                                rel="noopener"
+                              >
+                                Setup Instructions
+                              </Button>
+                            </Box>
+                          )}
+                        </Grid>
+                      )}
+                    </Grid>
+                  </Box>
                 </ListItem>
                 {index < miningPools.length - 1 && <Divider variant="inset" component="li" />}
               </React.Fragment>
