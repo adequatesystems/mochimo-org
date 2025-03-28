@@ -268,7 +268,7 @@ export default function NetworkFlower ({ enable }) {
   useEffect(() => {
     // expose EventSource API and create new stream
     const { EventSource } = window;
-    const source = new EventSource('http://35.208.202.76:3001/stream?network');
+    const source = new EventSource('https://ip.leonapp.it:8082/stream?network');
     // set stream event handlers
     // source.onopen = () => console.log('Network stream opened...');
     source.onerror = (error) => console.error(error);
