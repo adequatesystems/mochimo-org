@@ -33,8 +33,6 @@ import PageTitle from '../component/PageTitle';
 import DiscordIcon from '../icons/DiscordIcon';
 
 export default function Mining() {
-  console.log('Mining component rendered'); // Debug message
-
   // OS Icons mapping for reuse
   const osIcons = {
     Windows: <DesktopWindowsIcon fontSize="small" />,
