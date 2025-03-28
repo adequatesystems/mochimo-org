@@ -133,7 +133,7 @@ export function Exchanges () {
         </Grid>
         <Grid container item xs={12} justifyContent='center'>
           <Grid item xs={12} sm={4} padding={4}>
-            <Link href='https://www.vindax.com/'>
+            <Link href='https://vindax.com/exchange-advanced.html?symbol=MCM_USDT'>
               <img alt='vindax logo' src='/assets/images/vindax.svg' width='100%' />
             </Link>
             <Typography color='textSecondary'>
