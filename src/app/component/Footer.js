@@ -1,4 +1,3 @@
-
 import {
   Box,
   Container,
@@ -72,12 +71,9 @@ export default function Footer () {
             <Grid item xs={6} padding={2} align='left'>
               <Typography variant='h5' gutterBottom>Links</Typography>
               <FooterLink href='http://mochiwiki.com'>MochiWiki</FooterLink>
+              <FooterLink to='/mining' onClick={scrollToTopNow}>Mining</FooterLink>
               <FooterLink href='/assets/files/mochimo_wp_EN.pdf'>
                 Whitepaper
-              </FooterLink>
-              <FooterLink href='https://illamanudi.com'>illamanudi</FooterLink>
-              <FooterLink href='https://www.coingecko.com/coins/mochimo'>
-                CoinGecko
               </FooterLink>
               <FooterLink href='https://coinmarketcap.com/currencies/mochimo/'>
                 CoinMarketCap
