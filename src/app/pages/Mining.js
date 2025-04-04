@@ -29,7 +29,6 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HelpIcon from '@mui/icons-material/Help';
 
-import PageTitle from '../component/PageTitle';
 import DiscordIcon from '../icons/DiscordIcon';
 
 export default function Mining() {
@@ -103,7 +102,11 @@ export default function Mining() {
             boxShadow: ({ palette }) => '0 0 2em ' + palette.background.default
           }}
         >
-          <PageTitle title="Mining Mochimo" />
+          <Box sx={{ mb: 4 }}>
+            <Typography variant="h2" component="h1" gutterBottom align="center">
+              Mining Mochimo
+            </Typography>
+          </Box>
           
           <Typography variant="h4" component="h2" gutterBottom>
             Getting Started with Mining
