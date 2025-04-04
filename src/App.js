@@ -1,4 +1,3 @@
-
 import { forwardRef, lazy, Suspense, useMemo, useState } from 'react';
 import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 import { Box, CssBaseline, responsiveFontSizes, useMediaQuery } from '@mui/material';
@@ -19,6 +18,7 @@ import Explorer from 'app/explorer';
 import ExplorerBlock from 'app/explorer-block';
 import ExplorerLedger from 'app/explorer-ledger';
 import Footer from 'app/component/Footer';
+import Mining from './app/pages/Mining';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -203,6 +203,7 @@ export default function App () {
                 <Route path='transaction' element={<Explorer type='transaction' />} />
                 <Route path='*' element={<Navigate replace to='/explorer' />} />
               </Route>
+              <Route path='mining' element={<Mining />} />
             </Routes>
           </Box>
           <Routes>
