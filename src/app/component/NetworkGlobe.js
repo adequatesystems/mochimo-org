@@ -199,7 +199,7 @@ export default function NetworkGlobe ({ mfx }) {
         ref={globe}
         width={width}
         height={height}
-        backgroundImageUrl={mfx ? '' : '/assets/globe/8k_stars.jpg'}
+        backgroundImageUrl={mfx ? '' : '/assets/globe/8k_stars.webp'}
         backgroundColor={mfx ? 'rgba(0, 0, 0, 0)' : '#121212'}
         hexBinPointsData={points}
         hexBinResolution={3}
