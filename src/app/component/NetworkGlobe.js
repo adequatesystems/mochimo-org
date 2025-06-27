@@ -1,4 +1,3 @@
-
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { applyObjDiff, dupObj } from 'util';
 import { useGetNetworkQuery } from 'api';
@@ -63,14 +62,14 @@ export default function NetworkGlobe ({ mfx }) {
   }, [nodes]);
 
   useEffect(() => {
-    if (points.length && !countries.features.length) {
+    if (!countries.features.length) {
       /* eslint-disable-next-line no-undef */// fetch is defined globally
       fetch('/assets/data/countries-hex-data.json')
         .then((res) => res.json())
         .then(setCountries)
         .finally(() => setLoading(0));
     }
-  }, [points, countries.features.length]);
+  }, [countries.features.length]);
 
   // ////////////////////
   // Update Network State
@@ -143,8 +142,9 @@ export default function NetworkGlobe ({ mfx }) {
           current.renderer().setSize(window.innerWidth, window.innerHeight);
           current.controls().autoRotate = true;
           current.controls().autoRotateSpeed = mql.matches ? 1 : 0.25;
+          current.controls().enableZoom = false;  
           if (mfx) {
-            current.controls().enableZoom = false;
+            //current.controls().enableZoom = false;
             current.controls().minDistance = 300;
             current.controls().maxDistance = 300;
           }
@@ -199,7 +199,7 @@ export default function NetworkGlobe ({ mfx }) {
         ref={globe}
         width={width}
         height={height}
-        backgroundImageUrl={mfx ? '' : '/assets/globe/night-sky.png'}
+        backgroundImageUrl={mfx ? '' : '/assets/globe/8k_stars.webp'}
         backgroundColor={mfx ? 'rgba(0, 0, 0, 0)' : '#121212'}
         hexBinPointsData={points}
         hexBinResolution={3}

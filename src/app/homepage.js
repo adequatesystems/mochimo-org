@@ -69,7 +69,8 @@ export default function Homepage () {
           position: 'relative',
           minHeight: { xs: '80vh', sm: '70vh' },
           textAlign: 'center',
-          textShadow: '0 0 0.125em black, 0 0 0.25em black, 0 0 0.5em black'
+          textShadow: '0 0 0.125em black, 0 0 0.25em black, 0 0 0.5em black',
+          pointerEvents: 'none'
         }}
       >
         <Box sx={{ flexGrow: 1, opacity: { xs: 0, sm: 1 }, width: '100%' }}>
@@ -80,7 +81,7 @@ export default function Homepage () {
               </Typography>
             </Box>
           )) || (
-            <Grid container spacing={1} opacity={0} marginTop={0.5}>
+            <Grid container spacing={1} opacity={0} marginTop={0.5} sx={{pointerEvents: 'auto'}}>
               <Grid item xs={6} align='left'>
                 <Typography fontWeight='bold' lineHeight={1}>
                   <SuffixedValue exact value={chain.data?.circsupply} /><br />
@@ -120,7 +121,7 @@ export default function Homepage () {
             </Grid>
           )}
         </Box>
-        <Typography lineHeight={1.5} variant='caption' fontSize='1em'>
+        <Typography lineHeight={1.5} variant='caption' fontSize='1em' sx={{pointerEvents: 'auto'}}>
           The
           <Typography variant='h4' fontFamily='Nunito Sans' fontWeight='bold'>
             Mochimo
@@ -136,27 +137,28 @@ export default function Homepage () {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
+            pointerEvents: 'auto',
             gap: ({ spacing }) => spacing(1)
           }}
         >
           <Tooltip title='Trade MCM!' arrow>
             <Link to='/exchanges-mcm'>
-              <Button variant='contained'>Exchanges</Button>
+              <Button sx={{width:'200px'}} variant='contained'>Exchanges</Button>
             </Link>
           </Tooltip>
           <Tooltip title="Mining software and pools" arrow>
             <Link to='/mining'>
-              <Button variant='contained'>Mining</Button>
+              <Button sx={{width:'200px'}} variant='contained'>Mining</Button>
             </Link>
           </Tooltip>
           <Tooltip title='Github' arrow>
             <Link href='https://github.com/mochimodev/mochimo/releases'>
-              <Button variant='contained'>Mochimo Releases</Button>
+              <Button sx={{width:'200px'}} variant='contained'>Mochimo Releases</Button>
             </Link>
           </Tooltip>
           <Tooltip title='Much detail, many interesting!' arrow>
             <Link href='/assets/files/mochimo_wp_EN.pdf'>
-              <Button variant='contained'>Whitepaper</Button>
+              <Button sx={{width:'200px'}} variant='contained'>Whitepaper</Button>
             </Link>
           </Tooltip>
         </Box>
@@ -177,7 +179,7 @@ export default function Homepage () {
             height: '100%',
             left: '-150%',
             top: ({ spacing }) => spacing(16),
-            boxShadow: ({ palette }) => '0 0 2em ' + palette.background.default
+            boxShadow: '0 0 0em 6px #2e2e2e'
           }}
         />
         <HomepageDivider dense>Mochimo's Focus</HomepageDivider>
@@ -275,16 +277,12 @@ export default function Homepage () {
               boxShadow: '0 4em 2em 2em rgba(30, 30, 30, 0.75)'
             }}
           >
-            While the extensive history of updates and improvements to the
+            The extensive history of updates and improvements to the
             Mochimo Cryptocurrency Engine is always accesible from Mochimo's&nbsp;
             <Tooltip title='Extensive History' placement='top' arrow>
               <Link href='https://github.com/mochimodev/mochimo'>
                 Github Repository
               </Link>
-            </Tooltip>, we like to keep a separate list of much easier to read
-            "milestones".&nbsp;
-            <Tooltip title='Delicious History' placement='right' arrow>
-              <Link to='/milestones'>Check them out &#187;</Link>
             </Tooltip>
             <br /><br />
             In addition, here are some of the novel innovations that set
@@ -449,10 +447,6 @@ export default function Homepage () {
                   notable exchanges. All exchanges that have listed Mochimo
                   have done so on their own accord. Hit the "TRADE MOCHIMO"
                   button to see the latest exchanges where MCM is located.
-                  <br /><br />For a guide, see&nbsp;
-                  <Link href='https://medium.com/mochimo-official/how-to-buy-mochimo-mcm-in-minutes-88d5dab2d8e8'>
-                    How to buy MCM in minutes
-                  </Link>
                 </Grid>
               </Grid>
             </RaisedCard>
@@ -606,10 +600,7 @@ export default function Homepage () {
               Mochimo Foundation (<Amount value={1557066000000000} />):
             </strong> these funds are used at the discretion of the
             foundation for marketing costs, bounties, and ongoing support
-            of the network. Disposition of these coins is listed on the&nbsp;
-            <Link href='https://www.mochiwiki.com/w/index.php/Premine_Disposition'>
-              Mochimo Wiki
-            </Link>.
+            of the network.
             <br /><br />
             <strong>
               Matt Zweil (<Amount value={1919999999991500} />):
@@ -696,11 +687,9 @@ export default function Homepage () {
         align='center' sx={{
           zIndex: 1,
           position: 'relative',
-          padding: 8,
-          marginTop: 12,
-          marginBottom: 4,
-          borderRadius: 0,
-          boxShadow: '0 0 1em 1em white'
+          padding: 2,
+          marginTop: 25,
+          background: '#121212'
         }}
       >
         <Typography variant='h2' gutterBottom>

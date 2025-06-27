@@ -116,17 +116,6 @@ export function Exchanges () {
         </Grid>
         <Grid item xs={12}>
           <Typography color='textSecondary' variant='caption' fontSize='1em'>
-            For a guide on how to buy Mochimo, see&nbsp;
-            <Link href='https://medium.com/mochimo-official/how-to-buy-mochimo-mcm-in-minutes-88d5dab2d8e8'>
-              How to buy MCM in minutes
-            </Link>.<br />Alternatively, there is also a YouTube video for&nbsp;
-            <Link href='https://www.youtube.com/watch?v=JcpORNiRoEk'>
-              How to buy Mochimo
-            </Link>.
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography color='textSecondary' variant='caption' fontSize='1em'>
             Below are the exchanges that have announced and integrated to trade
             MCM. Note available pairs.
           </Typography>
