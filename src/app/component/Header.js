@@ -113,15 +113,22 @@ export default function Header ({ actualTheme, switchTheme }) {
       <Container disableGutters>
         <Toolbar
           variant={dense ? 'dense' : 'regular'}
-          sx={{ transition: 'min-height 250ms' }}
+          sx={{ 
+            transition: 'min-height 250ms',
+            marginTop: '10px',
+            marginBottom: '10px'
+          }}
         >
           <Headertitle dense={dense} />
           <Box flexGrow={1} marginLeft={2}>
-            <Headernav dense={dense} to='/explorer'>Explorer</Headernav>
+            <Headernav dense={dense} href="https://mochiscan.org" target="_blank" rel="noopener noreferrer">
+              Explorer
+            </Headernav>
+            {/*<Headernav dense={dense} to='/explorer'>Explorer</Headernav>
             <Headernav dense={dense} to='/network'>Network</Headernav>
             <Headernav dense={dense} href='/status'>
               Status
-            </Headernav>
+            </Headernav>*/}
           </Box>
           <Box>
             {service.map(({ href, Icon, primary }, i) => (

@@ -30,13 +30,16 @@ export default function Footer () {
     <footer
       style={{
         zIndex: 2,
-        background: '#303030',
+        background: 'rgba(46, 46, 46, 0.75)',
         position: 'relative',
         bottom: 0,
-        borderTop: '0.25em solid #0059ff'
+        borderTop: '0.25em solid #0059ff',
       }}
     >
-      <Container align='center'>
+      <Container align='center' sx={{
+        marginTop: '10px',
+        marginBottom: '10px'
+      }}>
         <Grid container spacing={1} align='center'>
           <Grid container item sm={12} md={6}>
             <Grid
@@ -70,7 +73,7 @@ export default function Footer () {
             </Grid>
             <Grid item xs={6} padding={2} align='left'>
               <Typography variant='h5' gutterBottom>Links</Typography>
-              <FooterLink href='http://mochiwiki.com'>MochiWiki</FooterLink>
+              {/*<FooterLink href='http://mochiwiki.com'>MochiWiki</FooterLink>*/}
               <FooterLink to='/mining' onClick={scrollToTopNow}>Mining</FooterLink>
               <FooterLink href='/assets/files/mochimo_wp_EN.pdf'>
                 Whitepaper
@@ -90,7 +93,7 @@ export default function Footer () {
         </Typography>
         <Grid item xs={12}><Divider /></Grid>
         <Grid item xs={12}>
-          <Typography variant='caption' fontSize={{ xs: 'auto', sm: '1em' }}>
+          <Typography variant='caption' fontSize={{ xs: 'auto' }}>
             Copyright 2022 &copy; All rights Reserved.
             <Box component='span' display={{ xs: 'none', sm: 'inline' }}>&nbsp;</Box>
             <Box component='span' display={{ xs: 'inline', sm: 'none' }}><br /></Box>
