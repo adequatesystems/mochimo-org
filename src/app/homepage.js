@@ -80,46 +80,7 @@ export default function Homepage () {
                 <CircularProgress size='1em' /> Loading Network Data...
               </Typography>
             </Box>
-          )) || (
-            <Grid container spacing={1} opacity={0} marginTop={0.5} sx={{pointerEvents: 'auto'}}>
-              <Grid item xs={6} align='left'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue exact value={chain.data?.circsupply} /><br />
-                  <Typography variant='caption'>Circulating Supply</Typography>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} align='right'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue exact value={chain.data?.hashrate_avg} /><br />
-                  <Typography variant='caption'>Haiku / second</Typography>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} align='left'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue value={base.data?.stats?.addresses} /><br />
-                  <Typography variant='caption'>Active Addresses</Typography>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} align='right'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue value={base.data?.stats?.deltas} /><br />
-                  <Typography variant='caption'>Balance Deltas</Typography>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} align='left'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue value={base.data?.stats?.transactions} /><br />
-                  <Typography variant='caption'>Transactions</Typography>
-                </Typography>
-              </Grid>
-              <Grid item xs={6} align='right'>
-                <Typography fontWeight='bold' lineHeight={1}>
-                  <SuffixedValue value={base.data?.stats?.blocks} /><br />
-                  <Typography variant='caption'>Blocks</Typography>
-                </Typography>
-              </Grid>
-            </Grid>
-          )}
+          ))}
         </Box>
         <Typography lineHeight={1.5} variant='caption' fontSize='1em' sx={{pointerEvents: 'auto'}}>
           The
