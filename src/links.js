@@ -27,7 +27,7 @@ export const Status = {
   href: 'https://status.mochimo.org',
   Icon: OnlinePredictionIcon,
   secondary: 'Status / Uptime Monitor',
-  primary: 'Standalone Status Page'
+  primary: 'Live System Status'
 };
 
 // social links
@@ -68,7 +68,7 @@ export const YouTube = {
 };
 
 // tl exports
-export const service = [Status, WebWallet, Merchandise];
+export const service = [Status];
 export const social = [Discord, Medium, Reddit, Telegram, Twitter, YouTube];
 const Links = { service, social };
 

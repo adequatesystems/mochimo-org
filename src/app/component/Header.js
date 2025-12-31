@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   AppBar,
@@ -68,6 +67,8 @@ function Headertitle ({ dense, ...props }) {
 
 function Headernav ({ dense, ...props }) {
   const bold = useLocation().pathname.includes(props.children.toLowerCase());
+  const isBuyButton = props.children === 'Find MCM on Biconomy Exchange';
+  
   return (
     <Link
       underline='none' {...props}
@@ -78,8 +79,22 @@ function Headernav ({ dense, ...props }) {
         color: 'white',
         fontFamily: 'Roboto Mono',
         fontWeight: bold ? 'bold' : '',
-        fontSize: dense ? '1em' : '1.125em',
-        '&:hover': { textShadow: '0 0 0.25em white', cursor: 'pointer' }
+        fontSize: dense ? '1.2em' : '1.35em',
+        ...(isBuyButton && {
+          border: '2px solid #0059ff',
+          borderRadius: '8px',
+          padding: '6px 16px',
+          backgroundColor: 'rgba(0, 89, 255, 0.1)',
+          transition: 'all 0.2s'
+        }),
+        '&:hover': { 
+          textShadow: '0 0 0.25em white', 
+          cursor: 'pointer',
+          ...(isBuyButton && {
+            backgroundColor: 'rgba(0, 89, 255, 0.3)',
+            transform: 'scale(1.05)'
+          })
+        }
       }}
     />
   );
@@ -96,9 +111,7 @@ function Headerbutton ({ title, ...props }) {
   );
 }
 
-export default function Header ({ actualTheme, switchTheme }) {
-  const [menuAnchor, setMenuAnchor] = useState('');
-  const toggle = (e) => setMenuAnchor(menuAnchor ? '' : 'left');
+export default function Header ({ actualTheme }) {
   const dense = useScrollTrigger({
     disableHysteresis: true,
     threshold: 25
@@ -107,30 +120,35 @@ export default function Header ({ actualTheme, switchTheme }) {
   return (
     <AppBar
       position='fixed'
-      color={dense ? 'primary' : 'transparent'}
-      sx={{ boxShadow: dense ? 'default' : 'none' }}
+      color='primary'
+      sx={{ boxShadow: 'default' }}
     >
       <Container disableGutters>
         <Toolbar
-          variant={dense ? 'dense' : 'regular'}
+          variant='dense'
           sx={{ 
-            transition: 'min-height 250ms',
             marginTop: '10px',
             marginBottom: '10px'
           }}
         >
-          <Headertitle dense={dense} />
-          <Box flexGrow={1} marginLeft={2}>
-            <Headernav dense={dense} href="https://mochiscan.org" target="_blank" rel="noopener noreferrer">
+          <Headertitle dense={true} />
+          <Box flexGrow={1} />
+          <Box display='flex' justifyContent='center' alignItems='center' gap={3}>
+            <Headernav dense={true} href="https://mochiscan.org" target="_blank" rel="noopener noreferrer">
               Explorer
             </Headernav>
-            {/*<Headernav dense={dense} to='/explorer'>Explorer</Headernav>
-            <Headernav dense={dense} to='/network'>Network</Headernav>
-            <Headernav dense={dense} href='/status'>
-              Status
-            </Headernav>*/}
+            <Headernav dense={true} href='https://chromewebstore.google.com/detail/mochimo-wallet/fkogefgjocnflhankmffnibdofdiiiho' target="_blank" rel="noopener noreferrer">
+              Wallet
+            </Headernav>
+            <Headernav dense={true} href='/assets/files/mochimo_wp_EN.pdf' target="_blank" rel="noopener noreferrer">
+              Whitepaper
+            </Headernav>
+            <Headernav dense={true} href='https://www.biconomy.com/exchange/MCM_USDT' target="_blank" rel="noopener noreferrer">
+              Find MCM on Biconomy Exchange
+            </Headernav>
           </Box>
-          <Box>
+          <Box flexGrow={1} />
+          <Box display='flex' alignItems='center' gap={1}>
             {service.map(({ href, Icon, primary }, i) => (
               <Headerbutton
                 key={`headerlink-${i}`} href={href} title={primary}

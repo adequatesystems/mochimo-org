@@ -108,29 +108,30 @@ export function Exchanges () {
             </u>
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography color='info' variant='caption' fontSize='1em'>
-            PLEASE NOTE: Neither the Mochimo Foundation nor any of its
-            members endorse exchanges.<br />Trade at your own risk.
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography color='textSecondary' variant='caption' fontSize='1em'>
-            Below are the exchanges that have announced and integrated to trade
-            MCM. Note available pairs.
-          </Typography>
-        </Grid>
         <Grid container item xs={12} justifyContent='center'>
           <Grid item xs={12} sm={4} padding={4}>
-            <Link href='https://vindax.com/exchange-advanced.html?symbol=MCM_USDT'>
-              <img alt='vindax logo' src='/assets/images/vindax.svg' width='100%' />
+            <Link href='https://www.biconomy.com/exchange/MCM_USDT'>
+              <img 
+                alt='biconomy logo' 
+                src='/assets/images/biconomy-logo.png' 
+                width='100%'
+                style={{
+                  border: '2px solid #0059ff',
+                  borderRadius: '12px',
+                  padding: '16px',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 89, 255, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              />
             </Link>
-            <Typography color='textSecondary'>
-              <DirectionsIcon fontSize='inherit' />&nbsp;
-              <Link href='https://vindax.com/exchange-advanced.html?symbol=MCM_USDT'>
-                USDT
-              </Link>
-            </Typography>
           </Grid>
         </Grid>
       </Grid>

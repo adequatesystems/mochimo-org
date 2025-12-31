@@ -32,8 +32,9 @@ function ResultsLabel (props) {
 export default function Explorer ({ type }) {
   let { pathname, search } = useLocation();
   const navigate = useNavigate();
-  const hexRegex = /^(?:0x)?[0-9a-f]+$/i;
-  const searchRegex = /^(?:0x)?[0-9a-f]*$/i;
+  // Add length limits to prevent ReDoS attacks (128 hex chars = 64 bytes)
+  const hexRegex = /^(?:0x)?[0-9a-f]{1,128}$/i;
+  const searchRegex = /^(?:0x)?[0-9a-f]{0,128}$/i;
 
   // determine search query
   search = new URLSearchParams(search);

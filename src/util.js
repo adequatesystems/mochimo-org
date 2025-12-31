@@ -52,3 +52,24 @@ export const isTagged = (tag) => {
     typeof tag === 'string' && !['00', '42'].includes(tag.slice(0, 2))
   );
 };
+
+/**
+ * Validates and sanitizes hexadecimal input
+ * @param {string} input - The hex string to validate
+ * @param {number} maxLength - Maximum allowed length (default: 128)
+ * @returns {string|null} - Sanitized hex string or null if invalid
+ */
+export const validateHexInput = (input, maxLength = 128) => {
+  if (typeof input !== 'string') return null;
+  
+  // Remove 0x prefix if present
+  const cleaned = input.replace(/^0x/i, '');
+  
+  // Check length
+  if (cleaned.length > maxLength) return null;
+  
+  // Validate hex characters
+  if (!/^[0-9a-f]*$/i.test(cleaned)) return null;
+  
+  return cleaned;
+};

@@ -47,7 +47,12 @@ const regionPreferenceBaseQuery = retry(
                   r.dist = geodist(nlat, nlng, r.lat, r.lng);
                 });
               }
-            }).catch(console.error).finally(() => {
+            }).catch((error) => {
+              // Log error but continue with default region ordering
+              if (process.env.NODE_ENV === 'development') {
+                console.error('Failed to fetch geo-location:', error);
+              }
+            }).finally(() => {
               // sort regions based on distances
               regionPreference.regions.sort((a, b) => {
                 return a.dist < b.dist ? -1 : a.dist > b.dist ? 1 : 0;

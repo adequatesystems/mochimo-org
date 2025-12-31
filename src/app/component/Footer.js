@@ -73,10 +73,15 @@ export default function Footer () {
             </Grid>
             <Grid item xs={6} padding={2} align='left'>
               <Typography variant='h5' gutterBottom>Links</Typography>
-              {/*<FooterLink href='http://mochiwiki.com'>MochiWiki</FooterLink>*/}
+              <FooterLink href='https://github.com/mochimodev/mochimo/releases'>
+                Github
+              </FooterLink>
               <FooterLink to='/mining' onClick={scrollToTopNow}>Mining</FooterLink>
               <FooterLink href='/assets/files/mochimo_wp_EN.pdf'>
                 Whitepaper
+              </FooterLink>
+              <FooterLink href='https://my-store-b9cfd9.creator-spring.com'>
+                Merchandise
               </FooterLink>
               <FooterLink href='https://coinmarketcap.com/currencies/mochimo/'>
                 CoinMarketCap
@@ -94,7 +99,7 @@ export default function Footer () {
         <Grid item xs={12}><Divider /></Grid>
         <Grid item xs={12}>
           <Typography variant='caption' fontSize={{ xs: 'auto' }}>
-            Copyright 2022 &copy; All rights Reserved.
+            Copyright 2025 &copy; All rights Reserved.
             <Box component='span' display={{ xs: 'none', sm: 'inline' }}>&nbsp;</Box>
             <Box component='span' display={{ xs: 'inline', sm: 'none' }}><br /></Box>
             The Mochimo Foundation.

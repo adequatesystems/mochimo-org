@@ -1,6 +1,6 @@
-import { forwardRef, lazy, Suspense, useMemo, useState } from 'react';
+import { forwardRef, lazy, Suspense, useMemo } from 'react';
 import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
-import { Box, CssBaseline, responsiveFontSizes, useMediaQuery } from '@mui/material';
+import { Box, CssBaseline, responsiveFontSizes } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import ScrollToTop from 'app/component/ScrollToTop';
@@ -11,7 +11,6 @@ import {
 } from 'app/other';
 import Network from 'app/network';
 import MFXGlobe from 'app/mfx-globe';
-// import Store from 'app/store';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
 import Explorer from 'app/explorer';
@@ -19,6 +18,7 @@ import ExplorerBlock from 'app/explorer-block';
 import ExplorerLedger from 'app/explorer-ledger';
 import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
+import FAQ from './app/pages/FAQ';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -32,14 +32,7 @@ const LinkForwarder = forwardRef(({ children, ...props }, ref) => {
 });
 
 export default function App () {
-  const [selected, setSelected] = useState();
-  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
-  const switchTheme = () => {
-    setSelected(
-      (!selected && prefersDark) || selected === 'dark' ? 'light' : 'dark'
-    );
-  };
-  const mode = 'dark'; // selected || (prefersDark ? 'dark' : 'light');
+  const mode = 'dark'; // Theme is hardcoded to dark mode
   const customTheme = useMemo(() => {
     return responsiveFontSizes(
       createTheme({
@@ -132,7 +125,7 @@ export default function App () {
             path='*' element={(
               <>
                 <CssBaseline />
-                <Header actualTheme={mode} switchTheme={switchTheme} />
+                <Header actualTheme={mode} />
               </>
             )}
           />
@@ -182,7 +175,6 @@ export default function App () {
               <Route path='exchanges-mcm' element={<Exchanges />} />
               <Route path='privacy-policy' element={<Privacy />} />
               <Route path='status' element={<Status />} />
-              {/* <Route path='store' element={<Store />} /> */}
               <Route path='network' element={<Network />} />
               <Route path='explorer'>
                 <Route index element={<Explorer />} />
@@ -204,6 +196,7 @@ export default function App () {
                 <Route path='*' element={<Navigate replace to='/explorer' />} />
               </Route>
               <Route path='mining' element={<Mining />} />
+              <Route path='faq' element={<FAQ />} />
             </Routes>
           </Box>
           <Routes>
