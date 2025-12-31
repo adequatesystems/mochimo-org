@@ -14,15 +14,25 @@ export default function Network ({ type }) {
   const [display, setDisplay] = useState(type || 'globe');
   const box = useRef();
 
-  // scroll listener (parallax, within page content) where within page content
+  // scroll listener (parallax, within page content)
   useEffect(() => {
     setIsMounted(true);
+    
+    let ticking = false;
+    
     function scroll () {
-      if (box.current) {
-        box.current.style.top = (window.pageYOffset * 0.5) + 'px';
+      if (!ticking && box.current) {
+        window.requestAnimationFrame(() => {
+          if (box.current) {
+            box.current.style.top = (window.pageYOffset * 0.5) + 'px';
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     }
-    window.addEventListener('scroll', scroll);
+    
+    window.addEventListener('scroll', scroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', scroll);
     };

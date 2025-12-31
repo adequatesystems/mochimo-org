@@ -81,7 +81,11 @@ export default function NetworkGlobe ({ mfx }) {
     const pending = [];
     // set stream event handlers
     // source.onopen = () => console.log('Network stream opened...');
-    source.onerror = (error) => console.error(error);
+    source.onerror = (error) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Network stream error:', error);
+      }
+    };
     source.onmessage = (message) => {
       // ignore non-object messages
       if (typeof message !== 'object') return;
@@ -109,7 +113,9 @@ export default function NetworkGlobe ({ mfx }) {
         }
       } catch (error) {
         // catch process breaking error
-        console.error(error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Message parsing error:', error);
+        }
       }
     };
     const interval = setInterval(() => {

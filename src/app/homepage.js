@@ -9,8 +9,6 @@ import SuffixedValue from './component/SuffixedValue';
 import RaisedCard from './component/RaisedCard';
 import DiscordIcon from './icons/DiscordIcon';
 
-import Network from './network';
-
 function HomepageDivider ({ dense, ...props }) {
   return (
     <Divider sx={{ paddingTop: dense ? 4 : 8, paddingBottom: dense ? 2 : 4 }}>
@@ -59,7 +57,6 @@ export default function Homepage () {
 
   return (
     <Box sx={{ overflow: 'hidden' }}>
-      <Network type='globe' />
       <Container
         sx={{
           gap: '1em',
@@ -67,31 +64,21 @@ export default function Homepage () {
           flexDirection: 'column',
           alignItems: 'center',
           position: 'relative',
-          minHeight: { xs: '80vh', sm: '70vh' },
+          paddingTop: { xs: '2rem', sm: '3rem' },
+          paddingBottom: '2rem',
           textAlign: 'center',
           textShadow: '0 0 0.125em black, 0 0 0.25em black, 0 0 0.5em black',
           pointerEvents: 'none'
         }}
       >
-        <Box sx={{ flexGrow: 1, opacity: { xs: 0, sm: 1 }, width: '100%' }}>
-          {((base.isFetching || chain.isFetching) && (
-            <Box align='center' sx={{ width: '100%' }}>
-              <Typography color='textSecondary'>
-                <CircularProgress size='1em' /> Loading Network Data...
-              </Typography>
-            </Box>
-          ))}
-        </Box>
         <Typography lineHeight={1.5} variant='caption' fontSize='1em' sx={{pointerEvents: 'auto'}}>
-          The
           <Typography variant='h4' fontFamily='Nunito Sans' fontWeight='bold'>
-            Mochimo
-            <Box component='span' display={{ xs: 'none', sm: 'inline' }}>&nbsp;</Box>
-            <Box component='span' display={{ xs: 'inline', sm: 'none' }}><br /></Box>
-            Cryptocurrency Network
+            Mochimo Cryptocurrency Network
           </Typography>
-          A complete reimplementation of Blockchain /
-          Currency for the Post-Quantum era
+          The world's first completely quantum resistant cryptocurrency.
+          <Typography variant='caption' fontSize='0.9em' display='block' sx={{ marginTop: 1 }}>
+            Est. 2018
+          </Typography>
         </Typography>
         <Box
           sx={{
@@ -101,28 +88,7 @@ export default function Homepage () {
             pointerEvents: 'auto',
             gap: ({ spacing }) => spacing(1)
           }}
-        >
-          <Tooltip title='Trade MCM!' arrow>
-            <Link to='/exchanges-mcm'>
-              <Button sx={{width:'200px'}} variant='contained'>Exchanges</Button>
-            </Link>
-          </Tooltip>
-          <Tooltip title="Mining software and pools" arrow>
-            <Link to='/mining'>
-              <Button sx={{width:'200px'}} variant='contained'>Mining</Button>
-            </Link>
-          </Tooltip>
-          <Tooltip title='Github' arrow>
-            <Link href='https://github.com/mochimodev/mochimo/releases'>
-              <Button sx={{width:'200px'}} variant='contained'>Mochimo Releases</Button>
-            </Link>
-          </Tooltip>
-          <Tooltip title='Much detail, many interesting!' arrow>
-            <Link href='/assets/files/mochimo_wp_EN.pdf'>
-              <Button sx={{width:'200px'}} variant='contained'>Whitepaper</Button>
-            </Link>
-          </Tooltip>
-        </Box>
+        />
       </Container>
       <Container
         sx={{
@@ -145,75 +111,55 @@ export default function Homepage () {
         />
         <HomepageDivider dense>Mochimo's Focus</HomepageDivider>
         <Grid container spacing={2} justifyContent='center'>
-          <Grid item xs={12} sm={6} md={4}>
-            <RaisedCard sx={{ height: '100%' }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} align='center'>
+          <Grid item xs={12}>
+            <RaisedCard>
+              <Grid container spacing={2} alignItems='center'>
+                <Grid item xs={12} sm={2} align='center'>
                   <Avatar
                     variant='square' src='/assets/icons/quantum-computing.png'
-                    sx={{ justifyContent: 'center', width: 64, height: 64 }}
+                    sx={{ justifyContent: 'center', width: 64, height: 64, margin: 'auto' }}
                   />
-                  <Typography variant='h6'>Quantum Resistant</Typography>
-                  <Typography variant='caption'>
-                    Future-Proofed and Privacy Enabled
-                  </Typography>
                 </Grid>
-                <Grid item xs={12} align='center'>
+                <Grid item xs={12} sm={10}>
+                  <Typography variant='h6'>Quantum Resistance</Typography>
                   <Typography>
-                    Quantum Computing is poised to break ECDSA encryption&nbsp;
-                    <u><b>without warning</b></u>, leaving BTC, ETH and all
-                    ERC-20 tokens unsafe for transactions and as a store of
-                    value. Mochimo uses WOTS+ Quantum Resistant Security
-                    approved by the EU funded PQCrypto research organization
-                    and a one time addressing feature to secure privacy when
-                    you want it.
+                    Quantum Computing is poised to break Bitcoin and Ethereum without warning. Mochimo uses the WOTS+ algorithm for its wallets, securing them against any Quantum computing attack.
                   </Typography>
                 </Grid>
               </Grid>
             </RaisedCard>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <RaisedCard sx={{ height: '100%' }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} align='center'>
-                  <Avatar
-                    variant='square' src='/assets/icons/fast-charge.png'
-                    sx={{ justifyContent: 'center', width: 64, height: 64 }}
-                  />
-                  <Typography variant='h6'>Lightweight & Fast</Typography>
-                  <Typography variant='caption'>Scalability Solved</Typography>
-                </Grid>
-                <Grid item xs={12} align='center'>
-                  <Typography>
-                    Network scalability issues, solved for good. The Mochimo
-                    blockchain remains small while substantially increasing
-                    TX speed using ChainCrunch™, a proprietary algorithm.
-                    Using a compressed portion of the historical blockchain
-                    available on every node in the decentralized network,
-                    anyone can set up a full working node in minutes.
-                  </Typography>
-                </Grid>
-              </Grid>
-            </RaisedCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <RaisedCard sx={{ height: '100%' }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} align='center'>
+          <Grid item xs={12}>
+            <RaisedCard>
+              <Grid container spacing={2} alignItems='center'>
+                <Grid item xs={12} sm={2} align='center'>
                   <Avatar
                     variant='square' src='/assets/icons/decentralized.png'
-                    sx={{ justifyContent: 'center', width: 64, height: 64 }}
+                    sx={{ justifyContent: 'center', width: 64, height: 64, margin: 'auto' }}
                   />
-                  <Typography variant='h6'>Decentralized & Fair</Typography>
-                  <Typography variant='caption'>Stays Decentralized</Typography>
                 </Grid>
-                <Grid item xs={12} align='center'>
+                <Grid item xs={12} sm={10}>
+                  <Typography variant='h6'>Decentralization & Fair Mining</Typography>
                   <Typography>
-                    The code-base is community-developed, and licensed under
-                    an MPL 2.0 derivative Open Source license. There is no
-                    centralized source of truth or trusted node. Mochimo is a
-                    truly decentralized project promoting fair usage and mining
-                    with a FPGA-tough, GPU targeted algorithm.
+                    Decentralization is everything.  Mochimo is a Proof-of-Work (PoW) system like Bitcoin, but our coins are only mined by GPUs.   There are no trusted nodes or central authority, not even the Core Team. Every node operator is equal on the network, including you!
+                  </Typography>
+                </Grid>
+              </Grid>
+            </RaisedCard>
+          </Grid>
+          <Grid item xs={12}>
+            <RaisedCard>
+              <Grid container spacing={2} alignItems='center'>
+                <Grid item xs={12} sm={2} align='center'>
+                  <Avatar
+                    variant='square' src='/assets/icons/fast-charge.png'
+                    sx={{ justifyContent: 'center', width: 64, height: 64, margin: 'auto' }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={10}>
+                  <Typography variant='h6'>Fast!</Typography>
+                  <Typography>
+                    Mochimo has one of the best block times for a PoW network.  Our nodes start fast, converge fast, and process transactions quickly!
                   </Typography>
                 </Grid>
               </Grid>
@@ -375,44 +321,6 @@ export default function Homepage () {
             </HomepageAccordion>
           </Grid>
         </Grid>
-        <HomepageDivider>Exchanges</HomepageDivider>
-        <Grid
-          container spacing={2} justifyContent='center' sx={{
-            backgroundImage: 'url(/assets/backgrounds/nasa-Q1p7bh3SHj8-unsplash.jpg)',
-            backgroundPosition: 'center bottom',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            boxShadow: 'inset 0 0 4em 4em #1e1e1e'
-          }}
-        >
-          <Grid item xs={12} sm={8} align='center'>
-            <RaisedCard>
-              <Grid container spacing={4} padding={2}>
-                <Grid
-                  item xs={12} sm={5} sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <Typography variant='caption'>THE TICKER</Typography>
-                  <Typography variant='h2' gutterBottom>MCM</Typography>
-                  <Box>
-                    <Link to='/exchanges-mcm'>
-                      <Button variant='contained'>Trade Mochimo</Button>
-                    </Link>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={7} align='left'>
-                  Mochimo can currently be bought or sold on a number of
-                  notable exchanges. All exchanges that have listed Mochimo
-                  have done so on their own accord. Hit the "TRADE MOCHIMO"
-                  button to see the latest exchanges where MCM is located.
-                </Grid>
-              </Grid>
-            </RaisedCard>
-          </Grid>
-        </Grid>
         <HomepageDivider>The Team</HomepageDivider>
         <Grid
           container spacing={2} justifyContent='center' sx={{
@@ -483,186 +391,22 @@ export default function Homepage () {
             </RaisedCard>
           </Grid>
         </Grid>
-        <HomepageDivider>Frequently Asked Questions</HomepageDivider>
-        <Masonry
-          columns={{ sm: 1, md: 2, lg: 3 }} spacing={2} sx={{
-            boxShadow: 'inset 0 0 4em 4em #1e1e1e',
-            background: 'black',
-            margin: 0
-          }}
-        >
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              What's the supply statistics?
-            </Typography>
-            Mochimo's supply is fairly simply split into 2 categories.
-            <ol>
-              <li>
-                <strong>
-                  Instamine Supply (<Amount value='4757066000000000' />)
-                </strong><br />
-                The Instamine (not to be confused with a "premine") existed
-                as a single ledger entry of Mochimo's Genesis Block. This
-                instamine was split into it's predetermined allocations
-                during the early days of the Blockchain.<br /><br />
-                <Address href short wots={remainingInstamine} /> currently
-                holds the largest remainder of the instamine, which is
-                controlled by the Mochimo Foundation, and is LOCKED by
-                contractual agreement until 25th June 2023.
-              </li>
-              <br />
-              <li>
-                <strong>
-                  Mineable Supply (
-                  {(chain.isFetching && (
-                    <span> <CircularProgress size='1em' /> </span>
-                  )) || (
-                    /* realtime "max supply" minus "instamine" */
-                    <Amount value={((chain.data?.maxsupply || 76493180.0616804) * 1e+9) - 4757066000000000} />
-                  )})
-                </strong><br />
-                The Mineable supply can be described simply as Mochimo
-                that is rewarded to a "miner" for solving a block on the
-                Blockchain. The distribution of these rewards over the
-                life of the Mochimo Blockchain is explained and illustrated
-                in a fantastic&nbsp;
-                <Link href='https://medium.com/mochimo-official/of-time-and-tide-the-mochimo-cryptocurrency-emission-curve-9bbe30b9b02e'>
-                  Medium Article
-                </Link>.<br />
-                In summary...
-                <ul>
-                  <li>Reward (@ 0x01): <Amount value={5000000000} /></li>
-                  <ul><li> +<Amount value={56000} /> / block</li></ul>
-                  <li>Reward (@ 0x4321): <Amount value={5917392000} /></li>
-                  <ul><li> +<Amount value={150000} /> / block</li></ul>
-                  <li>Reward (@ 0x5B402): <Amount value={59523942000} /></li>
-                  <ul><li> -<Amount value={28488} /> / block</li></ul>
-                  <li>Reward (@ 0x200000): <Amount value={0} /></li>
-                  <ul><li>mining distribution finalized</li></ul>
-                  <ul><li>txfees sustain network</li></ul>
-                </ul>
-              </li>
-            </ol>
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              How is the Instamine used?
-            </Typography>
-            The majority of the Instamine was allocated to the original
-            Mochimo Development Team. The team spent years creating a
-            cryptocurrency platform that solves almost every major issue
-            with Bitcoin to date. Therefore, this allocation serves as a
-            fee (in MCM) for that work. The fee is equal to approximately
-            4.46% of the fully diluted Mochimo supply.
-            <br /><br />
-            For the extended breakdown of Instamine distribution...
-            <br /><br />
-            <strong>
-              Mochimo Foundation (<Amount value={1557066000000000} />):
-            </strong> these funds are used at the discretion of the
-            foundation for marketing costs, bounties, and ongoing support
-            of the network.
-            <br /><br />
-            <strong>
-              Matt Zweil (<Amount value={1919999999991500} />):
-            </strong> Mochimo's founder, architect, and only remaining
-            Development Team member whose coins remain controlled by The
-            Mochimo Foundation. These coins are LOCKED until 25th June 2023,
-            exactly 5 years from the launch date of Mochimo.
-            <br /><br />
-            <strong>
-              Development Team (<Amount value={1280000000008000} />):
-            </strong> effective 25th June 2019, the original 2-year lock
-            on the Developer Team coins has expired. The coins and their
-            intended sale dates are no longer tracked or listed on the
-            Mochimo Wiki, as they are now privately controlled and
-            considered apart of the circulating supply.
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              When was the first block solved?
-            </Typography>
-            As per Blockchain data pulled directly from the network nodes,
-            the first block was solved on Monday, June 25, 2018 3:43:45 PM,
-            or 2018-06-18T15:43:45+00:00 (ISO timestamp).
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              Did Mochimo have an ICO or other pre-Mainet investment phase?
-            </Typography>
-            No. The decision to forego any sort of pre–launch investment
-            in the coin was made to avoid the legal and regulatory issues
-            that would have arisen. Furthermore,&nbsp;
-            <Link href='https://discord.com/channels/460867662977695765/512709057497530369/606879821548617737'>
-              Mochimo is money...
-            </Link>
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              Do I need the blockchain history to transact directly with
-              the network?
-            </Typography>
-            No. Somewhat importantly, performing a transaction on the
-            Mochimo Network DOES NOT require access to the blockchain.
-            This allows Wallets, Exchanges, Third-Party Applications and
-            Payment Providers to swiftly operate on the network without
-            pre-requisite access to the blockchain.
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              How did you implement quantum resistance, anyhow?
-            </Typography>
-            We checked out the algorithms that were peer reviewed and
-            acknowledged by the EU backed Quantum Research group PQCRYPTO
-            and chose the WOTS+ algorithm. We then wrote and vetted our
-            quantum code with the algorithm's originator: Andreas Hülsing.
-            The penalty of adopting quantum signatures is their size, but
-            we've already solved that problem with our ChainCrunch™ tech.
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              How long does it take to set up a Mochimo mining node?
-            </Typography>
-            Several minutes on high performance hardware, but it is known
-            to take around 20 minutes on tiny 1vCPU server nodes.
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              Where do I store my MCM?
-            </Typography>
-            Mochimo can currently be stored in the cross-platform "Mojo"
-            wallet, with Mobile / Web Wallets, and hardware wallet
-            integrations in the works...
-          </RaisedCard>
-          <RaisedCard>
-            <Typography fontWeight='bold' variant='h6' gutterBottom>
-              What exchanges are you on?
-            </Typography>
-            The list of exchanges that Mochimo is currently on can be found
-            on the MCM Exchanges page. Regularly check back in Discord and
-            the exchange page for updates.
-          </RaisedCard>
-        </Masonry>
       </Container>
-      <Paper
-        align='center' sx={{
-          zIndex: 1,
-          position: 'relative',
-          padding: 2,
-          marginTop: 25,
-          background: '#121212'
-        }}
-      >
-        <Typography variant='h2' gutterBottom>
-          Need more answers about Mochimo?
+      <Container align='center' sx={{ marginTop: 12, marginBottom: 4 }}>
+        <Typography variant='h4' gutterBottom align='center'>
+          Frequently Asked Questions
         </Typography>
-        <Typography display='block' variant='caption' gutterBottom>
-          Come join the community
+        <Typography variant='body1' gutterBottom align='center' sx={{ marginBottom: 2 }}>
+          Have questions about Mochimo? We have answers!
         </Typography>
-        <Button variant='contained' href='https://discord.mochimo.org/'>
-          <DiscordIcon />&emsp;Mochimo Official Discord
-        </Button>
-      </Paper>
+        <Box align='center'>
+          <Link to='/faq' underline='none'>
+            <Button variant='contained' size='large'>
+              View All FAQs
+            </Button>
+          </Link>
+        </Box>
+      </Container>
     </Box>
   );
 }
