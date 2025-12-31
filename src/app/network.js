@@ -48,7 +48,7 @@ export default function Network ({ type }) {
       {!type && (
         <Box sx={{ position: 'fixed', bottom: 0, width: '100vw', textAlign: 'center' }}>
           <Typography display='block' variant='caption' fontSize='1em'>
-            The Mochimo Cryptocurrency Network
+            The Mochimo  Network
           </Typography>
           <Typography display='block' variant='caption' fontSize='1.25em'>
             <b>Realtime</b> global decentralization and communication visualization
