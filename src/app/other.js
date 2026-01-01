@@ -796,3 +796,109 @@ export function Privacy () {
     </Container>
   );
 }
+
+export function MobileWalletPrivacy () {
+  return (
+    <Container>
+      <Grid container spacing={4}>
+        <Grid item xs={12} align='center'>
+          <Typography variant='h2'>
+            <u style={{ textDecorationColor: '#0059ff' }}>
+              Mobile Wallet Privacy Policy
+            </u>
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align='center'>
+          <Typography variant='caption' color='textSecondary'>
+            Effective Date: January 1, 2026
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            No Data Collection
+          </Typography>
+          <Typography color='textSecondary'>
+            Adequate Systems, LLC ("Adequate Systems", "we", "us", "our") does
+            not collect, store, process, or transmit any personal information,
+            usage data, or any other data whatsoever from users of the Mochimo
+            Mobile Wallet application (the "Application").
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            Wallet Data
+          </Typography>
+          <Typography color='textSecondary'>
+            All wallet data, including but not limited to private keys, public
+            keys, wallet addresses, transaction history, and account balances,
+            is stored exclusively on your device. Adequate Systems has no access
+            to, and does not collect, any wallet data or cryptocurrency holdings.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            No Third-Party Sharing
+          </Typography>
+          <Typography color='textSecondary'>
+            Because we do not collect any data, we do not share, sell, rent,
+            trade, or otherwise disclose any information to third parties.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            No Analytics or Tracking
+          </Typography>
+          <Typography color='textSecondary'>
+            The Application does not incorporate any analytics services,
+            advertising networks, tracking technologies, cookies, or similar
+            data collection mechanisms.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            Network Communications
+          </Typography>
+          <Typography color='textSecondary'>
+            The Application may communicate with the Mochimo blockchain network
+            solely for the purpose of broadcasting transactions and retrieving
+            publicly available blockchain data. These communications do not
+            transmit any personally identifiable information to Adequate Systems.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            User Responsibility
+          </Typography>
+          <Typography color='textSecondary'>
+            You are solely responsible for maintaining the security and backup
+            of your wallet data, including your private keys and recovery phrases.
+            Adequate Systems cannot recover lost wallet data as we do not have
+            access to it.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            Changes to This Policy
+          </Typography>
+          <Typography color='textSecondary'>
+            We reserve the right to modify this Privacy Policy at any time.
+            Any changes will be effective immediately upon posting the updated
+            policy. Your continued use of the Application constitutes acceptance
+            of the revised policy.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            Contact
+          </Typography>
+          <Typography color='textSecondary'>
+            For questions regarding this Privacy Policy, please contact:
+          </Typography>
+          <Typography color='textSecondary'>
+            <Link href='mailto:support@mochimo.org'>support@mochimo.org</Link>
+          </Typography>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+}
