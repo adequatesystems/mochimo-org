@@ -7,7 +7,7 @@ import ScrollToTop from 'app/component/ScrollToTop';
 import Header from './app/component/Header';
 
 import {
-  Adq, Exchanges, MeetTheTeam, Privacy
+  Adq, Exchanges, MeetTheTeam, MobileWalletTerms, Privacy
 } from 'app/other';
 import Network from 'app/network';
 import MFXGlobe from 'app/mfx-globe';
@@ -181,6 +181,7 @@ export default function App () {
               <Route path='meet-the-team' element={<MeetTheTeam />} />
               <Route path='exchanges-mcm' element={<Exchanges />} />
               <Route path='privacy-policy' element={<Privacy />} />
+              <Route path='mobile-wallet-terms' element={<MobileWalletTerms />} />
               <Route path='status' element={<Status />} />
               {/* <Route path='store' element={<Store />} /> */}
               <Route path='network' element={<Network />} />

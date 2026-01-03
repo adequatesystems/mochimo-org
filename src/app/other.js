@@ -795,3 +795,427 @@ export function Privacy () {
     </Container>
   );
 }
+
+export function MobileWalletTerms () {
+  useEffect(() => scrollToTopNow(), []);
+  return (
+    <Container>
+      <Grid container spacing={4}>
+        <Grid item xs={12} align='center'>
+          <Typography variant='h2'>
+            <u style={{ textDecorationColor: '#0059ff' }}>
+              Mochimo Wallet Mobile — Terms of Service
+            </u>
+          </Typography>
+        </Grid>
+        <Grid item xs={12} align='center'>
+          <Typography color='textSecondary'>
+            <strong>Effective Date:</strong> January 3, 2026<br />
+            <strong>Last Updated:</strong> January 3, 2026
+          </Typography>
+        </Grid>
+
+        {/* Section 1 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            1. Acceptance of Terms
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            By downloading, installing, or using the Mochimo Wallet Mobile application ("App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.
+          </Typography>
+          <Typography color='textSecondary'>
+            These Terms constitute a legally binding agreement between you ("User," "you," or "your") and Adequate Systems, LLC ("Adequate Systems," "we," "us," or "our").
+          </Typography>
+        </Grid>
+
+        {/* Section 2 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            2. Description of Service
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Mochimo Wallet Mobile is a self-custody cryptocurrency wallet application that allows you to:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Generate and store Mochimo (MCM) wallet addresses</li>
+              <li>View your MCM balance</li>
+              <li>Send and receive MCM transactions</li>
+              <li>Manage your private keys and recovery phrase (mnemonic)</li>
+            </ul>
+          </Typography>
+          <Typography color='textSecondary'>
+            <strong>The App is provided as a tool for interacting with the Mochimo network. We do not own the Mochimo network, control its protocol, or have any ability to reverse, modify, or cancel transactions.</strong>
+          </Typography>
+        </Grid>
+
+        {/* Section 3 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            3. Self-Custody and User Responsibility
+          </Typography>
+          
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            3.1 You Control Your Wallet
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Mochimo Wallet Mobile is a <strong>self-custody wallet</strong>. This means:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li><strong>You alone</strong> control your private keys and recovery phrase</li>
+              <li><strong>We do not have access</strong> to your wallet, private keys, recovery phrase, or funds</li>
+              <li><strong>We cannot recover</strong> your wallet if you lose your recovery phrase</li>
+              <li><strong>We cannot reverse</strong> transactions once they are broadcast to the network</li>
+              <li><strong>We cannot freeze, seize, or access</strong> your funds under any circumstances</li>
+            </ul>
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            3.2 Recovery Phrase Security
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            When you create a wallet, you will be provided with a recovery phrase (mnemonic seed phrase). <strong>This recovery phrase is the only way to restore your wallet.</strong>
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>YOU ARE SOLELY RESPONSIBLE FOR:</strong>
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Securely recording and storing your recovery phrase</li>
+              <li>Keeping your recovery phrase confidential and private</li>
+              <li>Never sharing your recovery phrase with anyone</li>
+              <li>Understanding that anyone with your recovery phrase can access and transfer your funds</li>
+            </ul>
+          </Typography>
+          <Typography color='error' marginBottom={2}>
+            <strong>WARNING:</strong> If you lose your recovery phrase and cannot access your device, <strong>your funds will be permanently lost</strong>. There is no recovery process, no customer support override, and no way for Adequate Systems to help you regain access.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            3.3 Device Security
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            You are responsible for:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Maintaining the security of your device</li>
+              <li>Using appropriate device security measures (PIN, biometrics, encryption)</li>
+              <li>Protecting your device from malware, unauthorized access, and theft</li>
+              <li>Ensuring your device software is up to date</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 4 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            4. No Financial Advice
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>The App does not provide financial, investment, tax, or legal advice.</strong>
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>We make no recommendations regarding the purchase, sale, or holding of any cryptocurrency</li>
+              <li>Past performance of any cryptocurrency is not indicative of future results</li>
+              <li>You should consult qualified professionals before making financial decisions</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 5 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            5. Cryptocurrency Risks
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            By using this App, you acknowledge and accept the following risks:
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            5.1 Volatility
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Cryptocurrency values are highly volatile. The value of your MCM holdings may increase or decrease significantly, including to zero, at any time.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            5.2 Regulatory Uncertainty
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Cryptocurrency regulations vary by jurisdiction and may change. You are responsible for compliance with all applicable laws and regulations in your jurisdiction.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            5.3 Technology Risks
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Blockchain networks may experience congestion, forks, or technical issues</li>
+              <li>Transactions may be delayed or fail</li>
+              <li>Software may contain bugs or vulnerabilities</li>
+              <li>The Mochimo network operates independently and may be modified by its community</li>
+            </ul>
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            5.4 Irreversibility
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Blockchain transactions are irreversible. If you send MCM to an incorrect address, those funds are permanently lost.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            5.5 Loss of Access
+          </Typography>
+          <Typography color='textSecondary'>
+            Loss of your recovery phrase, device damage, or forgotten credentials may result in permanent loss of access to your funds.
+          </Typography>
+        </Grid>
+
+        {/* Section 6 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            6. Prohibited Uses
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            You agree not to use the App to:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Violate any applicable laws or regulations</li>
+              <li>Engage in money laundering, terrorist financing, or other illegal activities</li>
+              <li>Circumvent sanctions or export controls</li>
+              <li>Defraud or deceive others</li>
+              <li>Interfere with the operation of the App or Mochimo network</li>
+              <li>Reverse engineer, decompile, or disassemble the App except as permitted by law</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 7 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            7. Disclaimer of Warranties
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.</strong>
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            To the fullest extent permitted by law, Adequate Systems disclaims all warranties, including but not limited to:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Merchantability</li>
+              <li>Fitness for a particular purpose</li>
+              <li>Non-infringement</li>
+              <li>Accuracy, reliability, or completeness</li>
+              <li>Uninterrupted or error-free operation</li>
+              <li>Security or freedom from viruses or harmful components</li>
+            </ul>
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            We do not warrant that:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>The App will meet your requirements</li>
+              <li>The App will be available at all times</li>
+              <li>Transactions will be processed correctly or timely</li>
+              <li>Any errors will be corrected</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 8 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            8. Limitation of Liability
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ADEQUATE SYSTEMS, ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND AFFILIATES SHALL NOT BE LIABLE FOR:</strong>
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+              <li>Loss of profits, revenue, data, or funds</li>
+              <li>Loss of access to your wallet or cryptocurrency</li>
+              <li>Unauthorized access to your wallet or device</li>
+              <li>Errors, mistakes, or inaccuracies in the App</li>
+              <li>Third-party conduct or content</li>
+              <li>Any matter beyond our reasonable control</li>
+            </ul>
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>IN NO EVENT SHALL OUR TOTAL LIABILITY EXCEED THE AMOUNT YOU PAID US FOR USE OF THE APP (WHICH IS ZERO FOR FREE APPLICATIONS).</strong>
+          </Typography>
+          <Typography color='textSecondary'>
+            This limitation applies regardless of the legal theory (contract, tort, negligence, strict liability, or otherwise) and even if we have been advised of the possibility of such damages.
+          </Typography>
+        </Grid>
+
+        {/* Section 9 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            9. Indemnification
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            You agree to indemnify, defend, and hold harmless Adequate Systems and its officers, directors, employees, agents, and affiliates from and against any claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or related to:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>Your use of the App</li>
+              <li>Your violation of these Terms</li>
+              <li>Your violation of any rights of another party</li>
+              <li>Your violation of any applicable laws or regulations</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 10 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            10. Modifications to the App and Terms
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            10.1 App Changes
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            We reserve the right to modify, suspend, or discontinue the App (or any part thereof) at any time, with or without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            10.2 Terms Changes
+          </Typography>
+          <Typography color='textSecondary'>
+            We may update these Terms from time to time. The updated Terms will be effective upon posting. Your continued use of the App after any changes constitutes acceptance of the new Terms.
+          </Typography>
+        </Grid>
+
+        {/* Section 11 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            11. Termination
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            You may stop using the App at any time. We may terminate or suspend your access to the App at any time, for any reason, without notice.
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Upon termination:
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ul>
+              <li>These Terms remain in effect for any prior use</li>
+              <li>You retain access to your cryptocurrency via your recovery phrase (independent of this App)</li>
+              <li>Sections 3, 7, 8, 9, and 12 survive termination</li>
+            </ul>
+          </Typography>
+        </Grid>
+
+        {/* Section 12 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            12. Governing Law and Dispute Resolution
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            12.1 Governing Law
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            These Terms shall be governed by and construed in accordance with the laws of the State of Florida, United States, without regard to its conflict of law provisions.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            12.2 Dispute Resolution
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Any dispute arising out of or relating to these Terms or the App shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association. The arbitration shall take place in Hillsborough County, Florida, and the arbitrator's decision shall be final and binding.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            12.3 Class Action Waiver
+          </Typography>
+          <Typography color='textSecondary'>
+            <strong>YOU AGREE TO RESOLVE DISPUTES WITH US ON AN INDIVIDUAL BASIS AND WAIVE ANY RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION.</strong>
+          </Typography>
+        </Grid>
+
+        {/* Section 13 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            13. Miscellaneous
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            13.1 Entire Agreement
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            These Terms constitute the entire agreement between you and Adequate Systems regarding the App and supersede all prior agreements.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            13.2 Severability
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            If any provision of these Terms is found to be unenforceable, the remaining provisions shall continue in full force and effect.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            13.3 No Waiver
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            Our failure to enforce any provision of these Terms shall not constitute a waiver of that provision or any other provision.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            13.4 Assignment
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            You may not assign or transfer these Terms without our prior written consent. We may assign these Terms without restriction.
+          </Typography>
+
+          <Typography variant='h6' gutterBottom sx={{ fontSize: '1.1rem', marginTop: 2 }}>
+            13.5 Contact
+          </Typography>
+          <Typography color='textSecondary' marginBottom={1.5}>
+            For questions about these Terms, please contact:
+          </Typography>
+          <Typography color='textSecondary'>
+            <strong>Adequate Systems, LLC</strong><br />
+            Email: <Link href='mailto:support@mochimo.org'>support@mochimo.org</Link><br />
+            Website: <Link href='https://mochimo.org'>https://mochimo.org</Link>
+          </Typography>
+        </Grid>
+
+        {/* Section 14 */}
+        <Grid item xs={12}>
+          <Typography variant='h5' gutterBottom>
+            14. Acknowledgment
+          </Typography>
+          <Typography color='textSecondary' marginBottom={2}>
+            <strong>BY USING MOCHIMO WALLET MOBILE, YOU ACKNOWLEDGE THAT:</strong>
+          </Typography>
+          <Typography color='textSecondary' component='div'>
+            <ol>
+              <li>You have read and understood these Terms of Service</li>
+              <li>You understand the risks associated with cryptocurrency and self-custody wallets</li>
+              <li>You are solely responsible for the security of your recovery phrase and private keys</li>
+              <li>Adequate Systems cannot access, recover, or restore your wallet or funds</li>
+              <li>You accept full responsibility for any loss of funds resulting from your use of the App</li>
+            </ol>
+          </Typography>
+        </Grid>
+
+        {/* Copyright */}
+        <Grid item xs={12} align='center'>
+          <Typography color='textSecondary' sx={{ fontStyle: 'italic' }}>
+            © 2026 Adequate Systems, LLC. All rights reserved.
+          </Typography>
+        </Grid>
+      </Grid>
+    </Container>
+  );
+}
