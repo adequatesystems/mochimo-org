@@ -20,6 +20,7 @@ import ExplorerLedger from 'app/explorer-ledger';
 import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
+import Vote from './app/pages/Vote';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -244,6 +245,7 @@ export default function App () {
               </Route>
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
+              <Route path='pow-pos-on-chain-voting' element={<Vote />} />
             </Routes>
           </Box>
           <Routes>
