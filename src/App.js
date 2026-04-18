@@ -20,6 +20,7 @@ import ExplorerLedger from 'app/explorer-ledger';
 import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
+import Vote from './app/pages/Vote';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -35,43 +36,52 @@ const LinkForwarder = forwardRef(({ children, ...props }, ref) => {
 // News Banner Component
 function NewsBanner() {
   return (
-    <Box
-      sx={{
-        background: 'linear-gradient(90deg, #0059ff 0%, #00d9ff 50%, #0059ff 100%)',
-        backgroundSize: '200% 100%',
-        animation: 'gradientShift 3s ease infinite',
-        '@keyframes gradientShift': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' }
-        },
-        color: 'white',
-        padding: '12px 16px',
-        textAlign: 'center',
-        position: 'fixed',
-        top: 68,
-        left: 0,
-        right: 0,
-        zIndex: 1099,
-        boxShadow: '0 2px 8px rgba(0, 89, 255, 0.4)'
-      }}
+    <Link
+      to="/vote"
+      style={{ textDecoration: 'none' }}
     >
-      <Typography
+      <Box
         sx={{
-          fontFamily: 'Roboto Mono',
-          fontWeight: 'bold',
-          fontSize: { xs: '0.75rem', sm: '0.9rem', md: '1rem' },
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 1
+          background: 'linear-gradient(90deg, #0059ff 0%, #00d9ff 50%, #0059ff 100%)',
+          backgroundSize: '200% 100%',
+          animation: 'gradientShift 3s ease infinite',
+          '@keyframes gradientShift': {
+            '0%': { backgroundPosition: '0% 50%' },
+            '50%': { backgroundPosition: '100% 50%' },
+            '100%': { backgroundPosition: '0% 50%' }
+          },
+          color: 'white',
+          padding: '12px 16px',
+          textAlign: 'center',
+          position: 'fixed',
+          top: 68,
+          left: 0,
+          right: 0,
+          zIndex: 1099,
+          boxShadow: '0 2px 8px rgba(0, 89, 255, 0.4)',
+          cursor: 'pointer',
+          '&:hover': {
+            filter: 'brightness(1.1)'
+          }
         }}
       >
-        <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
-        BREAKING NEWS: Mochimo Development Team Releases Alpha Version of Mobile Wallet for iOS Devices
-        <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
-      </Typography>
-    </Box>
+        <Typography
+          sx={{
+            fontFamily: 'Roboto Mono',
+            fontWeight: 'bold',
+            fontSize: { xs: '0.75rem', sm: '0.9rem', md: '1rem' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 1
+          }}
+        >
+          <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
+          VOTING IS NOW OPEN: Does MCM Become Proof-of-Stake? Click Here for Instructions
+          <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
+        </Typography>
+      </Box>
+    </Link>
   );
 }
 
@@ -244,6 +254,7 @@ export default function App () {
               </Route>
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
+              <Route path='vote' element={<Vote />} />
             </Routes>
           </Box>
           <Routes>
