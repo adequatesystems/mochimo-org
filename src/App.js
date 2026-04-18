@@ -37,7 +37,7 @@ const LinkForwarder = forwardRef(({ children, ...props }, ref) => {
 function NewsBanner() {
   return (
     <Link
-      to="/pow-pos-on-chain-voting"
+      to="/vote"
       style={{ textDecoration: 'none' }}
     >
       <Box
@@ -254,7 +254,7 @@ export default function App () {
               </Route>
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
-              <Route path='pow-pos-on-chain-voting' element={<Vote />} />
+              <Route path='vote' element={<Vote />} />
             </Routes>
           </Box>
           <Routes>
