@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Box, Container, Paper, Typography } from '@mui/material';
+import { Box, Button, Container, Paper, Typography } from '@mui/material';
 import { scrollToTopNow } from '../component/ScrollToTop';
 
 export default function Vote() {
@@ -90,6 +90,25 @@ export default function Vote() {
           >
             c2QVMZKC1KyQq84VVQc32sniKQhB6e
           </Typography>
+        </Box>
+
+        <Box sx={{ textAlign: 'center', my: 2 }}>
+          <Button
+            variant="contained"
+            href="https://mochiscan.org/address/0x810b82c44efb657ad4cc7937578668b19e985e72"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              fontFamily: 'Roboto Mono',
+              fontWeight: 'bold',
+              backgroundColor: '#0059ff',
+              '&:hover': {
+                backgroundColor: '#0046cc'
+              }
+            }}
+          >
+            Click Here to See Recent Votes
+          </Button>
         </Box>
 
         <Box
