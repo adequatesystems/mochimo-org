@@ -7,7 +7,37 @@ export default function Vote() {
 
   return (
     <Container maxWidth="md">
-      <Typography variant='h2' align='center' gutterBottom sx={{ marginTop: 4, marginBottom: 4 }}>
+      <Box
+        sx={{
+          background: 'linear-gradient(90deg, #00c853 0%, #00e676 50%, #00c853 100%)',
+          backgroundSize: '200% 100%',
+          animation: 'gradientShift 3s ease infinite',
+          '@keyframes gradientShift': {
+            '0%': { backgroundPosition: '0% 50%' },
+            '50%': { backgroundPosition: '100% 50%' },
+            '100%': { backgroundPosition: '0% 50%' }
+          },
+          color: 'white',
+          padding: 2,
+          borderRadius: 2,
+          textAlign: 'center',
+          marginTop: 4,
+          marginBottom: 3,
+          boxShadow: '0 4px 12px rgba(0, 200, 83, 0.4)'
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            fontFamily: 'Roboto Mono',
+            fontWeight: 'bold'
+          }}
+        >
+          VOTING IS NOW OPEN
+        </Typography>
+      </Box>
+
+      <Typography variant='h2' align='center' gutterBottom sx={{ marginBottom: 4 }}>
         PoW-PoS On-Chain Voting
       </Typography>
       
@@ -62,9 +92,20 @@ export default function Vote() {
           </Typography>
         </Box>
 
-        <Typography variant="body1" paragraph>
-          <strong>Before the end of April 2026.</strong>
-        </Typography>
+        <Box
+          sx={{
+            backgroundColor: 'rgba(255, 152, 0, 0.15)',
+            border: '1px solid #ff9800',
+            borderRadius: 1,
+            padding: 2,
+            textAlign: 'center',
+            my: 2
+          }}
+        >
+          <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono', color: '#ff9800' }}>
+            Voting closes: 23:59:59 UTC on April 30th, 2026
+          </Typography>
+        </Box>
 
         <Typography variant="body1" paragraph>
           Send the smallest amount the network will accept which is <strong>0.000000501 MCM</strong>, and add a memo field with either the word <strong>POW</strong> or <strong>POS</strong> in it.
