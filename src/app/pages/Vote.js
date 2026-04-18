@@ -9,21 +9,14 @@ export default function Vote() {
     <Container maxWidth="md">
       <Box
         sx={{
-          background: 'linear-gradient(90deg, #00c853 0%, #00e676 50%, #00c853 100%)',
-          backgroundSize: '200% 100%',
-          animation: 'gradientShift 3s ease infinite',
-          '@keyframes gradientShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' }
-          },
+          background: '#0059ff',
           color: 'white',
           padding: 2,
           borderRadius: 2,
           textAlign: 'center',
           marginTop: 4,
           marginBottom: 3,
-          boxShadow: '0 4px 12px rgba(0, 200, 83, 0.4)'
+          boxShadow: '0 4px 12px rgba(0, 89, 255, 0.4)'
         }}
       >
         <Typography
@@ -113,15 +106,15 @@ export default function Vote() {
 
         <Box
           sx={{
-            backgroundColor: 'rgba(255, 152, 0, 0.15)',
-            border: '1px solid #ff9800',
+            backgroundColor: 'rgba(0, 89, 255, 0.15)',
+            border: '1px solid #0059ff',
             borderRadius: 1,
             padding: 2,
             textAlign: 'center',
             my: 2
           }}
         >
-          <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono', color: '#ff9800' }}>
+          <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono' }}>
             Voting closes: 23:59:59 UTC on April 30th, 2026
           </Typography>
         </Box>
