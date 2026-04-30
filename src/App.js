@@ -21,6 +21,7 @@ import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
 import Vote from './app/pages/Vote';
+import VoteRules from './app/pages/VoteRules';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -77,7 +78,7 @@ function NewsBanner() {
           }}
         >
           <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
-          VOTING IS NOW OPEN: Does MCM Become Proof-of-Stake? Click Here for Instructions
+          The vote is complete, Mochimo will become Proof-of-Stake!
           <NewReleasesIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
         </Typography>
       </Box>
@@ -255,6 +256,7 @@ export default function App () {
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
               <Route path='vote' element={<Vote />} />
+              <Route path='vote-rules' element={<VoteRules />} />
             </Routes>
           </Box>
           <Routes>
