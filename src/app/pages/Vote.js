@@ -47,7 +47,29 @@ export default function Vote() {
         </Typography>
 
         <Typography variant="body1" paragraph>
-          To do this we will be holding an on-chain vote that all holders can participate in.
+          To ensure all community members have a fair opportunity to participate, the PoW-PoS on-chain voting window has been extended by one week.
+        </Typography>
+
+        <Typography variant="body1" paragraph>
+          To prevent last-minute attempts to force an outcome without sufficient response time, voting close will now be determined by an objective on-chain event instead of a fixed second on the clock.
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+          Voting Window Extension
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Voting remains open through May 7, 2026, and transitions into a randomized close condition after 00:00:00 UTC on May 7, 2026.
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+          How Voting Will Close
+        </Typography>
+        <Typography variant="body1" component="div">
+          <ul>
+            <li>The final valid voting block is the <strong>first block after May 7, 2026 00:00:00 UTC</strong> whose block hash begins with binary <strong>00000000</strong> (shown in explorers as hash prefix <strong>0x00</strong>).</li>
+            <li>Because block hashes are unknown until a block is solved, each block after that time has roughly a <strong>1/256</strong> chance of being the terminal voting block.</li>
+            <li>This means the close could occur immediately, or only after additional blocks have been mined, creating a buffer for community response instead of a single predictable cutoff moment.</li>
+          </ul>
         </Typography>
 
         <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
@@ -115,7 +137,7 @@ export default function Vote() {
           }}
         >
           <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono' }}>
-            Voting closes: 23:59:59 UTC on April 30th, 2026
+            Voting close trigger: first post-2026-05-07 00:00:00 UTC block with hash prefix 0x00
           </Typography>
         </Box>
 
