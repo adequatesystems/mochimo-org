@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
 import { scrollToTopNow } from '../component/ScrollToTop';
 
 export default function Vote() {
@@ -27,12 +26,12 @@ export default function Vote() {
             fontWeight: 'bold'
           }}
         >
-          VOTING HAS ENDED
+          VOTING IS NOW OPEN
         </Typography>
       </Box>
 
       <Typography variant='h2' align='center' gutterBottom sx={{ marginBottom: 4 }}>
-        PoW-PoS Vote Results
+        PoW-PoS On-Chain Voting
       </Typography>
 
       <Paper
@@ -44,7 +43,25 @@ export default function Vote() {
         }}
       >
         <Typography variant="body1" paragraph>
-          It's official, the community voted in favor of PoS! The final vote tallies were 2,164,054.69 MCM for PoW and 2,912,738.73, with a split of 42.6% to 57.4%. Proof-of-Stake only slightly edged out Proof-of-Work, sparking a wider conversation about the future of the network, and whether it might be desirable to have a separate PoW-only network in addition to a future PoS Mochimo network. See below for the full vote readout as of 00:00:00 GMT on 05/01/2026.
+          After a lot of community discussion over the years, the Core Contributor Team is asking for your help in choosing the future of the Mochimo network's consensus algorithm.
+        </Typography>
+
+        <Typography variant="body1" paragraph>
+          To do this we will be holding an on-chain vote that all holders can participate in.
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+          The Question
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Do you want the Mochimo network to remain <strong>PoW</strong> (Proof of Work, mined by GPU miners) or do you want Mochimo to migrate to a <strong>PoS</strong> (Proof of Stake, where validator nodes confirm transactions and individual holders can stake their coins for staking rewards)?
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+          How to Vote
+        </Typography>
+        <Typography variant="body1" paragraph>
+          In order to answer this question, each person who desires to vote must send a single transaction to the official MCM voting address:
         </Typography>
 
         <Box
@@ -57,64 +74,76 @@ export default function Vote() {
             my: 2
           }}
         >
-          <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono' }}>
-            Voting closed: 23:59:59 UTC on April 30th, 2026
-          </Typography>
-        </Box>
-
-        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
-          Final Vote Readout
-        </Typography>
-
-        <Box
-          sx={{
-            my: 2,
-            p: { xs: 1, sm: 2 },
-            backgroundColor: 'rgba(0, 89, 255, 0.1)',
-            border: '1px solid rgba(0, 89, 255, 0.5)',
-            borderRadius: 2
-          }}
-        >
-          <Box
-            component="img"
-            src="/assets/images/vote-results-readout.png"
-            alt="Multi-page readout of final PoW versus PoS voting totals"
+          <Typography
+            variant="h6"
             sx={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              borderRadius: 1
+              fontFamily: 'Roboto Mono',
+              wordBreak: 'break-all'
             }}
-          />
-          <Typography variant="caption" component="p" sx={{ mt: 1 }}>
-            Replace this placeholder image by uploading your final multi-page PNG to public/assets/images/vote-results-readout.png.
+          >
+            c2QVMZKC1KyQq84VVQc32sniKQhB6e
           </Typography>
         </Box>
 
-        <Box sx={{ textAlign: 'center', my: 3 }}>
+        <Box sx={{ textAlign: 'center', my: 2 }}>
           <Button
-            component={RouterLink}
-            to="/vote-rules"
-            variant="outlined"
+            variant="contained"
+            href="https://mochiscan.org/address/0x810b82c44efb657ad4cc7937578668b19e985e72"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               fontFamily: 'Roboto Mono',
               fontWeight: 'bold',
-              borderColor: '#0059ff',
-              color: '#7ab3ff'
+              backgroundColor: '#0059ff',
+              '&:hover': {
+                backgroundColor: '#0046cc'
+              }
             }}
           >
-            View Original Voting Rules (Archived)
+            Click Here to See Recent Votes
           </Button>
         </Box>
+
+        <Box
+          sx={{
+            backgroundColor: 'rgba(0, 89, 255, 0.15)',
+            border: '1px solid #0059ff',
+            borderRadius: 1,
+            padding: 2,
+            textAlign: 'center',
+            my: 2
+          }}
+        >
+          <Typography variant="h6" sx={{ fontFamily: 'Roboto Mono' }}>
+            Voting closes: 23:59:59 UTC on May 7th, 2026
+          </Typography>
+        </Box>
+
+        <Typography variant="body1" paragraph>
+          Send the smallest amount the network will accept which is <strong>0.000000501 MCM</strong>, and add a memo field with either the word <strong>POW</strong> or <strong>POS</strong> in it.
+        </Typography>
+
+        <Typography variant="body1" paragraph>
+          The memo represents the network type you want to have in the future. If you want to migrate to PoS for example, enter <strong>POS</strong> in the memo field.
+        </Typography>
+
+        <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
+          Voting Rules
+        </Typography>
+        <Typography variant="body1" component="div">
+          <ul>
+            <li>Only the first vote transaction received from each address with a proper memo string included (either "POW" or "POS") will count.</li>
+            <li>Please don't vote multiple times.</li>
+            <li>To prevent any coin shuffling double-voting shenanigans, on May 1st we will check each address with either a POW or POS vote transaction.</li>
+            <li>Whatever that address balance shows on May 1st is how many votes will be credited to either PoS or PoW.</li>
+          </ul>
+        </Typography>
 
         <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
           Results
         </Typography>
         <Typography variant="body1" paragraph>
-          Based on final tabulation, the community vote selected <strong>PoS (Proof of Stake)</strong> as the winning outcome.
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Implementation planning and transition details will be published in follow-up updates by the Core Contributor Team.
+          Vote results will be tabulated and presented on this page late on May 1st.
         </Typography>
       </Paper>
     </Container>
