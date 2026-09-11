@@ -139,83 +139,6 @@ function NavItem ({ item }) {
   );
 }
 
-function Announcement ({ dense }) {
-  return (
-    <Box
-      sx={{
-        height: dense ? 0 : 40,
-        opacity: dense ? 0 : 1,
-        overflow: 'hidden',
-        transition: 'height 280ms ease, opacity 200ms ease',
-        borderBottom: fx.hairline,
-        background: 'linear-gradient(90deg, rgba(0,89,255,0.16), rgba(0,217,255,0.12), rgba(0,89,255,0.16))',
-        backdropFilter: 'blur(14px)'
-      }}
-    >
-      <Link
-        to='/vote' underline='none'
-        sx={{
-          height: 40,
-          px: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 1.25,
-          color: tokens.text,
-          '&:hover .announce-cta': { color: tokens.accent, gap: 1 }
-        }}
-      >
-        <Box
-          component='span'
-          sx={{
-            width: 6,
-            height: 6,
-            borderRadius: '50%',
-            flexShrink: 0,
-            background: tokens.accent,
-            boxShadow: `0 0 10px ${tokens.accent}`,
-            animation: 'announcePulse 2s ease-in-out infinite',
-            '@keyframes announcePulse': {
-              '0%, 100%': { opacity: 1 },
-              '50%': { opacity: 0.25 }
-            }
-          }}
-        />
-        <Typography
-          noWrap
-          sx={{
-            fontFamily: mono,
-            fontSize: { xs: '0.66rem', sm: '0.74rem' },
-            letterSpacing: '0.04em',
-            color: tokens.text,
-            minWidth: 0
-          }}
-        >
-          <Box component='span' sx={{ fontWeight: 700 }}>VOTING IS NOW OPEN</Box>
-          <Box component='span' sx={{ display: { xs: 'none', sm: 'inline' } }}>
-            : Does MCM Become Proof-of-Stake?
-          </Box>
-        </Typography>
-        <Box
-          component='span' className='announce-cta'
-          sx={{
-            display: { xs: 'none', md: 'inline-flex' },
-            alignItems: 'center',
-            gap: 0.5,
-            fontFamily: mono,
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            color: tokens.brand,
-            transition: 'color 180ms ease, gap 180ms ease',
-            whiteSpace: 'nowrap'
-          }}
-        >Click Here for Instructions &#8594;
-        </Box>
-      </Link>
-    </Box>
-  );
-}
-
 export default function Header () {
   const [open, setOpen] = useState(false);
   const dense = useScrollTrigger({ disableHysteresis: true, threshold: 20 });
@@ -232,7 +155,6 @@ export default function Header () {
           transition: 'background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease'
         }}
       >
-        <Announcement dense={dense} />
         <Container maxWidth='lg' disableGutters>
           <Toolbar
             disableGutters
