@@ -164,7 +164,7 @@ export default function Footer () {
           }}
         >
           <Typography sx={{ fontSize: '0.78rem', color: tokens.textFaint }}>
-            Copyright 2025 &copy; All rights Reserved. The Mochimo Foundation.
+            Copyright 2026 &copy; All rights Reserved. The Mochimo Foundation.
           </Typography>
           <Typography sx={{ fontSize: '0.72rem', color: tokens.textFaint }}>
             Some icons by&nbsp;
