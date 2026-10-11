@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { applyObjDiff, dupObj } from '../../util';
 import { useGetNetworkQuery } from 'api';
+import { tokens, mono } from 'theme';
 
 import { Box, LinearProgress } from '@mui/material';
 import Globe from 'react-globe.gl';
@@ -26,10 +27,14 @@ export default function NetworkGlobe ({ mfx }) {
   const resolution = useCallback(() => mql.matches ? 2 : 3, [mql.matches]);
   const hexBinColor = useCallback(({ sumWeight }) => {
     // location is considered "congested" when location weight reaches 12.5%
-    const weight = (512 * (sumWeight / (points.length * 0.125))) | 0;
-    const r = ('0' + Math.min(255, weight).toString(16)).slice(-2);
-    const g = ('0' + Math.min(255, (512 - weight)).toString(16)).slice(-2);
-    return `#${r + g}00`;
+    const ratio = (sumWeight / Math.max(points.length, 1)) / 0.125;
+    const t = Number.isFinite(ratio) ? Math.min(1, Math.max(0, ratio)) : 0;
+    // ramp: deep mint at 0, brand mint at 0.5, ink at 1
+    const [from, to, k] = t < 0.5
+      ? [[16, 176, 120], [21, 220, 150], t * 2]
+      : [[21, 220, 150], [245, 247, 247], (t - 0.5) * 2];
+    const [r, g, b] = from.map((c, i) => Math.round(c + (to[i] - c) * k));
+    return `rgb(${r}, ${g}, ${b})`;
   }, [points.length]);
 
   const updatePoints = useCallback((update) => {
@@ -175,9 +180,9 @@ export default function NetworkGlobe ({ mfx }) {
     const levelsMax = levels.length - 1;
     const level = levels[Math.min(levelsMax, Math.floor((density * levelsMax)))];
     return `
-      <div style="font-family: 'Roboto Mono';background: rgba(32,32,32,0.75); border: 0.25em solid white; border-radius: 1em; padding:1em;font-weight:bold;text-shadow:0 0 0.25em black,0 0 0.25em black;">
-        <div>${countryCode}, ${region}</div>
-        <div>Node density: ${level}</div>
+      <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; line-height: 1.6; color: #F5F7F7; background: #1D2A2E; border: 1px solid #2B3B40; border-radius: 14px; padding: 12px 14px; max-width: min(320px, 80vw);">
+        <div style="font-family: Montserrat, system-ui, sans-serif; font-weight: 600; font-size: 13px; margin-bottom: 4px;">${countryCode}, ${region}</div>
+        <div style="color: #8A989C;">Node density: ${level}</div>
         <ul style="margin:0;padding:0 1em 0 1.5em;">${
           d.points
             .map(({ ip }) => nodes.get(ip))
@@ -192,7 +197,7 @@ export default function NetworkGlobe ({ mfx }) {
             if (hours) str = hours + ' hour' + (hours > 1 ? 's' : '');
             const days = (uptime /= 24) | 0;
             if (days) str = days + ' day' + (days > 1 ? 's' : '');
-            return `<li style="white-space:pre;">${ip}, ${str} uptime</li>`;
+            return `<li style="white-space: normal; word-break: break-all;">${ip}${str ? `, ${str} uptime` : ''}</li>`;
           }).join('')
         }</ul>
       </div>
@@ -206,7 +211,7 @@ export default function NetworkGlobe ({ mfx }) {
         width={width}
         height={height}
         backgroundImageUrl={mfx ? '' : '/assets/globe/8k_stars.webp'}
-        backgroundColor={mfx ? 'rgba(0, 0, 0, 0)' : '#121212'}
+        backgroundColor={mfx ? 'rgba(0, 0, 0, 0)' : '#172124'}
         hexBinPointsData={points}
         hexBinResolution={3}
         hexAltitude={useCallback((d) => d.sumWeight / points.length, [points])}
@@ -216,11 +221,11 @@ export default function NetworkGlobe ({ mfx }) {
         onHexHover={stopRotate}
         hexPolygonsData={useMemo(() => countries.features, [countries])}
         hexPolygonAltitude={0.005}
-        hexPolygonColor={useCallback(() => 'rgba(0,89,255,1)', [])}
+        hexPolygonColor={useCallback(() => '#3A4C52', [])}
         hexPolygonCurvatureResolution={useCallback(() => 5, [])}
         hexPolygonResolution={resolution}
         arcsData={arcsData}
-        arcColor={useCallback(() => 'white', [])}
+        arcColor={useCallback(() => 'rgba(245,247,247,0.85)', [])}
         arcDashLength={useCallback(() => ARC_REL_LEN, [])}
         arcDashGap={useCallback(() => 2, [])}
         arcDashInitialGap={useCallback(() => 1, [])}
@@ -230,12 +235,19 @@ export default function NetworkGlobe ({ mfx }) {
       <Box
         sx={{
           position: 'absolute',
-          top: '25%',
+          top: '50%',
           left: '50%',
           opacity: loading,
           transform: 'translate(-50%,-50%)'
         }}
-      >Loading Globe Data<br /><LinearProgress />
+      >
+        <Box component='span' sx={{
+          fontFamily: mono,
+          fontSize: '0.6875rem',
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+          color: tokens.textFaint
+        }}>Loading network map</Box><br /><LinearProgress />
       </Box>
     </>
   );

@@ -187,7 +187,7 @@ function Nodes ({ nodes, options }) {
     <>
       <points ref={pref}>
         <bufferGeometry />
-        <pointsMaterial size={0.05} color='white' />
+        <pointsMaterial size={0.05} color='#F5F7F7' />
       </points>
       <instancedMesh ref={mref} args={[null, null, max]}>
         <bufferGeometry>
@@ -200,7 +200,7 @@ function Nodes ({ nodes, options }) {
             args={[attributes.normals, 3]}
           />
         </bufferGeometry>
-        <meshPhysicalMaterial color='#0059ff' side={DoubleSide} />
+        <meshPhysicalMaterial color='#15DC96' side={DoubleSide} />
       </instancedMesh>
     </>
   );
@@ -303,7 +303,7 @@ export default function NetworkFlower ({ enable }) {
       <Lighting />
       <mesh ref={core} scale={0.0025 * (nodes.size || 0)}>
         <sphereGeometry />
-        <meshBasicMaterial transparent color='lime' />
+        <meshBasicMaterial transparent color='#15DC96' />
       </mesh>
       <Nodes nodes={nodes} />
       <Stars count={500} fade />

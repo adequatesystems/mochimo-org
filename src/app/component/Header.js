@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -13,16 +13,14 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
-  Tooltip,
-  Typography,
-  useScrollTrigger
+  Tooltip
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import { service, social } from 'links';
-import { tokens, fx, mono, display } from 'theme';
+import { tokens, fx, display } from 'theme';
 
 export const BUY_MCM = {
   href: 'https://www.biconomy.com/exchange/MCM_USDT',
@@ -32,7 +30,7 @@ export const BUY_MCM = {
 
 const primaryNav = [
   { label: 'Explorer', href: 'https://mochiscan.org', external: true },
-  { label: 'Mining', to: '/mining' },
+  { label: 'Proof of Stake', to: '/mining' },
   { label: 'FAQ', to: '/faq' },
   { label: 'Whitepaper', href: '/assets/files/mochimo_wp_EN.pdf', external: true },
   {
@@ -44,58 +42,31 @@ const primaryNav = [
 
 const drawerNav = [
   ...primaryNav,
-  { label: 'Vote: PoW or PoS', to: '/vote' },
+  { label: 'PoS Vote', to: '/vote' },
   { label: 'Exchanges', to: '/exchanges-mcm' },
   { label: 'Meet The Team', to: '/meet-the-team' },
   { label: 'Adequate Systems', to: '/adq' },
-  { label: 'Live System Status', href: 'https://status.mochimo.org', external: true },
+  { label: 'Live System Status', to: '/status' },
   { label: 'Merchandise', href: 'https://my-store-b9cfd9.creator-spring.com', external: true },
   { label: 'CoinMarketCap', href: 'https://coinmarketcap.com/currencies/mochimo/', external: true },
   { label: 'Github', href: 'https://github.com/mochimodev', external: true }
 ];
 
 function Wordmark ({ dense }) {
-  const size = dense ? 34 : 40;
   return (
     <Link
       underline='none' to='/'
       sx={{ display: 'flex', alignItems: 'center', gap: 1.25, minWidth: 0 }}
     >
       <Box
-        component='img' alt='Mochimo' src='/assets/images/logo.png'
+        component='img' alt='Mochimo' src='/assets/images/logo-lockup.svg'
         sx={{
-          height: size,
-          width: size,
-          transition: 'height 250ms ease, width 250ms ease',
-          filter: `drop-shadow(0 0 14px ${tokens.glow})`
+          display: 'block',
+          width: 'auto',
+          height: dense ? 30 : { xs: 30, md: 36 },
+          transition: 'height 250ms ease'
         }}
       />
-      <Box sx={{ minWidth: 0, userSelect: 'none' }}>
-        <Typography
-          sx={{
-            fontFamily: display,
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            fontSize: dense ? '1.1rem' : '1.25rem',
-            lineHeight: 1.05,
-            color: tokens.text,
-            transition: 'font-size 250ms ease'
-          }}
-        >MOCHIMO
-        </Typography>
-        <Typography
-          noWrap
-          sx={{
-            fontFamily: mono,
-            fontSize: '0.58rem',
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
-            color: tokens.textFaint,
-            display: { xs: 'none', sm: 'block' }
-          }}
-        >Post-Quantum Currency
-        </Typography>
-      </Box>
     </Link>
   );
 }
@@ -113,11 +84,11 @@ function NavItem ({ item }) {
       sx={{
         position: 'relative',
         fontFamily: display,
-        fontSize: '0.9rem',
+        fontSize: '0.875rem',
         fontWeight: 500,
-        letterSpacing: '0.005em',
+        letterSpacing: 0,
         color: active ? tokens.text : tokens.textDim,
-        padding: '6px 2px',
+        padding: '6px 0',
         transition: 'color 180ms ease',
         '&:after': {
           content: '""',
@@ -126,7 +97,7 @@ function NavItem ({ item }) {
           right: 0,
           bottom: 0,
           height: '1px',
-          background: fx.brandGradient,
+          background: tokens.brand,
           transform: active ? 'scaleX(1)' : 'scaleX(0)',
           transformOrigin: 'left',
           transition: 'transform 260ms cubic-bezier(0.22,1,0.36,1)'
@@ -141,7 +112,6 @@ function NavItem ({ item }) {
 
 export default function Header () {
   const [open, setOpen] = useState(false);
-  const dense = useScrollTrigger({ disableHysteresis: true, threshold: 20 });
 
   return (
     <>
@@ -149,9 +119,9 @@ export default function Header () {
         position='fixed'
         sx={{
           zIndex: 1200,
-          backgroundColor: dense ? 'rgba(5,7,11,0.72)' : 'transparent',
-          backdropFilter: dense ? 'blur(16px) saturate(160%)' : 'none',
-          borderBottom: `1px solid ${dense ? tokens.line : 'transparent'}`,
+          backgroundColor: 'rgba(23,33,36,0.92)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: '1px solid #24343A',
           transition: 'background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease'
         }}
       >
@@ -160,18 +130,18 @@ export default function Header () {
             disableGutters
             sx={{
               px: { xs: 2, md: 3 },
-              minHeight: { xs: dense ? 62 : 74, md: dense ? 66 : 82 },
+              minHeight: { xs: 64, md: 76 },
               transition: 'min-height 250ms ease',
               gap: 2
             }}
           >
-            <Wordmark dense={dense} />
+            <Wordmark />
             <Box sx={{ flexGrow: 1 }} />
             <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 alignItems: 'center',
-                gap: 3.25
+                gap: '30px'
               }}
             >
               {primaryNav.map((item) => (
@@ -186,10 +156,10 @@ export default function Header () {
                 ml: 1.5
               }}
             >
-              {service.map(({ href, Icon, primary }) => (
+              {service.map(({ Icon, primary }) => (
                 <Tooltip key={primary} title={primary}>
                   <IconButton
-                    component='a' href={href} target='_blank' rel='noopener noreferrer'
+                    component={RouterLink} to='/status'
                     size='small' sx={{ color: tokens.textFaint }}
                   ><Icon fontSize='small' />
                   </IconButton>
@@ -219,7 +189,7 @@ export default function Header () {
         PaperProps={{
           sx: {
             width: { xs: '86vw', sm: 380 },
-            backgroundColor: 'rgba(5,7,11,0.96)',
+            backgroundColor: 'rgba(23,33,36,0.98)',
             backdropFilter: 'blur(20px)',
             borderLeft: fx.hairline,
             backgroundImage: 'none'

@@ -105,7 +105,10 @@ export default function Explorer ({ type }) {
           margin: 2
         }}
       >
-        <Typography variant='h1'>
+        <Typography
+          variant='h1'
+          sx={{ fontSize: { xs: '2.2rem', sm: '2.8rem', md: '3.2rem' }, lineHeight: 1.08, letterSpacing: '-0.03em', textAlign: 'center', mb: 1 }}
+        >
           {type ? capitalize(type) : 'Mochimo'} Explorer
         </Typography>
         {(!type && (

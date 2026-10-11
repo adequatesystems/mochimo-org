@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { Box, Button, CircularProgress, Container, Link, Typography } from '@mui/material';
 import { Masonry } from '@mui/lab';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { scrollToTopNow } from '../component/ScrollToTop';
 import { Address, Amount } from '../component/Types';
 import DiscordIcon from '../icons/DiscordIcon';
 import { useGetChainQuery } from 'api';
-import { Reveal, GlassPanel, Eyebrow } from '../component/Section';
-import { tokens, fx, mono } from 'theme';
+import { Reveal, GlassPanel, PageHero } from '../component/Section';
+import { tokens, mono } from 'theme';
 
 const REMAINING_INSTAMINE = 'de77cd98749f9ed61662a09cdf59db622ae8150ea2b9ec35d15c4bd5f204822a';
 
@@ -16,13 +17,13 @@ function Card ({ question, children }) {
     <GlassPanel hover sx={{ p: { xs: 2.75, md: 3.25 } }}>
       <Typography
         variant='h6'
-        sx={{ fontSize: '1.08rem', mb: 1.75, color: tokens.text, lineHeight: 1.4 }}
+        sx={{ fontSize: '1.125rem', mb: 1.75, color: tokens.text, lineHeight: 1.4 }}
       >{question}
       </Typography>
       <Box
         sx={{
           color: tokens.textDim,
-          fontSize: '0.92rem',
+          fontSize: '0.875rem',
           lineHeight: 1.72,
           '& strong': { color: tokens.text },
           '& ol, & ul': { pl: 2.5, my: 1 },
@@ -41,26 +42,21 @@ export default function FAQ () {
 
   return (
     <Container maxWidth='lg' sx={{ pb: { xs: 4, md: 8 } }}>
-      <Reveal>
-        <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 } }}>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Eyebrow>Answers</Eyebrow>
-          </Box>
-          <Typography
-            variant='h1'
-            sx={{ fontSize: { xs: '2.2rem', sm: '2.9rem', md: '3.5rem' }, mb: 2 }}
-          >
-            <Box component='span' sx={fx.textGradient}>Frequently Asked Questions</Box>
-          </Typography>
-          <Typography
-            sx={{ color: tokens.textDim, fontSize: '1.05rem', maxWidth: 560, mx: 'auto' }}
-          >Have questions about Mochimo? We have answers!
-          </Typography>
-        </Box>
-      </Reveal>
+      <PageHero title='Frequently Asked Questions' lede='Supply, launch history, quantum resistance, the move to proof of stake, and storage.' />
 
       <Reveal delay={80}>
         <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5} sx={{ margin: 0 }}>
+          <Card question='Is Mochimo moving to proof of stake?'>
+            Yes. Mochimo is moving from proof of work to proof of stake. Mining
+            and proof of work are deprecated, and full proof of stake is not
+            live yet. WOTS+ signatures do not change.
+            <br /><br />
+            See where the network is now on the{' '}
+            <Link component={RouterLink} to='/mining'>Proof of Stake page</Link>,
+            and how the community voted on the{' '}
+            <Link component={RouterLink} to='/vote'>vote page</Link>.
+          </Card>
+
           <Card question="What's the supply statistics?">
             Mochimo's supply is fairly simply split into 2 categories.
             <ol>
@@ -69,12 +65,12 @@ export default function FAQ () {
                 <br />
                 The Instamine (not to be confused with a "premine") existed as a
                 single ledger entry of Mochimo's Genesis Block. This instamine
-                was split into it's predetermined allocations during the early
+                was split into its predetermined allocations during the early
                 days of the Blockchain.
                 <br /><br />
                 <Address href short wots={REMAINING_INSTAMINE} /> currently holds
                 the largest remainder of the instamine, which is controlled by
-                the Mochimo Foundation, and is LOCKED by contractual agreement
+                the Mochimo Foundation, and was locked by contractual agreement
                 until 25th June 2023.
               </li>
               <br />
@@ -86,7 +82,7 @@ export default function FAQ () {
                   )})
                 </strong>
                 <br />
-                The Mineable supply can be described simply as Mochimo that is
+                Under proof of work, the mineable supply was the Mochimo
                 rewarded to a "miner" for solving a block on the Blockchain. The
                 distribution of these rewards over the life of the Mochimo
                 Blockchain is explained and illustrated in a fantastic&nbsp;
@@ -106,6 +102,7 @@ export default function FAQ () {
                   <ul><li>mining distribution finalized</li></ul>
                   <ul><li>txfees sustain network</li></ul>
                 </ul>
+                This schedule applied under proof of work. Mining is now deprecated while the network moves to proof of stake.
               </li>
             </ol>
           </Card>
@@ -115,8 +112,6 @@ export default function FAQ () {
             Development Team. The team spent years creating a cryptocurrency
             platform that solves almost every major issue with Bitcoin to date.
             Therefore, this allocation serves as a fee (in MCM) for that work.
-            The fee is equal to approximately 4.46% of the fully diluted Mochimo
-            supply.
             <br /><br />
             For the extended breakdown of Instamine distribution...
             <br /><br />
@@ -127,24 +122,24 @@ export default function FAQ () {
             <strong>Matt Zweil (<Amount value={1919999999991500} />):</strong>{' '}
             Mochimo's founder, architect, and only remaining Development Team
             member whose coins remain controlled by The Mochimo Foundation.
-            These coins are LOCKED until 25th June 2023, exactly 5 years from
+            These coins were locked until 25th June 2023, exactly 5 years from
             the launch date of Mochimo.
             <br /><br />
             <strong>Development Team (<Amount value={1280000000008000} />):</strong>{' '}
             effective 25th June 2019, the original 2-year lock on the Developer
             Team coins has expired. The coins and their intended sale dates are
             no longer tracked or listed on the Mochimo Wiki, as they are now
-            privately controlled and considered apart of the circulating supply.
+            privately controlled and considered a part of the circulating supply.
           </Card>
 
           <Card question='When was the first block solved?'>
             As per Blockchain data pulled directly from the network nodes, the
             first block was solved on Monday, June 25, 2018 3:43:45 PM, or
-            2018-06-18T15:43:45+00:00 (ISO timestamp).
+            2018-06-25T15:43:45+00:00 (ISO timestamp).
           </Card>
 
-          <Card question='Did Mochimo have an ICO or other pre-Mainet investment phase?'>
-            No. The decision to forego any sort of pre–launch investment in the
+          <Card question='Did Mochimo have an ICO or other pre-Mainnet investment phase?'>
+            No. The decision to forego any sort of pre-launch investment in the
             coin was made to avoid the legal and regulatory issues that would
             have arisen. Furthermore,&nbsp;
             <Link href='https://discord.com/channels/460867662977695765/512709057497530369/606879821548617737' target='_blank' rel='noopener noreferrer'>
@@ -169,7 +164,7 @@ export default function FAQ () {
             that problem with our ChainCrunch™ tech.
           </Card>
 
-          <Card question='How long does it take to set up a Mochimo mining node?'>
+          <Card question='How long does it take to set up a Mochimo node?'>
             Several minutes on high performance hardware, but it is known to
             take around 20 minutes on tiny 1vCPU server nodes.
           </Card>
@@ -193,25 +188,30 @@ export default function FAQ () {
           sx={{
             mt: { xs: 5, md: 7 },
             p: { xs: 4, md: 6 },
-            textAlign: 'center',
-            background: 'linear-gradient(150deg, rgba(0,89,255,0.16), rgba(0,217,255,0.05) 55%, rgba(255,255,255,0.015))'
+            textAlign: 'left',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: { xs: 'flex-start', md: 'center' },
+            justifyContent: 'space-between',
+            gap: 3
           }}
         >
-          <Typography
-            variant='h3'
-            sx={{ fontSize: { xs: '1.7rem', md: '2.3rem' }, mb: 1.25 }}
-          >Need more answers about Mochimo?
-          </Typography>
-          <Typography
-            sx={{
-              fontFamily: mono,
-              fontSize: '0.78rem',
-              letterSpacing: '0.1em',
-              color: tokens.textDim,
-              mb: 3.5
-            }}
-          >Come join the community
-          </Typography>
+          <Box>
+            <Typography
+              variant='h3'
+              sx={{ fontSize: { xs: '1.7rem', md: '2.3rem' }, mb: 1.25 }}
+            >Need more answers about Mochimo?
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: mono,
+                fontSize: '0.8125rem',
+                letterSpacing: '0.1em',
+                color: tokens.textDim
+              }}
+            >Come join the community
+            </Typography>
+          </Box>
           <Button
             variant='contained' size='large'
             href='https://discord.mochimo.org/'
