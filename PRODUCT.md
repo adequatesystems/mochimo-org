@@ -50,6 +50,7 @@ Confirmed product facts used on the site:
 Constraints:
 - Do not change routes, primary nav labels, legal copy (privacy policy, wallet terms) or the logo without owner approval.
 - Do not publish vote tallies or staking terms until the owner confirms them. Do not call Mochimo open source.
+- Do not expose specific node information: no node hostnames, IPs, locations, counts, latency, peer data or node maps (owner, 2026-10-11). The status page lists websites and APIs only; /network and /mfx/globe redirect away.
 
 Open decisions and known inconsistencies (do not resolve by guessing):
 - Naming drift: "Mojo" wallet vs "Mochimo Wallet"; "Peach" vs "Mochimo-Peach"; support@mochimo.org vs support@Mochimo.com.

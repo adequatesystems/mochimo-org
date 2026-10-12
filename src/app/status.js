@@ -27,11 +27,7 @@ const GROUPS = [
     { id: 'api_deu_mochimo_monitor', name: 'API, Germany', host: 'api-deu.mochimo.org' },
     { id: 'api_sgp_mochimo_monitor', name: 'API, Singapore', host: 'api-sgp.mochimo.org' },
     { id: 'api_usc_mochimo_monitor', name: 'API, US Central', host: 'api-usc.mochimo.org' },
-    { id: 'api_dev_mochiscan_monitor', name: 'Mochiscan API, development', host: 'dev-api.mochiscan.org:8443' } ] },
-  { title: 'Nodes', items: [
-    { id: 'api_deu_tcp_monitor', name: 'Node, Germany', host: 'core-deu.mochimo.org:2095' },
-    { id: 'api_sgp_tcp_monitor', name: 'Node, Singapore', host: 'core-sgp.mochimo.org:2095' },
-    { id: 'api_usc_tcp_monitor', name: 'Node, US Central', host: 'core-usc.mochimo.org:2095' } ] }
+    { id: 'api_dev_mochiscan_monitor', name: 'Mochiscan API, development', host: 'dev-api.mochiscan.org:8443' } ] }
 ];
 
 function relativeTime (ts, now) {
@@ -93,22 +89,16 @@ export default function Status () {
   }, []);
 
   const monitors = (data && data.monitors) || {};
-  const knownIds = new Set(GROUPS.flatMap((group) => group.items.map((item) => item.id)));
-  const otherItems = Object.keys(monitors)
-    .filter((id) => !knownIds.has(id))
-    .map((id) => ({ id, name: id, host: '' }));
-  const allGroups = otherItems.length
-    ? [...GROUPS, { title: 'Other', items: otherItems }]
-    : GROUPS;
-
-  const allUp = !!data && data.down === 0;
-  const total = data ? data.up + data.down : 0;
+  const shown = GROUPS.flatMap((group) => group.items).filter((item) => monitors[item.id]);
+  const upCount = shown.filter((item) => monitors[item.id].up).length;
+  const total = shown.length;
+  const allUp = !!data && total > 0 && upCount === total;
   const firstMonitor = Object.values(monitors)[0];
   const location = firstMonitor ? firstMonitor.location : null;
 
   let headline = 'Checking services';
   if (data) {
-    headline = allUp ? 'All systems operational' : `${data.up} of ${total} services operational`;
+    headline = allUp ? 'All systems operational' : `${upCount} of ${total} services operational`;
   } else if (error) {
     headline = 'Status unavailable';
   }
@@ -243,7 +233,7 @@ export default function Status () {
     </Box>
   );
 
-  const GROUP_LIST = allGroups.map((group) => {
+  const GROUP_LIST = GROUPS.map((group) => {
     const sectionId = `status-${group.title.toLowerCase()}`;
     return (
       <Box key={group.title} component='section' aria-labelledby={sectionId} sx={{ mb: { xs: 4, md: 5 } }}>
@@ -366,7 +356,7 @@ export default function Status () {
     <Container maxWidth='lg' sx={{ pb: { xs: 4, md: 8 } }}>
       <PageHero
         title='Live System Status'
-        lede="Current health of Mochimo's websites, APIs and network nodes, from the official status monitor."
+        lede="Current health of Mochimo's websites and APIs, from the official status monitor."
       />
       {SUMMARY}
       {!data && !error && SKELETON}
