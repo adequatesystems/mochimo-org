@@ -7,6 +7,7 @@ import { scrollToTopNow } from '../component/ScrollToTop';
 import { Address, Amount } from '../component/Types';
 import DiscordIcon from '../icons/DiscordIcon';
 import { useGetChainQuery } from 'api';
+import { WebWallet } from 'links';
 import { Reveal, GlassPanel, PageHero } from '../component/Section';
 import { tokens, mono } from 'theme';
 
@@ -170,9 +171,9 @@ export default function FAQ () {
           </Card>
 
           <Card question='Where do I store my MCM?'>
-            Mochimo can currently be stored in the cross-platform "Mojo" wallet,
-            with Mobile / Web Wallets, and hardware wallet integrations in the
-            works...
+            For now, MCM can be stored in the{' '}
+            <Link href={WebWallet.href} target='_blank' rel='noopener noreferrer'>Mochimo Wallet Chrome extension</Link>{' '}
+            or in the Mochimo mobile wallets.
           </Card>
 
           <Card question='What exchanges are you on?'>
