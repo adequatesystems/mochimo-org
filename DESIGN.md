@@ -4,6 +4,7 @@ description: The first post-quantum cryptocurrency on mainnet, signed with WOTS+
 colors:
   mint-signal: "#15DC96"
   mint-deep: "#10B078"
+  brand-band: "#15C288"
   slate-ground: "#172124"
   slate-raised: "#1D2A2E"
   slate-hover: "#22333A"
@@ -143,7 +144,7 @@ components:
     rounded: "{rounded.pill}"
     padding: "4px 10px"
   mint-band:
-    backgroundColor: "{colors.mint-signal}"
+    backgroundColor: "{colors.brand-band}"
     textColor: "{colors.slate-ground}"
     typography: "{typography.manifesto}"
 ---
@@ -175,6 +176,7 @@ A cold slate world lit by a single mint signal.
 ### Primary
 - **Mint Signal** (mint-signal): the brand's only voice colour. Primary buttons, the emphasised word in the hero headline, links, the dial's sweep arc and brackets, the safe row and pill in the comparison table, active nav underline, focus rings, and the one full-bleed mint band. On slate it reaches 9.15:1 contrast.
 - **Deep Mint** (mint-deep): the brandbook's secondary green. Reserved for low-opacity washes and fixed-background glows; never for text or controls.
+- **Band Mint** (brand-band): mint mixed about 12% toward slate. The full-width WOTS+ band on the homepage uses it so a large mint field does not glare; buttons, links and small accents keep #15DC96.
 
 ### Neutral
 - **Slate Ground** (slate-ground): the page. Every page starts here, including the header bar and footer.
