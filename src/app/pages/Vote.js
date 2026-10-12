@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Link, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import { scrollToTopNow } from '../component/ScrollToTop';
-import { Reveal, GlassPanel } from '../component/Section';
-import { tokens, fx, mono } from 'theme';
+import { Reveal, GlassPanel, PageHero } from '../component/Section';
+import { tokens, mono } from 'theme';
 
 const VOTE_ADDRESS = 'c2QVMZKC1KyQq84VVQc32sniKQhB6e';
 
@@ -68,8 +69,8 @@ function Callout ({ children, label }) {
         my: 3,
         p: 2.5,
         borderRadius: '14px',
-        border: `1px solid rgba(45,127,255,0.42)`,
-        background: 'rgba(45,127,255,0.08)',
+        border: `1px solid rgba(21,220,150,0.42)`,
+        background: 'rgba(21,220,150,0.08)',
         textAlign: 'center'
       }}
     >
@@ -77,7 +78,7 @@ function Callout ({ children, label }) {
         <Typography
           sx={{
             fontFamily: mono,
-            fontSize: '0.6rem',
+            fontSize: '0.6875rem',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
             color: tokens.textFaint,
@@ -104,25 +105,11 @@ export default function Vote () {
   useEffect(() => scrollToTopNow(), []);
 
   return (
-    <Container maxWidth='md' sx={{ pb: { xs: 4, md: 8 } }}>
-      <Reveal>
-        <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
-          <Typography
-            variant='h1'
-            sx={{ fontSize: { xs: '2.2rem', sm: '2.9rem', md: '3.5rem' }, mb: 2 }}
-          >
-            <Box component='span' sx={fx.textGradient}>PoW-PoS On-Chain Voting</Box>
-          </Typography>
-        </Box>
-      </Reveal>
+    <Container maxWidth='lg' sx={{ pb: { xs: 4, md: 8 } }}>
+      <PageHero title='PoW-PoS On-Chain Vote' lede="After years of community discussion, the Core Contributor Team asked holders to choose the future of the Mochimo network's consensus algorithm. The network now runs on proof of stake." />
 
       <Reveal delay={80}>
-        <GlassPanel sx={{ p: { xs: 3, md: 5 } }}>
-          <Body>
-            After a lot of community discussion over the years, the Core
-            Contributor Team is asking for your help in choosing the future of
-            the Mochimo network's consensus algorithm.
-          </Body>
+        <GlassPanel sx={{ p: { xs: 3, md: 5 }, maxWidth: 820 }}>
           <Body>
             To ensure all community members had a fair opportunity to
             participate, the PoW-PoS on-chain voting window was extended by
@@ -172,20 +159,19 @@ export default function Vote () {
 
           <Block title='The Question'>
             <Body sx={{ mb: 0 }}>
-              Do you want the Mochimo network to remain{' '}
+              Voters were asked whether the Mochimo network should remain{' '}
               <Box component='strong' sx={{ color: tokens.text }}>PoW</Box>{' '}
-              (Proof of Work, mined by GPU miners) or do you want Mochimo to
-              migrate to a{' '}
+              (Proof of Work, mined by GPU miners) or migrate to{' '}
               <Box component='strong' sx={{ color: tokens.text }}>PoS</Box>{' '}
               (Proof of Stake, where validator nodes confirm transactions and
-              individual holders can stake their coins for staking rewards)?
+              individual holders can stake their coins for staking rewards).
             </Body>
           </Block>
 
           <Block title='How Voting Worked'>
             <Body>
-              In order to answer this question, each person who desired to vote
-              sent a single transaction to the official MCM voting address:
+              Each person who wanted to vote sent a single transaction to the
+              official MCM voting address:
             </Body>
             <Callout label='Official MCM Voting Address'>{VOTE_ADDRESS}</Callout>
             <Box sx={{ textAlign: 'center', my: 3 }}>
@@ -195,7 +181,7 @@ export default function Vote () {
                 target='_blank' rel='noopener noreferrer'
                 startIcon={<HowToVoteIcon />}
                 endIcon={<OpenInNewIcon sx={{ fontSize: 16 }} />}
-              >Click Here to See Recent Votes
+              >See the votes on Mochiscan
               </Button>
             </Box>
             <Callout label='Voting Close Trigger'>
@@ -237,9 +223,13 @@ export default function Vote () {
           </Block>
 
           <Block title='Results'>
+            <Body>
+              Vote results were tabulated and presented on this page in early
+              May. Mochimo now runs on proof of stake, and mining and proof of
+              work are retired.
+            </Body>
             <Body sx={{ mb: 0 }}>
-              Vote results were tabulated and presented on this page late on
-              May 1st.
+              <Link component={RouterLink} to='/mining'>Read about proof of stake</Link>
             </Body>
           </Block>
         </GlassPanel>

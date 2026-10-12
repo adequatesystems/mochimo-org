@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
 import { Box, Button, Chip, Grid, Link, Stack, Tooltip, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
 import AppleIcon from '@mui/icons-material/Apple';
-import LinuxIcon from '@mui/icons-material/Android';
+import LinuxIcon from '@mui/icons-material/Terminal';
 import PaymentIcon from '@mui/icons-material/Payment';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DownloadIcon from '@mui/icons-material/Download';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
+import { Discord } from 'links';
 import DiscordIcon from '../icons/DiscordIcon';
 import { scrollToTopNow } from '../component/ScrollToTop';
-import { Section, SectionHeading, Eyebrow, Reveal, GlassPanel } from '../component/Section';
+import { Section, SectionHeading, PageHero, Reveal, GlassPanel } from '../component/Section';
 import { tokens, fx, mono, display } from 'theme';
 
 const osIcons = {
@@ -18,6 +20,27 @@ const osIcons = {
   Linux: <LinuxIcon fontSize='small' />,
   MacOS: <AppleIcon fontSize='small' />
 };
+
+const transitionStages = [
+  {
+    name: 'Proof of work',
+    description: 'Mining secured Mochimo from the genesis block on June 25, 2018 until the move to proof of stake.',
+    status: 'Retired',
+    pillSx: { border: `1px solid ${tokens.lineStrong}`, color: tokens.textDim }
+  },
+  {
+    name: 'Transition',
+    description: 'The network has moved from proof of work to proof of stake.',
+    status: 'Complete',
+    pillSx: { border: `1px solid ${tokens.lineStrong}`, color: tokens.textDim }
+  },
+  {
+    name: 'Proof of stake',
+    description: 'Mochimo now runs on proof of stake. More resources about how it works are coming soon.',
+    status: 'Live',
+    pillSx: { bgcolor: tokens.brand, color: tokens.base }
+  }
+];
 
 const soloMiners = [
   {
@@ -30,7 +53,7 @@ const soloMiners = [
   {
     platform: 'Linux',
     icon: <LinuxIcon />,
-    description: 'Build from source for maximum performance on Linux',
+    description: 'Prebuilt miner for Linux, run from the terminal',
     link: 'https://github.com/mochimodev/mochimo/releases/tag/v3.0.3',
     instructions: 'Extract mcmminer-v3.0.3.ubuntu.cuda-12.8-570.86.10.tar.gz and run it.'
   }
@@ -64,14 +87,14 @@ function DetailRow ({ icon, label, value }) {
         <Typography
           sx={{
             fontFamily: mono,
-            fontSize: '0.6rem',
+            fontSize: '0.6875rem',
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
             color: tokens.textFaint
           }}
         >{label}
         </Typography>
-        <Typography sx={{ color: tokens.text, fontSize: '0.9rem' }}>{value}</Typography>
+        <Typography sx={{ color: tokens.text, fontSize: '0.875rem' }}>{value}</Typography>
       </Box>
     </Box>
   );
@@ -84,37 +107,103 @@ export default function Mining () {
     <Box sx={{ overflow: 'hidden' }}>
       <Section sx={{ pt: { xs: 2, md: 3 }, pb: { xs: 4, md: 6 } }}>
         <Reveal>
-          <Box sx={{ textAlign: 'center' }}>
-            <Eyebrow>Proof of Work</Eyebrow>
-            <Typography
-              variant='h1'
-              sx={{ fontSize: { xs: '2.4rem', sm: '3.2rem', md: '4rem' }, mb: 2.5 }}
-            >
-              <Box component='span' sx={fx.textGradient}>Mining Mochimo</Box>
-            </Typography>
-            <Typography
+          <PageHero
+            title='Proof of Stake'
+            lede='Mochimo now runs on proof of stake. Mining and proof of work are retired, and more resources about proof of stake are coming soon.'
+          />
+        </Reveal>
+      </Section>
+
+      <Section id='transition' sx={{ py: { xs: 4, md: 6 } }}>
+        <Typography
+          component='h2'
+          sx={{ fontFamily: display, fontWeight: 600, fontSize: { xs: '2rem', md: '2.75rem' }, lineHeight: 1.1, letterSpacing: '-0.025em', mb: { xs: 3, md: 4 } }}
+        >Where the network is now.
+        </Typography>
+        <Box
+          role='list'
+          sx={{ border: `1px solid ${tokens.line}`, borderRadius: '20px', overflow: 'hidden', bgcolor: tokens.raise }}
+        >
+          {transitionStages.map((stage, i) => (
+            <Box
+              role='listitem' key={stage.name}
               sx={{
-                maxWidth: 700,
-                mx: 'auto',
-                color: tokens.textDim,
-                fontSize: { xs: '1rem', md: '1.08rem' },
-                lineHeight: 1.7
+                display: 'grid',
+                gridTemplateColumns: { xs: 'minmax(0,1fr) auto', md: '220px minmax(0,1fr) auto' },
+                columnGap: { xs: 2, md: 3 },
+                rowGap: 0.75,
+                alignItems: 'center',
+                px: { xs: 2.5, md: 3 },
+                py: { xs: 2.25, md: 2.75 },
+                borderTop: i > 0 ? `1px solid ${tokens.line}` : 'none'
               }}
             >
-              Mochimo uses a unique mining algorithm called Mochimo-Peach algorithm
-              that is FPGA-resistant and can be efficiently mined on accessible
-              consumer GPUs. You can mine Mochimo either by solo mining or by
-              joining a mining pool.
-            </Typography>
-          </Box>
-        </Reveal>
+              <Typography sx={{ fontFamily: display, fontWeight: 600, fontSize: '1rem', color: tokens.text }}>
+                {stage.name}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '0.9375rem',
+                  lineHeight: 1.6,
+                  color: tokens.textDim,
+                  gridColumn: { xs: '1 / -1', md: 'auto' },
+                  gridRow: { xs: 2, md: 'auto' }
+                }}
+              >{stage.description}
+              </Typography>
+              <Box
+                component='span'
+                sx={{
+                  display: 'inline-flex',
+                  px: 1.25,
+                  py: 0.5,
+                  borderRadius: 999,
+                  fontFamily: mono,
+                  fontSize: '0.625rem',
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
+                  justifySelf: 'end',
+                  ...stage.pillSx
+                }}
+              >{stage.status}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+        <Typography sx={{ mt: 3, maxWidth: '62ch', color: tokens.textDim, lineHeight: 1.7 }}>
+          WOTS+ signatures do not change. Post-quantum protection comes from how transactions are signed, not from the consensus mechanism.
+        </Typography>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mt: { xs: 3, md: 4 } }}>
+          <Button variant='contained' component={RouterLink} to='/vote' endIcon={<ArrowForwardIcon />}>
+            Read about the vote
+          </Button>
+          <Button
+            variant='outlined'
+            href={Discord.href} target='_blank' rel='noopener noreferrer'
+            startIcon={<DiscordIcon />}
+          >Follow updates on Discord
+          </Button>
+        </Box>
+      </Section>
+
+      <Section id='legacy' sx={{ pb: 0, pt: { xs: 6, md: 8 } }}>
+        <Box sx={{ borderTop: '1px solid #24343A', pt: { xs: 5, md: 7 } }}>
+          <Typography
+            component='h2'
+            sx={{ fontFamily: display, fontWeight: 600, fontSize: { xs: '2rem', md: '2.75rem' }, lineHeight: 1.1, letterSpacing: '-0.025em', mb: { xs: 3, md: 4 } }}
+          >Legacy mining software
+          </Typography>
+          <Typography sx={{ mt: 2, maxWidth: '62ch', color: tokens.textDim, lineHeight: 1.7 }}>
+            Kept for reference. Mining is retired now that the network runs on proof of stake.
+          </Typography>
+        </Box>
       </Section>
 
       <Section id='solo-mining' sx={{ py: { xs: 4, md: 6 } }}>
         <SectionHeading
-          eyebrow='Getting Started with Mining'
-          title='Solo Mining Setup'
-          subtitle='Solo mining allows you to mine directly on the Mochimo network without joining a pool. While solo mining rewards are less frequent, you receive the full block reward when you successfully mine a block.'
+          title='Solo miners'
+          subtitle='Release v3.0.3 miners for Windows and Linux, as published on GitHub.'
           maxWidth={720}
         />
         <Grid container spacing={3} alignItems='stretch'>
@@ -125,14 +214,14 @@ export default function Mining () {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.75, mb: 2 }}>
                     <Box
                       sx={{
-                        width: 46, height: 46, borderRadius: '12px',
+                        width: 46, height: 46, borderRadius: '10px',
                         display: 'grid', placeItems: 'center',
-                        border: fx.hairline, background: 'rgba(45,127,255,0.08)',
+                        border: fx.hairline, background: 'rgba(21,220,150,0.08)',
                         color: tokens.brand
                       }}
                     >{miner.icon}
                     </Box>
-                    <Typography variant='h6' sx={{ fontSize: '1.2rem' }}>{miner.platform}</Typography>
+                    <Typography variant='h6' sx={{ fontSize: '1.35rem' }}>{miner.platform}</Typography>
                   </Box>
                   <Typography sx={{ color: tokens.text, fontSize: '0.95rem', mb: 1.5 }}>
                     {miner.description}
@@ -141,13 +230,13 @@ export default function Mining () {
                     sx={{
                       color: tokens.textDim,
                       fontFamily: mono,
-                      fontSize: '0.78rem',
+                      fontSize: '0.8125rem',
                       lineHeight: 1.65,
                       p: 1.75,
                       mb: 2.5,
                       borderRadius: '10px',
                       border: fx.hairline,
-                      background: 'rgba(0,0,0,0.28)',
+                      background: tokens.base,
                       wordBreak: 'break-word'
                     }}
                   >{miner.instructions}
@@ -156,7 +245,7 @@ export default function Mining () {
                     variant='outlined' size='small'
                     href={miner.link} target='_blank' rel='noopener'
                     startIcon={<DownloadIcon />}
-                  >Download {miner.platform} Miner
+                  >Download {miner.platform} miner (legacy)
                   </Button>
                 </GlassPanel>
               </Reveal>
@@ -167,9 +256,8 @@ export default function Mining () {
 
       <Section id='mining-pools' sx={{ py: { xs: 4, md: 6 } }}>
         <SectionHeading
-          eyebrow='Shared Hashrate'
-          title='Mining Pools'
-          subtitle='Mining pools combine the computing power of multiple miners to increase the chance of finding blocks. Rewards are distributed among participants based on their contributed hashrate. Joining a pool provides more consistent rewards compared to solo mining.'
+          title='MochiPool'
+          subtitle='The community pool that operated during proof of work.'
           maxWidth={760}
         />
         <Grid container spacing={3}>
@@ -183,12 +271,12 @@ export default function Mining () {
                         <Box
                           component='img' alt={`${pool.name} icon`} src={pool.icon}
                           sx={{
-                            width: 52, height: 52, borderRadius: '12px',
+                            width: 52, height: 52, borderRadius: '10px',
                             objectFit: 'cover', border: fx.hairline
                           }}
                         />
                         <Box>
-                          <Typography variant='h6' sx={{ fontSize: '1.25rem', lineHeight: 1.2 }}>
+                          <Typography variant='h6' sx={{ fontSize: '1.35rem', lineHeight: 1.2 }}>
                             <Link href={pool.url} target='_blank' rel='noopener' underline='hover' color='inherit'>
                               {pool.name}
                             </Link>
@@ -196,7 +284,7 @@ export default function Mining () {
                           <Typography
                             sx={{
                               fontFamily: mono,
-                              fontSize: '0.72rem',
+                              fontSize: '0.6875rem',
                               color: tokens.accent,
                               letterSpacing: '0.06em'
                             }}
@@ -210,7 +298,7 @@ export default function Mining () {
                       <Typography
                         sx={{
                           fontFamily: mono,
-                          fontSize: '0.6rem',
+                          fontSize: '0.6875rem',
                           letterSpacing: '0.16em',
                           textTransform: 'uppercase',
                           color: tokens.textFaint,
@@ -233,9 +321,9 @@ export default function Mining () {
                       <Box
                         sx={{
                           p: 2.5,
-                          borderRadius: '12px',
+                          borderRadius: '10px',
                           border: fx.hairline,
-                          background: 'rgba(45,127,255,0.06)'
+                          background: 'rgba(21,220,150,0.06)'
                         }}
                       >
                         <Typography
@@ -247,7 +335,7 @@ export default function Mining () {
                           }}
                         >How to Join
                         </Typography>
-                        <Typography sx={{ color: tokens.textDim, fontSize: '0.9rem', mb: 2 }}>
+                        <Typography sx={{ color: tokens.textDim, fontSize: '0.875rem', mb: 2 }}>
                           {pool.howToJoin.description}
                         </Typography>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>

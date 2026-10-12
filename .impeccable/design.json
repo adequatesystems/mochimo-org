@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T21:54:44Z",
+  "title": "Design System: Mochimo",
+  "extensions": {
+    "colorMeta": {
+      "mint-signal": {
+        "role": "primary",
+        "displayName": "Mint Signal",
+        "canonical": "oklch(79.1% 0.173 161.1)",
+        "tonalRamp": ["#000F07", "#002A19", "#00472D", "#006C47", "#009463", "#00BF81", "#33E9A2", "#C2FFDE"]
+      },
+      "mint-deep": {
+        "role": "primary",
+        "displayName": "Deep Mint",
+        "canonical": "oklch(67.0% 0.146 161.4)",
+        "tonalRamp": ["#000F07", "#002A19", "#00472D", "#006C48", "#009464", "#2CBD84", "#5FE4A9", "#C2FFDF"]
+      },
+      "slate-ground": {
+        "role": "neutral",
+        "displayName": "Slate Ground",
+        "canonical": "oklch(23.9% 0.015 218.1)",
+        "tonalRamp": ["#050D0F", "#192427", "#323D40", "#525D61", "#748083", "#97A4A8", "#BDCACE", "#E4F1F5"]
+      },
+      "slate-raised": {
+        "role": "neutral",
+        "displayName": "Raised Slate",
+        "canonical": "oklch(27.5% 0.019 218.7)",
+        "tonalRamp": ["#030D11", "#172428", "#303D41", "#4F5E62", "#718085", "#95A5AA", "#BACBD0", "#E1F2F7"]
+      },
+      "slate-hover": {
+        "role": "neutral",
+        "displayName": "Hover Slate",
+        "canonical": "oklch(30.9% 0.026 225.4)",
+        "tonalRamp": ["#010D13", "#14242B", "#2C3E45", "#4C5E66", "#6E8189", "#91A5AE", "#B7CBD4", "#DDF3FC"]
+      },
+      "hairline-frame": {
+        "role": "neutral",
+        "displayName": "Frame Hairline",
+        "canonical": "oklch(31.3% 0.024 223.1)",
+        "tonalRamp": ["#020D12", "#15242A", "#2D3D44", "#4D5E65", "#6F8188", "#92A5AC", "#B8CBD3", "#DEF2FA"]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(34.0% 0.023 219.0)",
+        "tonalRamp": ["#020D12", "#152429", "#2D3E43", "#4D5E63", "#6F8186", "#93A5AB", "#B8CBD1", "#DFF3F9"]
+      },
+      "hairline-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "oklch(40.4% 0.025 220.2)",
+        "tonalRamp": ["#010D12", "#14242A", "#2C3E44", "#4C5E65", "#6E8188", "#91A5AC", "#B7CBD3", "#DDF3FA"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(97.5% 0.002 197.1)",
+        "tonalRamp": ["#0A0B0B", "#202222", "#393B3B", "#595B5B", "#7C7E7E", "#A0A2A2", "#C6C8C8", "#EDEFEF"]
+      },
+      "ink-dim": {
+        "role": "neutral",
+        "displayName": "Dim Ink",
+        "canonical": "oklch(79.7% 0.013 215.8)",
+        "tonalRamp": ["#050D0F", "#1B2326", "#333C3F", "#535D5F", "#757F82", "#99A4A7", "#BECACD", "#E5F1F4"]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink",
+        "canonical": "oklch(67.0% 0.017 216.7)",
+        "tonalRamp": ["#040D10", "#182427", "#313D40", "#505D61", "#728084", "#96A4A8", "#BCCACF", "#E2F2F6"]
+      },
+      "dial-graphite": {
+        "role": "neutral",
+        "displayName": "Dial Graphite",
+        "canonical": "oklch(54.1% 0.027 217.0)",
+        "tonalRamp": ["#000E12", "#12252A", "#2B3E44", "#4A5F65", "#6C8188", "#90A6AC", "#B5CCD3", "#DCF3FA"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Homepage hero headline only; two lines max, one mint word." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings in sentence case." },
+      "manifesto": { "displayName": "Manifesto", "purpose": "Mint band headline only, uppercase, slate on mint." },
+      "title": { "displayName": "Title", "purpose": "Tile, card, row and accordion titles." },
+      "lede": { "displayName": "Lede", "purpose": "Hero and page intro paragraphs, 62ch max." },
+      "body": { "displayName": "Body", "purpose": "Running copy, 65 to 75ch." },
+      "button": { "displayName": "Button", "purpose": "All button labels." },
+      "data": { "displayName": "Data", "purpose": "Readout values, signatures, addresses, tabular facts." },
+      "label": { "displayName": "Label", "purpose": "Readout and table labels only; never above a heading." },
+      "label-wide": { "displayName": "Wide Label", "purpose": "Detail-row and callout labels on inner pages." },
+      "small": { "displayName": "Small", "purpose": "Table cells, tile calls to action, secondary metadata." },
+      "haiku": { "displayName": "Haiku", "purpose": "The block haiku only." }
+    },
+    "shadows": [
+      { "name": "none", "value": "none", "purpose": "The system is flat; depth is tonal (ground, raised, hover) plus 1px hairlines." }
+    ],
+    "motion": [
+      { "name": "ease-reveal", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Below-fold reveal (800ms, 18px rise, 6px blur to sharp) and dial pointer follow (900ms)." },
+      { "name": "ease-dial", "value": "cubic-bezier(.22,.7,.2,1)", "purpose": "The authored hero moment: sweep arc from -300deg and dotted ring from -40deg over 3.3s, once." },
+      { "name": "ease-ui", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Button press and nav underline (200 to 260ms)." },
+      { "name": "duration-hover", "value": "200ms", "purpose": "Colour and border changes on hover." },
+      { "name": "mark-draw", "value": "3.2s once", "purpose": "Animated mark draws ring, base, box and columns, diagonal, then holds; static still under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "0px" },
+      { "name": "sm", "value": "600px" },
+      { "name": "md", "value": "900px" },
+      { "name": "lg", "value": "1200px" },
+      { "name": "xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action per view; mint fill, slate text.",
+      "html": "<button class=\"ds-btn-primary\">Buy MCM</button>",
+      "css": ".ds-btn-primary{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:15px;letter-spacing:.01em;background:#15DC96;color:#172124;border:0;border-radius:10px;padding:10px 22px;cursor:pointer;transition:background 200ms ease,color 200ms ease,transform 200ms cubic-bezier(0.22,1,0.36,1)}.ds-btn-primary:hover{background:#F5F7F7}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:focus-visible{outline:2px solid #15DC96;outline-offset:3px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action beside a primary.",
+      "html": "<button class=\"ds-btn-outline\">Read the Whitepaper</button>",
+      "css": ".ds-btn-outline{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:15px;letter-spacing:.01em;background:transparent;color:#F5F7F7;border:1px solid #3A4C52;border-radius:10px;padding:10px 22px;cursor:pointer;transition:border-color 200ms ease,color 200ms ease,background 200ms ease}.ds-btn-outline:hover{border-color:#15DC96;color:#15DC96;background:rgba(21,220,150,.08)}.ds-btn-outline:focus-visible{outline:2px solid #15DC96;outline-offset:3px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Slate bar, dim links, mint underline on hover and active.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-active\" href=\"#\">Proof of Stake</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a><a class=\"ds-nav-link\" href=\"#\">Whitepaper</a></nav>",
+      "css": ".ds-nav{display:flex;gap:30px;align-items:center;background:rgba(23,33,36,.92);border-bottom:1px solid #24343A;padding:24px}.ds-nav-link{position:relative;font-family:Montserrat,system-ui,sans-serif;font-weight:500;font-size:14px;color:#B4BFC2;text-decoration:none;padding:6px 0;transition:color 180ms ease}.ds-nav-link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#15DC96;transform:scaleX(0);transform-origin:left;transition:transform 260ms cubic-bezier(0.22,1,0.36,1)}.ds-nav-link:hover,.ds-nav-link.ds-active{color:#F5F7F7}.ds-nav-link:hover::after,.ds-nav-link.ds-active::after{transform:scaleX(1)}.ds-nav-link:focus-visible{outline:2px solid #15DC96;outline-offset:3px}"
+    },
+    {
+      "name": "Status Pills",
+      "kind": "chip",
+      "refersTo": "status-pill-safe",
+      "description": "Quantum status in the comparison table.",
+      "html": "<span class=\"ds-pill ds-pill-safe\">Resistant since 2018</span> <span class=\"ds-pill ds-pill-exposed\">Breakable by Shor</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:4px 10px;white-space:nowrap}.ds-pill-safe{background:#15DC96;color:#172124}.ds-pill-exposed{border:1px solid #3A4C52;color:#B4BFC2}"
+    },
+    {
+      "name": "Bento Tile",
+      "kind": "card",
+      "refersTo": "tile",
+      "description": "A whole-tile link on raised slate; hairline border turns mint on hover.",
+      "html": "<a class=\"ds-tile\" href=\"#\"><span class=\"ds-tile-title\">Mochiscan</span><span class=\"ds-tile-body\">Look up blocks, transactions and account balances.</span><span class=\"ds-tile-cta\">Open the explorer</span></a>",
+      "css": ".ds-tile{display:flex;flex-direction:column;gap:8px;max-width:320px;background:#1D2A2E;border:1px solid #2B3B40;border-radius:20px;padding:28px;color:#F5F7F7;text-decoration:none;transition:border-color .25s ease,transform .25s ease}.ds-tile:hover{border-color:rgba(21,220,150,.5);transform:translateY(-2px)}.ds-tile:focus-visible{outline:2px solid #15DC96;outline-offset:2px}.ds-tile-title{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:21px}.ds-tile-body{font-family:Poppins,system-ui,sans-serif;font-size:15px;line-height:1.65;color:#B4BFC2}.ds-tile-cta{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:14px;color:#15DC96;padding-top:16px}@media (prefers-reduced-motion:reduce){.ds-tile{transition:none}.ds-tile:hover{transform:none}}"
+    },
+    {
+      "name": "Community Link Row",
+      "kind": "custom",
+      "refersTo": "link-row",
+      "description": "External destination row with handle in mono.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-row-text\"><span class=\"ds-row-title\">Discord</span><span class=\"ds-row-sub\">discord.mochimo.org</span></span><span class=\"ds-row-arrow\">&#8599;</span></a>",
+      "css": ".ds-row{display:flex;align-items:center;gap:14px;min-height:64px;max-width:320px;padding:12px 18px;border:1px solid #2B3B40;border-radius:14px;background:#1D2A2E;color:#F5F7F7;text-decoration:none;transition:background-color .2s ease,border-color .2s ease}.ds-row:hover{background:#22333A;border-color:rgba(21,220,150,.5)}.ds-row:focus-visible{outline:2px solid #15DC96;outline-offset:2px}.ds-row-text{display:flex;flex-direction:column;flex:1;min-width:0}.ds-row-title{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:15px}.ds-row-sub{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;color:#8A989C}.ds-row-arrow{color:#8A989C}"
+    },
+    {
+      "name": "Dial Readout",
+      "kind": "custom",
+      "refersTo": "readout",
+      "description": "Corner bracket readout from the hero dial.",
+      "html": "<div class=\"ds-readout\"><span class=\"ds-readout-label\">Signatures</span><span class=\"ds-readout-value\">WOTS+</span></div>",
+      "css": ".ds-readout{display:inline-flex;flex-direction:column;gap:4px;padding:12px 0 0 14px;border-top:1px solid rgba(21,220,150,.55);border-left:1px solid rgba(21,220,150,.55);font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase}.ds-readout-label{font-size:10px;letter-spacing:.14em;color:#8A989C}.ds-readout-value{font-size:13px;letter-spacing:.06em;color:#15DC96}"
+    },
+    {
+      "name": "Mint Band Button",
+      "kind": "button",
+      "refersTo": "button-on-mint",
+      "description": "The only control on a mint field; slate fill.",
+      "html": "<div class=\"ds-band\"><button class=\"ds-btn-onmint\">Read the FAQ</button></div>",
+      "css": ".ds-band{background:#15DC96;padding:32px;border-radius:20px}.ds-btn-onmint{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:16px;background:#172124;color:#F5F7F7;border:0;border-radius:10px;padding:14px 30px;cursor:pointer;transition:background 200ms ease,color 200ms ease}.ds-btn-onmint:hover{background:#1D2A2E;color:#15DC96}.ds-btn-onmint:focus-visible{outline:2px solid #172124;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Since Block Zero",
+    "overview": "Mochimo has been signing every transaction with post-quantum signatures since its genesis block on June 25, 2018. The design system treats that record as its ornament. Nothing on the page is decorative unless it is proof: the mark drawing itself line by line, a dial whose readouts are real protocol facts, a table that names which signatures break, dates written out in full. The world is a dark slate ground with one mint signal, cut with hairlines and set in confident Montserrat. It is bold, sovereign and uncompromising: it states the claim plainly, shows the mechanism, and does not raise its voice with gradients, glow or hype.\n\nThe brand source is the 2025 brandbook (mint #15DC96 on slate, Montserrat and Poppins, line-art mark, repeat pattern) and the reference mockup in /Resources. From the brandbook the system keeps the slate ground, the rare mint, the outline mark, the pattern and the oversized cropped mark. It rejects the brandbook's stock coin photography, neon light effects and campaign taglines. From the mockup it keeps the instrument dial, the signature comparison table, the bento entry points, the single mint band and the hairline surfaces; it rejects numbered eyebrows, section numbers and kicker labels.\n\nSurfaces are machined and exact: flat fills, 1px borders, tonal layering instead of shadow, and motion measured in one or two pixels. The one exception to restraint is the authored moment: the mark draws itself once in the hero and settles.",
+    "keyCharacteristics": [
+      "Slate ground, one mint signal, one full mint field per page at most.",
+      "The mark is the hero: drawn on, oversized, cropped, or repeated as a quiet pattern.",
+      "Proof as ornament: readouts, dates, tables and mechanisms instead of illustration.",
+      "Hairlines and tonal layers; no drop shadows, no glass, no glow.",
+      "Montserrat for the voice, Poppins for the reading, IBM Plex Mono only for data.",
+      "One authored motion moment; everything else enters quietly or not at all."
+    ],
+    "rules": [
+      {
+        "name": "The Single Signal Rule",
+        "body": "Mint is the only accent and stays under about a tenth of any screen. If two mint elements compete in one view, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mint Field Swap Rule",
+        "body": "When mint becomes a whole field (the band), everything on it turns slate: text, mark, pattern and the button. Never mint on mint, never white on mint.",
+        "section": "colors"
+      },
+      {
+        "name": "The Slate Ground Rule",
+        "body": "The site is dark by brand decision, not by category habit. No section inverts to a light theme.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data Is Mono Rule",
+        "body": "Monospace means \"this is a measured fact\". It is never used as a costume for prose, headings or buttons.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Kicker Rule",
+        "body": "Nothing sits above a heading: no eyebrow, no section number, no status pill. The heading carries its own weight.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "If something needs separating, use a 1px line or a tonal step. A shadow is never the answer.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Glow Rule",
+        "body": "No outer glows, no neon, no gradient text. The brandbook lists effects as logo misuse; the same applies to the interface.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Poem Rule",
+        "body": "Redressed appears only for the block haiku; it is the single expressive exception to the system's restraint.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do keep mint under about a tenth of any screen, and use it for the action, the proof or the mark.",
+      "Do turn everything slate on a mint field: text, mark, pattern and buttons.",
+      "Do separate with 1px hairlines and tonal steps between slate ground (#172124) and raised slate (#1D2A2E).",
+      "Do use IBM Plex Mono only for measured data: readouts, signatures, dates, addresses, table headers.",
+      "Do let the mark carry the brand: drawn on once, oversized and cropped, or repeated as a faint masked pattern.",
+      "Do write dates in full and keep every number checkable; prefer a mechanism to an adjective.",
+      "Do give every interactive element a 2px mint focus outline and honour prefers-reduced-motion.",
+      "Do keep every multi-column layout single-column below 900px with no horizontal scroll at 375px."
+    ],
+    "donts": [
+      "Don't put an eyebrow, kicker, section number or status pill above a heading.",
+      "Don't use gradient text, glow, neon, glass or drop shadows.",
+      "Don't rotate, stretch, blur or add effects to the mark; never recolour it outside mint, slate or ink.",
+      "Don't use stock coin photography, third-party coin logos or the brandbook's campaign taglines.",
+      "Don't add a second full mint field to a page, or invert a section to a light theme.",
+      "Don't animate more than one authored moment per page, loop the mark, or hide content that is already on screen.",
+      "Don't use pure white (#FFFFFF) or pure black for text or surfaces.",
+      "Don't use em or en dashes in visible text."
+    ]
+  }
+}

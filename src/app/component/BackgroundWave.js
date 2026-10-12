@@ -97,7 +97,7 @@ export default function BackgroundWave () {
     >
       <Canvas camera={{ fov: 75, near: NEAR, far: FAR }}>
         <fog attach='fog' args={[0x000000, FAR / 2, FAR]} />
-        <pointLight color={0x0059ff} position={[0, 1000, 0]} intensity={1.5} />
+        <pointLight color={0x15dc96} position={[0, 1000, 0]} intensity={1.5} />
         <Points />
       </Canvas>
     </Box>

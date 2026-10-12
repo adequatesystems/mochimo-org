@@ -10,8 +10,6 @@ import baseTheme from 'theme';
 import {
   Adq, Exchanges, MeetTheTeam, MobileWalletPrivacy, MobileWalletTerms, Privacy
 } from 'app/other';
-import Network from 'app/network';
-import MFXGlobe from 'app/mfx-globe';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
 import Explorer from 'app/explorer';
@@ -24,7 +22,7 @@ import Vote from './app/pages/Vote';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
-const FULL_BLEED = ['/', '/network'];
+const FULL_BLEED = ['/'];
 
 const LinkForwarder = forwardRef(({ children, ...props }, ref) => {
   return props.href
@@ -58,23 +56,12 @@ export default function App () {
     }
   }), []);
 
-  const mfxTheme = useMemo(() => createTheme(customTheme, {
-    palette: { background: { default: 'transparent' } }
-  }), [customTheme]);
-
   return (
     <ThemeProvider theme={customTheme}>
       <BrowserRouter>
         <Routes>
           <Route path='mfx'>
-            <Route
-              path='globe' element={(
-                <ThemeProvider theme={mfxTheme}>
-                  <CssBaseline />
-                  <MFXGlobe />
-                </ThemeProvider>
-              )}
-            />
+            <Route path='globe' element={<Navigate replace to='/' />} />
           </Route>
           <Route
             path='*' element={(
@@ -120,7 +107,7 @@ export default function App () {
               <Route path='mobile-wallet-privacy' element={<MobileWalletPrivacy />} />
               <Route path='mobile-wallet-terms' element={<MobileWalletTerms />} />
               <Route path='status' element={<Status />} />
-              <Route path='network' element={<Network />} />
+              <Route path='network' element={<Navigate replace to='/status' />} />
               <Route path='explorer'>
                 <Route index element={<Explorer />} />
                 <Route path='address'>

@@ -3,7 +3,7 @@ import EmailIcon from '@mui/icons-material/Email';
 
 import { scrollToTopNow } from './ScrollToTop';
 import { social } from 'links';
-import { tokens, fx, mono, display } from 'theme';
+import { tokens, mono, display } from 'theme';
 
 const columns = [
   {
@@ -19,9 +19,9 @@ const columns = [
     heading: 'Network',
     links: [
       { label: 'Explorer', href: 'https://mochiscan.org' },
-      { label: 'Live Status', href: 'https://status.mochimo.org' },
-      { label: 'Mining', to: '/mining' },
-      { label: 'Vote: PoW or PoS', to: '/vote' }
+      { label: 'Live Status', to: '/status' },
+      { label: 'Proof of Stake', to: '/mining' },
+      { label: 'PoS Vote', to: '/vote' }
     ]
   },
   {
@@ -63,34 +63,25 @@ export default function Footer () {
       sx={{
         position: 'relative',
         zIndex: 2,
-        mt: 10,
-        borderTop: fx.hairline,
-        background: 'linear-gradient(180deg, rgba(10,14,21,0.4) 0%, rgba(5,7,11,0.92) 100%)',
-        backdropFilter: 'blur(14px)',
-        '&:before': {
-          content: '""',
-          position: 'absolute',
-          top: -1,
-          left: '18%',
-          right: '18%',
-          height: '1px',
-          background: `linear-gradient(90deg, transparent, ${tokens.brand}, transparent)`
-        }
+        mt: 0,
+        overflow: 'hidden',
+        borderTop: '1px solid #24343A',
+        bgcolor: tokens.base
       }}
     >
-      <Container maxWidth='lg' sx={{ pt: { xs: 6, md: 8 }, pb: 4 }}>
+      <Container maxWidth='lg' sx={{ position: 'relative', zIndex: 1, pt: { xs: 6, md: 8 }, pb: 4 }}>
         <Grid container spacing={{ xs: 5, md: 4 }}>
           <Grid item xs={12} md={4.5}>
             <Box
               component='img' alt='Mochimo logo and slogan'
-              src='/assets/images/logo-full.png'
-              sx={{ width: 250, maxWidth: '70%', display: 'block', mb: 2.5 }}
+              src='/assets/images/logo-lockup.svg'
+              sx={{ height: 40, width: 'auto', maxWidth: '100%', display: 'block', mb: 2.5 }}
             />
             <Typography
               sx={{ color: tokens.textDim, fontSize: '0.9rem', maxWidth: 380, mb: 3 }}
             >
               The world's first completely quantum resistant cryptocurrency.
-              Open source, fully decentralized, and mined by GPUs since 2018.
+              Fully decentralized, with post-quantum signatures since 2018. Now running on proof of stake.
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 3, ml: -1 }}>
               {social.map(({ href, Icon, primary }) => (
@@ -136,11 +127,12 @@ export default function Footer () {
             <Grid item xs={6} sm={4} md={2.5} key={heading}>
               <Typography
                 sx={{
-                  fontFamily: mono,
-                  fontSize: '0.66rem',
-                  letterSpacing: '0.18em',
+                  fontFamily: display,
+                  fontWeight: 600,
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.16em',
                   textTransform: 'uppercase',
-                  color: tokens.brand,
+                  color: tokens.textDim,
                   mb: 1.75
                 }}
               >{heading}
@@ -176,24 +168,18 @@ export default function Footer () {
         </Box>
       </Container>
       <Box
-        aria-hidden
+        component='img' src='/assets/images/brand-mark.svg' alt='' aria-hidden
         sx={{
-          fontFamily: display,
-          fontWeight: 700,
-          textAlign: 'center',
-          fontSize: 'clamp(3rem, 15vw, 13rem)',
-          lineHeight: 0.8,
-          letterSpacing: '-0.05em',
-          background: `linear-gradient(180deg, ${tokens.line} 0%, transparent 82%)`,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          userSelect: 'none',
-          pb: 1,
-          px: 2
+          position: 'absolute',
+          right: { xs: -120, md: -60 },
+          bottom: { xs: -140, md: -110 },
+          width: { xs: 320, md: 440 },
+          height: 'auto',
+          opacity: 0.05,
+          pointerEvents: 'none',
+          userSelect: 'none'
         }}
-      >MOCHIMO
-      </Box>
+      />
     </Box>
   );
 }

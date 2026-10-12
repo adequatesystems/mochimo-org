@@ -46,7 +46,7 @@ export default function Privacy () {
           <ADQTypography>
             ADQ was the driving force behind the Mochimo cryptocurrency which
             made history as the first blockchain-based, quantum-resistant,
-            cryptocurrency. Mochimo is an open-source, fully decentralized
+            cryptocurrency. Mochimo is a fully decentralized
             global phenomenon in the crypto space. It includes many needed
             and desirable innovations in blockchain technology such as, massive
             speed improvements, ASIC-resistant proof of work (POW), a patented
