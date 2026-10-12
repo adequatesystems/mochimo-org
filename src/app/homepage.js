@@ -89,15 +89,12 @@ const innovations = [
   {
     id: 'pos',
     icon: '/assets/icons/decentralized.png',
-    title: 'Moving to Proof of Stake',
+    title: 'Proof of Stake',
     tag: 'Consensus',
     body: (
       <>
-        Mochimo is moving from proof of work to proof of stake. Mining and proof
-        of work are deprecated, and full proof of stake is not live yet.
-        <br /><br />
-        Under proof of stake, validator nodes will confirm transactions and
-        holders will be able to stake MCM.
+        Mochimo now runs on proof of stake. Mining and proof of work are
+        retired. More resources about proof of stake are coming soon.
         <br /><br />
         WOTS+ signatures do not change. Post-quantum protection comes from how
         transactions are signed, not from the consensus mechanism.
@@ -187,7 +184,7 @@ function HeroDial ({ height, maxSupply }) {
 
   const readouts = [
     { label: 'Signatures', value: 'WOTS+', accent: true, pos: 'tl' },
-    { label: 'Consensus', value: 'PoW → PoS', accent: true, pos: 'tr' },
+    { label: 'Consensus', value: 'Proof of Stake', accent: true, pos: 'tr' },
     { label: 'Max supply', value: `${Math.round(maxSupply).toLocaleString('en-US')} MCM`, pos: 'bl' },
     height
       ? { label: 'Block height', value: Number(height).toLocaleString('en-US'), accent: true, pos: 'br' }
@@ -750,14 +747,14 @@ function ExploreSection () {
                   fontSize: { xs: '1.2rem', md: '1.35rem' },
                   color: tokens.text
                 }}
-              >Moving to proof of stake
+              >Proof of stake
               </Typography>
               <Typography sx={{ fontSize: '0.9375rem', lineHeight: 1.65, color: tokens.textDim, mt: 1 }}>
-                Mining and proof of work are deprecated. The network is moving to proof of stake, which is not fully live yet.
+                Mochimo now runs on proof of stake. Mining and proof of work are retired, and more resources are coming soon.
               </Typography>
               <Typography
                 sx={{ fontFamily: display, fontWeight: 600, fontSize: '0.875rem', color: tokens.brand, mt: 'auto', pt: 2.5 }}
-              >See where the network is now
+              >Read about proof of stake
               </Typography>
             </Box>
           </BentoTile>
@@ -845,7 +842,7 @@ function WotsBand () {
             Signed with WOTS+ since block 0.
           </Typography>
           <Typography sx={{ mt: 2.5, mx: 'auto', maxWidth: '52ch', fontSize: { xs: '1rem', md: '1.0625rem' }, lineHeight: 1.7, color: 'rgba(23,33,36,0.8)', textAlign: 'center' }}>
-            Mochimo has never produced a block without post-quantum signatures. The FAQ covers how WOTS+ works, the coin supply and the move to proof of stake.
+            Mochimo has never produced a block without post-quantum signatures. The FAQ covers how WOTS+ works, the coin supply and proof of stake.
           </Typography>
           <Button component={RouterLink} to='/faq' variant='contained' size='large' endIcon={<ArrowForwardIcon />} sx={{ mt: { xs: 4, md: 5 }, bgcolor: tokens.base, color: tokens.text, '&:hover': { bgcolor: tokens.raise, color: tokens.brand } }}>
             Read the FAQ
@@ -873,7 +870,7 @@ function CommunitySection ({ contributors }) {
             <Typography
               variant='h2'
               sx={{ fontSize: { xs: '2rem', md: '2.75rem' }, lineHeight: 1.1, letterSpacing: '-0.025em', maxWidth: '14ch', mb: 2.5 }}
-            >Open source, built in the open.
+            >Built by its community.
             </Typography>
             <Typography
               sx={{ color: tokens.textDim, fontWeight: 300, fontSize: { xs: '1rem', md: '1.0625rem' }, lineHeight: 1.7, maxWidth: '46ch' }}

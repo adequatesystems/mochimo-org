@@ -24,21 +24,21 @@ const osIcons = {
 const transitionStages = [
   {
     name: 'Proof of work',
-    description: 'Mining secured Mochimo from the genesis block on June 25, 2018. It is now deprecated.',
-    status: 'Deprecated',
+    description: 'Mining secured Mochimo from the genesis block on June 25, 2018 until the move to proof of stake.',
+    status: 'Retired',
     pillSx: { border: `1px solid ${tokens.lineStrong}`, color: tokens.textDim }
   },
   {
     name: 'Transition',
-    description: 'The network is moving to proof of stake now.',
-    status: 'In progress',
-    pillSx: { bgcolor: tokens.brand, color: tokens.base }
+    description: 'The network has moved from proof of work to proof of stake.',
+    status: 'Complete',
+    pillSx: { border: `1px solid ${tokens.lineStrong}`, color: tokens.textDim }
   },
   {
     name: 'Proof of stake',
-    description: 'Validator nodes will confirm transactions and holders will be able to stake MCM. Not live yet.',
-    status: 'Not live yet',
-    pillSx: { border: `1px solid ${tokens.line}`, color: tokens.textFaint }
+    description: 'Mochimo now runs on proof of stake. More resources about how it works are coming soon.',
+    status: 'Live',
+    pillSx: { bgcolor: tokens.brand, color: tokens.base }
   }
 ];
 
@@ -109,7 +109,7 @@ export default function Mining () {
         <Reveal>
           <PageHero
             title='Proof of Stake'
-            lede='Mochimo is moving from proof of work to proof of stake. Mining and proof of work are deprecated, and full proof of stake is not live yet.'
+            lede='Mochimo now runs on proof of stake. Mining and proof of work are retired, and more resources about proof of stake are coming soon.'
           />
         </Reveal>
       </Section>
@@ -195,7 +195,7 @@ export default function Mining () {
           >Legacy mining software
           </Typography>
           <Typography sx={{ mt: 2, maxWidth: '62ch', color: tokens.textDim, lineHeight: 1.7 }}>
-            Kept for reference. Mining is deprecated while the network moves to proof of stake.
+            Kept for reference. Mining is retired now that the network runs on proof of stake.
           </Typography>
         </Box>
       </Section>

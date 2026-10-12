@@ -106,7 +106,7 @@ export default function Vote () {
 
   return (
     <Container maxWidth='lg' sx={{ pb: { xs: 4, md: 8 } }}>
-      <PageHero title='PoW-PoS On-Chain Vote' lede="After years of community discussion, the Core Contributor Team asked holders to choose the future of the Mochimo network's consensus algorithm. The network is now moving to proof of stake." />
+      <PageHero title='PoW-PoS On-Chain Vote' lede="After years of community discussion, the Core Contributor Team asked holders to choose the future of the Mochimo network's consensus algorithm. The network now runs on proof of stake." />
 
       <Reveal delay={80}>
         <GlassPanel sx={{ p: { xs: 3, md: 5 }, maxWidth: 820 }}>
@@ -225,12 +225,11 @@ export default function Vote () {
           <Block title='Results'>
             <Body>
               Vote results were tabulated and presented on this page in early
-              May. Mochimo is now moving from proof of work to proof of stake.
-              Mining and proof of work are deprecated, and full proof of stake
-              is not live yet.
+              May. Mochimo now runs on proof of stake, and mining and proof of
+              work are retired.
             </Body>
             <Body sx={{ mb: 0 }}>
-              <Link component={RouterLink} to='/mining'>See where the network is now</Link>
+              <Link component={RouterLink} to='/mining'>Read about proof of stake</Link>
             </Body>
           </Block>
         </GlassPanel>

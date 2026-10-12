@@ -42,16 +42,16 @@ export default function FAQ () {
 
   return (
     <Container maxWidth='lg' sx={{ pb: { xs: 4, md: 8 } }}>
-      <PageHero title='Frequently Asked Questions' lede='Supply, launch history, quantum resistance, the move to proof of stake, and storage.' />
+      <PageHero title='Frequently Asked Questions' lede='Supply, launch history, quantum resistance, proof of stake, and storage.' />
 
       <Reveal delay={80}>
         <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5} sx={{ margin: 0 }}>
-          <Card question='Is Mochimo moving to proof of stake?'>
-            Yes. Mochimo is moving from proof of work to proof of stake. Mining
-            and proof of work are deprecated, and full proof of stake is not
-            live yet. WOTS+ signatures do not change.
+          <Card question='Does Mochimo run on proof of stake?'>
+            Yes. Mochimo now runs on proof of stake. Mining and proof of work
+            are retired, and more resources about proof of stake are coming
+            soon. WOTS+ signatures do not change.
             <br /><br />
-            See where the network is now on the{' '}
+            Read more on the{' '}
             <Link component={RouterLink} to='/mining'>Proof of Stake page</Link>,
             and how the community voted on the{' '}
             <Link component={RouterLink} to='/vote'>vote page</Link>.
@@ -102,7 +102,7 @@ export default function FAQ () {
                   <ul><li>mining distribution finalized</li></ul>
                   <ul><li>txfees sustain network</li></ul>
                 </ul>
-                This schedule applied under proof of work. Mining is now deprecated while the network moves to proof of stake.
+                This schedule applied under proof of work. Mining is now retired, and the network runs on proof of stake.
               </li>
             </ol>
           </Card>

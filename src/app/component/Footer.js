@@ -81,7 +81,7 @@ export default function Footer () {
               sx={{ color: tokens.textDim, fontSize: '0.9rem', maxWidth: 380, mb: 3 }}
             >
               The world's first completely quantum resistant cryptocurrency.
-              Open source and fully decentralized, with post-quantum signatures since 2018. Now moving to proof of stake.
+              Fully decentralized, with post-quantum signatures since 2018. Now running on proof of stake.
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 3, ml: -1 }}>
               {social.map(({ href, Icon, primary }) => (
