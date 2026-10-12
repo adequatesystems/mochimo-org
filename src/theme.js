@@ -6,7 +6,6 @@ export const tokens = {
   surface: '#22333A',
   brand: '#15DC96',
   brandDeep: '#10B078',
-  brandBand: '#15C288',
   brandDim: '#0B4A35',
   accent: '#15DC96',
   text: '#F5F7F7',

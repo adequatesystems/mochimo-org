@@ -103,6 +103,14 @@ export function Properties
     let shortened = false;
     let to = false;
     if (href && !value) href = false;
+    if (href) {
+      switch (key) {
+        case 'txid': to = '/explorer/transaction/' + value; break;
+        case 'wots': to = '/explorer/address/' + value.slice(0, 64); break;
+        case 'tag': to = '/explorer/tag/' + value; break;
+        default: to = false;
+      }
+    }
     if (short && value?.length > 24) {
       shortened = true;
       value = value.slice(0, 24);

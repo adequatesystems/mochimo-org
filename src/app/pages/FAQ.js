@@ -69,7 +69,7 @@ export default function FAQ () {
                 was split into its predetermined allocations during the early
                 days of the Blockchain.
                 <br /><br />
-                <Address short wots={REMAINING_INSTAMINE} /> currently holds
+                <Address href short wots={REMAINING_INSTAMINE} /> currently holds
                 the largest remainder of the instamine, which is controlled by
                 the Mochimo Foundation, and was locked by contractual agreement
                 until 25th June 2023.

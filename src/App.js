@@ -1,4 +1,4 @@
-import { forwardRef, lazy, Suspense, useEffect, useMemo } from 'react';
+import { forwardRef, lazy, Suspense, useMemo } from 'react';
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -12,6 +12,9 @@ import {
 } from 'app/other';
 import Status from 'app/status';
 import Homepage from 'app/homepage';
+import Explorer from 'app/explorer';
+import ExplorerBlock from 'app/explorer-block';
+import ExplorerLedger from 'app/explorer-ledger';
 import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
@@ -26,11 +29,6 @@ const LinkForwarder = forwardRef(({ children, ...props }, ref) => {
     ? (<a ref={ref} {...props}>{children}</a>)
     : (<Link ref={ref} {...props}>{children}</Link>);
 });
-
-function MochiscanRedirect () {
-  useEffect(() => { window.location.replace('https://mochiscan.org'); }, []);
-  return null;
-}
 
 function PageBody ({ children }) {
   const { pathname } = useLocation();
@@ -110,7 +108,25 @@ export default function App () {
               <Route path='mobile-wallet-terms' element={<MobileWalletTerms />} />
               <Route path='status' element={<Status />} />
               <Route path='network' element={<Navigate replace to='/status' />} />
-              <Route path='explorer/*' element={<MochiscanRedirect />} />
+              <Route path='explorer'>
+                <Route index element={<Explorer />} />
+                <Route path='address'>
+                  <Route index element={<Explorer type='address' />} />
+                  <Route path=':value' element={<ExplorerLedger type='address' />} />
+                </Route>
+                <Route path='block'>
+                  <Route index element={<Explorer type='block' />} />
+                  <Route path=':bnum/:bhash' element={<ExplorerBlock />} />
+                  <Route path=':bnum' element={<ExplorerBlock />} />
+                </Route>
+                <Route path='richlist' element={<Explorer type='richlist' />} />
+                <Route path='tag'>
+                  <Route index element={<Navigate replace to='/explorer/address' />} />
+                  <Route path=':value' element={<ExplorerLedger type='tag' />} />
+                </Route>
+                <Route path='transaction' element={<Explorer type='transaction' />} />
+                <Route path='*' element={<Navigate replace to='/explorer' />} />
+              </Route>
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
               <Route path='vote' element={<Vote />} />
