@@ -184,7 +184,7 @@ function HeroDial ({ height, maxSupply }) {
 
   const readouts = [
     { label: 'Signatures', value: 'WOTS+', accent: true, pos: 'tl' },
-    { label: 'Consensus', value: 'Proof of Stake', accent: true, pos: 'tr' },
+    { label: 'Consensus', value: 'PoS', accent: true, pos: 'tr' },
     { label: 'Max supply', value: `${Math.round(maxSupply).toLocaleString('en-US')} MCM`, pos: 'bl' },
     height
       ? { label: 'Block height', value: Number(height).toLocaleString('en-US'), accent: true, pos: 'br' }
@@ -875,7 +875,7 @@ function CommunitySection ({ contributors }) {
             <Typography
               sx={{ color: tokens.textDim, fontWeight: 300, fontSize: { xs: '1rem', md: '1.0625rem' }, lineHeight: 1.7, maxWidth: '46ch' }}
             >
-              Mochimo's core contributors include engineers from networking, AI, telecommunications and cryptography. Most stay anonymous. Pull requests are open to anyone.
+              Mochimo's core contributors include engineers from networking, AI, telecommunications and cryptography. Most stay anonymous.
             </Typography>
 
             <Typography
