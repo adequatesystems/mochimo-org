@@ -834,7 +834,7 @@ function ExploreSection () {
 
 function WotsBand () {
   return (
-    <Box component='section' id='faq' sx={{ position: 'relative', overflow: 'hidden', bgcolor: tokens.brand, color: tokens.base, py: { xs: 10, md: 16 }, textAlign: 'center' }}>
+    <Box component='section' id='faq' sx={{ position: 'relative', overflow: 'hidden', bgcolor: tokens.brandBand, color: tokens.base, py: { xs: 10, md: 16 }, textAlign: 'center' }}>
       <Box aria-hidden sx={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/images/brand-mark-tile-dark.svg)', backgroundSize: { xs: '72px 72px', md: '96px 96px' }, backgroundPosition: 'center', opacity: 0.12, maskImage: 'radial-gradient(ellipse 70% 80% at 50% 50%, transparent 20%, #000 75%)', WebkitMaskImage: 'radial-gradient(ellipse 70% 80% at 50% 50%, transparent 20%, #000 75%)', pointerEvents: 'none' }} />
       <Container maxWidth='md' sx={{ position: 'relative' }}>
         <Reveal>
