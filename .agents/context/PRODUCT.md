@@ -17,7 +17,7 @@ web
 
 ## Product Purpose
 
-Mochimo (ticker MCM) is a cryptocurrency in which every address and transaction since the genesis block on June 25, 2018 has been signed with WOTS+, a hash-based one-time signature scheme that Shor's algorithm does not break. The network now runs on proof of stake; mining and proof of work are retired (owner, 2026-10-11). More proof of stake resources are coming. The website explains why that matters and routes visitors to buy MCM (Biconomy), store it (Mochimo Wallet Chrome extension), learn about proof of stake (the Proof of Stake page at /mining, with legacy miner downloads archived), explore the chain (Mochiscan), read the whitepaper, and contribute (GitHub, Discord).
+Mochimo (ticker MCM) is a cryptocurrency in which every address and transaction since the genesis block on June 25, 2018 has been signed with WOTS+, a hash-based one-time signature scheme that Shor's algorithm does not break. The network now runs on proof of stake; mining and proof of work are retired (owner, 2026-10-11). More proof of stake resources are coming. The website explains why that matters and routes visitors to buy MCM (Biconomy), store it (Tawara, the Mochimo wallet for Windows, macOS, Linux and Android, or the Mochimo Wallet Chrome extension), stake it (the Staking page at /staking, using Tawara), learn about proof of stake (the Proof of Stake page at /mining, with legacy miner downloads archived), explore the chain (Mochiscan), read the whitepaper, and contribute (GitHub, Discord).
 
 Success: a holder understands the quantum risk and Mochimo's answer within the first screen and reaches a buy or store path without hunting.
 
@@ -30,7 +30,7 @@ The mechanism a neighbour cannot truthfully copy: WOTS+ has protected every addr
 ## Operating Context
 
 - Publisher and copyright holder: **The Mochimo Foundation** (confirmed 2026-10-11). Adequate Systems, LLC is credited as the builder ("Built by" in the footer, /adq page) and is the operator named in the Mochimo Wallet Mobile terms and privacy policy.
-- Site: React (Create React App, react-scripts 5) with MUI 5 and Emotion; fonts self-hosted via @fontsource; routes and primary nav labels (Explorer, Mining, FAQ, Whitepaper, Wallet, Buy MCM) are stable and must not change without approval.
+- Site: React (Create React App, react-scripts 5) with MUI 5 and Emotion; fonts self-hosted via @fontsource; routes, primary nav labels (Explorer, Proof of Stake, Staking, FAQ, Whitepaper, Wallet) and the separate Buy MCM header button are stable and must not change without approval.
 - Live data comes from the MochiMap API (deu/sgp/usc-api.mochimap.com: chain, block, balance, richlist, transaction, network). As of 2026-10-11 these hosts do not resolve, so pages fall back to static values (max supply fallback, genesis date instead of live block height).
 - Governance: an on-chain PoW/PoS vote closed after May 7, 2026; results were presented in early May. Owner instruction (2026-10-11): Mochimo is officially on proof of stake; mining and proof of work are retired; more proof of stake resources are coming. Mochimo is not described as open source anywhere. Primary nav 'Mining' was renamed 'Proof of Stake' (route /mining unchanged) and 'Vote: PoW or PoS' was renamed 'PoS Vote' (owner-approved, 2026-10-11).
 
@@ -39,7 +39,8 @@ The mechanism a neighbour cannot truthfully copy: WOTS+ has protected every addr
 Confirmed product facts used on the site:
 - Signatures: WOTS+ (hash-based, one-time). WOTS+ is the one-time signature inside SLH-DSA, which NIST standardized as FIPS 205 in 2024.
 - Addresses: 2208-byte quantum public keys; a 20-byte tag gives an account a stable identity while the key changes on every spend.
-- Consensus: proof of stake. Proof of work (the "Peach" algorithm, FPGA-tough, mined on consumer GPUs) is retired. Do not describe validator or staking mechanics until the owner supplies them.
+- Consensus: proof of stake. Proof of work (the "Peach" algorithm, FPGA-tough, mined on consumer GPUs) is retired. `src/app/pages/Staking.js` (the /staking page) is the source for validator and staking mechanics. Describe only what that page states; anything beyond it needs owner confirmation first.
+- Wallets: Tawara is the Mochimo wallet for Windows, macOS, Linux and Android, and it also stakes MCM. Tawara creates and encrypts keys on the user's own device, and they never leave it. Staked coins stay at the user's own address, so the recovery phrase restores them along with the rest of the wallet. Tawara's source code is public (github.com/adequatelimited/Tawara-wallet); say that about the wallet only, because it does not change the rule against calling Mochimo open source. Downloads are GitHub releases: Tawara for desktop (github.com/adequatelimited/Tawara-wallet/releases/latest) and Tawara for Android (github.com/adequatelimited/Tawara-mobile/releases/latest). MCM can also be stored in the Mochimo Wallet Chrome extension or the Mochimo mobile wallets. In the header, primary nav 'Wallet' opens the Chrome extension and the drawer adds 'Tawara Wallet'.
 - ChainCrunch: compression that lets a full node start from a small, compressed portion of history (the site states about 50MB for the core verification component).
 - Pseudo-block failsafe (proof-of-work era): restored transaction clearing after a large loss of mining power. Not described as a current feature.
 - Three-way handshake: lightweight network acknowledgement protocol.
@@ -49,7 +50,7 @@ Confirmed product facts used on the site:
 
 Constraints:
 - Do not change routes, primary nav labels, legal copy (privacy policy, wallet terms) or the logo without owner approval.
-- Do not publish vote tallies or staking terms until the owner confirms them. Do not call Mochimo open source.
+- Do not publish vote tallies until the owner confirms them. Publish only the staking terms stated in `src/app/pages/Staking.js` (/staking); anything beyond that page needs owner confirmation first. Do not call Mochimo open source.
 - Do not expose specific node information: no node hostnames, IPs, locations, counts, latency, peer data or node maps (owner, 2026-10-11). The status page lists websites and APIs only; /network and /mfx/globe redirect away.
 
 Open decisions and known inconsistencies (do not resolve by guessing):
@@ -73,7 +74,7 @@ Open decisions and known inconsistencies (do not resolve by guessing):
 - Live data: MochiMap API (currently unreachable), GitHub contributors API, CoinGecko price.
 - Exchange: Biconomy (MCM/USDT) is the only listed exchange.
 
-Absent; never fabricate: testimonials, security audits or certifications, partner or customer logos, user, holder or hashrate counts, press coverage, patent numbers, roadmap dates, proof-of-stake staking terms or vote results, mobile wallet store links.
+Absent; never fabricate: testimonials, security audits or certifications, partner or customer logos, user, holder or hashrate counts, press coverage, patent numbers, roadmap dates, vote results, staking terms beyond `src/app/pages/Staking.js` (owner confirmation required), mobile wallet store links.
 
 ## Product Principles
 
