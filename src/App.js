@@ -16,6 +16,7 @@ import Footer from 'app/component/Footer';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
 import Vote from './app/pages/Vote';
+import Staking from './app/pages/Staking';
 
 const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
@@ -114,6 +115,7 @@ export default function App () {
               <Route path='mining' element={<Mining />} />
               <Route path='faq' element={<FAQ />} />
               <Route path='vote' element={<Vote />} />
+              <Route path='staking' element={<Staking />} />
             </Routes>
             </Box>
           </PageBody>

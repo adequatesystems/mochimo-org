@@ -31,6 +31,7 @@ export const BUY_MCM = {
 const primaryNav = [
   { label: 'Explorer', href: 'https://mochiscan.org', external: true },
   { label: 'Proof of Stake', to: '/mining' },
+  { label: 'Staking', to: '/staking' },
   { label: 'FAQ', to: '/faq' },
   { label: 'Whitepaper', href: '/assets/files/mochimo_wp_EN.pdf', external: true },
   {
@@ -42,6 +43,7 @@ const primaryNav = [
 
 const drawerNav = [
   ...primaryNav,
+  { label: 'Tawara Wallet', href: 'https://github.com/adequatelimited/Tawara-wallet/releases/latest', external: true },
   { label: 'PoS Vote', to: '/vote' },
   { label: 'Exchanges', to: '/exchanges-mcm' },
   { label: 'Meet The Team', to: '/meet-the-team' },
