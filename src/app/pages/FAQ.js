@@ -171,8 +171,10 @@ export default function FAQ () {
           </Card>
 
           <Card question='Where do I store my MCM?'>
-            For now, MCM can be stored in the{' '}
-            <Link href={WebWallet.href} target='_blank' rel='noopener noreferrer'>Mochimo Wallet Chrome extension</Link>{' '}
+            MCM can be stored in{' '}
+            <Link href='https://github.com/adequatelimited/Tawara-wallet/releases/latest' target='_blank' rel='noopener noreferrer'>Tawara</Link>,
+            the Mochimo wallet for Windows, macOS, Linux and Android, which also stakes MCM; in the{' '}
+            <Link href={WebWallet.href} target='_blank' rel='noopener noreferrer'>Mochimo Wallet Chrome extension</Link>;{' '}
             or in the Mochimo mobile wallets.
           </Card>
 

@@ -725,7 +725,7 @@ function ExploreSection () {
             </Box>
           </BentoTile>
 
-          <BentoTile to='/mining' sx={{ gridColumn: { md: '2 / 4' }, gridRow: { md: '1 / 2' }, p: { xs: 3, md: 3.5 }, minHeight: { md: 260 } }}>
+          <BentoTile to='/staking' sx={{ gridColumn: { md: '2 / 4' }, gridRow: { md: '1 / 2' }, p: { xs: 3, md: 3.5 }, minHeight: { md: 260 } }}>
             <Box
               aria-hidden
               sx={{
@@ -747,14 +747,14 @@ function ExploreSection () {
                   fontSize: { xs: '1.2rem', md: '1.35rem' },
                   color: tokens.text
                 }}
-              >Proof of stake
+              >Stake MCM with Tawara
               </Typography>
               <Typography sx={{ fontSize: '0.9375rem', lineHeight: 1.65, color: tokens.textDim, mt: 1 }}>
-                Mochimo now runs on proof of stake. Mining and proof of work are retired, and more resources are coming soon.
+                Tawara, the new Mochimo wallet for Windows, macOS, Linux and Android, is out. Stake MCM from it and earn a share of every block reward.
               </Typography>
               <Typography
                 sx={{ fontFamily: display, fontWeight: 600, fontSize: '0.875rem', color: tokens.brand, mt: 'auto', pt: 2.5 }}
-              >Read about proof of stake
+              >How staking works
               </Typography>
             </Box>
           </BentoTile>
