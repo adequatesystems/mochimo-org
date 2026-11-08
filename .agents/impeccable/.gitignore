@@ -1,0 +1,9 @@
+# The impeccable engine writes its runtime state here through the root .impeccable symlink.
+# Track the design sidecar and shared settings. Ignore everything else.
+*
+!.gitignore
+!design.json
+!config.json
+!live/
+live/*
+!live/config.json
