@@ -59,7 +59,7 @@ There is no test suite. Check a change with `npm run build` and in the dev serve
 - Do not change routes, primary nav labels, legal copy or the logo without owner approval.
 - Do not use em or en dashes in visible text or code comments.
 
-`src/app/pages/Staking.js` is the source for staking facts. `PRODUCT.md` predates that page and still says not to describe staking terms. Do not add a staking fact that is not on the page without the owner's confirmation.
+`src/app/pages/Staking.js` is the source for staking facts. Do not add a staking fact that is not on the page without the owner's confirmation.
 
 ## Git
 

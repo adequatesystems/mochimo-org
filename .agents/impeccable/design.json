@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-11T21:54:44Z",
+  "generatedAt": "2026-11-08T22:40:38Z",
   "title": "Design System: Mochimo",
   "extensions": {
     "colorMeta": {
@@ -15,6 +15,12 @@
         "displayName": "Deep Mint",
         "canonical": "oklch(67.0% 0.146 161.4)",
         "tonalRamp": ["#000F07", "#002A19", "#00472D", "#006C48", "#009464", "#2CBD84", "#5FE4A9", "#C2FFDF"]
+      },
+      "brand-band": {
+        "role": "primary",
+        "displayName": "Band Mint",
+        "canonical": "oklch(72.1% 0.154 162.6)",
+        "tonalRamp": ["#001007", "#002A19", "#00472E", "#006C49", "#009466", "#06BE85", "#51E6AA", "#C1FFE0"]
       },
       "slate-ground": {
         "role": "neutral",
@@ -131,7 +137,7 @@
       "kind": "nav",
       "refersTo": "nav",
       "description": "Slate bar, dim links, mint underline on hover and active.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-active\" href=\"#\">Proof of Stake</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a><a class=\"ds-nav-link\" href=\"#\">Whitepaper</a></nav>",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-active\" href=\"#\">Proof of Stake</a><a class=\"ds-nav-link\" href=\"#\">Staking</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a></nav>",
       "css": ".ds-nav{display:flex;gap:30px;align-items:center;background:rgba(23,33,36,.92);border-bottom:1px solid #24343A;padding:24px}.ds-nav-link{position:relative;font-family:Montserrat,system-ui,sans-serif;font-weight:500;font-size:14px;color:#B4BFC2;text-decoration:none;padding:6px 0;transition:color 180ms ease}.ds-nav-link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#15DC96;transform:scaleX(0);transform-origin:left;transition:transform 260ms cubic-bezier(0.22,1,0.36,1)}.ds-nav-link:hover,.ds-nav-link.ds-active{color:#F5F7F7}.ds-nav-link:hover::after,.ds-nav-link.ds-active::after{transform:scaleX(1)}.ds-nav-link:focus-visible{outline:2px solid #15DC96;outline-offset:3px}"
     },
     {
@@ -172,7 +178,7 @@
       "refersTo": "button-on-mint",
       "description": "The only control on a mint field; slate fill.",
       "html": "<div class=\"ds-band\"><button class=\"ds-btn-onmint\">Read the FAQ</button></div>",
-      "css": ".ds-band{background:#15DC96;padding:32px;border-radius:20px}.ds-btn-onmint{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:16px;background:#172124;color:#F5F7F7;border:0;border-radius:10px;padding:14px 30px;cursor:pointer;transition:background 200ms ease,color 200ms ease}.ds-btn-onmint:hover{background:#1D2A2E;color:#15DC96}.ds-btn-onmint:focus-visible{outline:2px solid #172124;outline-offset:3px}"
+      "css": ".ds-band{background:#15C288;padding:32px;border-radius:20px}.ds-btn-onmint{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:16px;background:#172124;color:#F5F7F7;border:0;border-radius:10px;padding:14px 30px;cursor:pointer;transition:background 200ms ease,color 200ms ease}.ds-btn-onmint:hover{background:#1D2A2E;color:#15DC96}.ds-btn-onmint:focus-visible{outline:2px solid #172124;outline-offset:3px}"
     }
   ],
   "narrative": {
@@ -213,6 +219,11 @@
         "section": "typography"
       },
       {
+        "name": "The One Poem Rule",
+        "body": "Redressed appears only for the block haiku; it is the single expressive exception to the system's restraint.",
+        "section": "typography"
+      },
+      {
         "name": "The Hairline Rule",
         "body": "If something needs separating, use a 1px line or a tonal step. A shadow is never the answer.",
         "section": "elevation"
@@ -221,11 +232,6 @@
         "name": "The No Glow Rule",
         "body": "No outer glows, no neon, no gradient text. The brandbook lists effects as logo misuse; the same applies to the interface.",
         "section": "elevation"
-      },
-      {
-        "name": "The One Poem Rule",
-        "body": "Redressed appears only for the block haiku; it is the single expressive exception to the system's restraint.",
-        "section": "typography"
       }
     ],
     "dos": [
