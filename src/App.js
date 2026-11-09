@@ -1,4 +1,4 @@
-import { forwardRef, lazy, Suspense, useEffect, useMemo } from 'react';
+import { forwardRef, useEffect, useMemo } from 'react';
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -13,12 +13,11 @@ import {
 import Status from 'app/status';
 import Homepage from 'app/homepage';
 import Footer from 'app/component/Footer';
+import BackgroundWave from 'app/component/BackgroundWave';
 import Mining from './app/pages/Mining';
 import FAQ from './app/pages/FAQ';
 import Vote from './app/pages/Vote';
 import Staking from './app/pages/Staking';
-
-const BackgroundWave = lazy(() => import('app/component/BackgroundWave'));
 
 const FULL_BLEED = ['/'];
 
@@ -89,13 +88,7 @@ export default function App () {
                 <Route path='*' element={null} />
               </Route>
               <Route path='network' element={null} />
-              <Route
-                path='*' element={(
-                  <Suspense fallback={null}>
-                    <BackgroundWave />
-                  </Suspense>
-                )}
-              />
+              <Route path='*' element={<BackgroundWave />} />
             </Routes>
             <Box sx={{ position: 'relative', zIndex: 1 }}>
             <Routes>
