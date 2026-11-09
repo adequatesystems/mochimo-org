@@ -16,14 +16,23 @@ export function Reveal ({ children, delay = 0, sx }) {
     const rect = node.getBoundingClientRect();
     if (rect.top < window.innerHeight * 0.92) return undefined; // already on screen: never hide
     setState('hidden');
-    const observer = new IntersectionObserver(([entry]) => {
+    const show = ([entry]) => {
       if (entry.isIntersecting) {
         setState('shown');
         observer.disconnect();
+        tallObserver.disconnect();
       }
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    };
+    const observer = new IntersectionObserver(show, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    // 15% of a very tall block can be more than fits on a short screen, so the threshold above never passes
+    // This shows it once its top reaches mid screen, and also shows blocks over 2.8 screens tall a little sooner
+    const tallObserver = new IntersectionObserver(show, { rootMargin: '0px 0px -50% 0px' });
     observer.observe(node);
-    return () => observer.disconnect();
+    tallObserver.observe(node);
+    return () => {
+      observer.disconnect();
+      tallObserver.disconnect();
+    };
   }, []);
 
   const hidden = state === 'hidden';
