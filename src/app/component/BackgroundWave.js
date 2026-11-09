@@ -166,6 +166,7 @@ export default function BackgroundWave () {
     let lastDraw = 0;
     let halfWidth = 0;
     let halfHeight = 0;
+    let windowShape = 1;
     let mouseX = 0;
     let mouseY = 0;
     const header = document.querySelector('header');
@@ -179,10 +180,18 @@ export default function BackgroundWave () {
 
     const tick = (now) => {
       frame = window.requestAnimationFrame(tick);
-      if (now - lastDraw < FRAME_MS - 1) return;
+      // timestamps jitter by about 2 ms on a 120 Hz display, and a tighter margin skips a refresh, so frames land 25 ms and then 8 ms apart
+      if (now - lastDraw < FRAME_MS - 2.5) return;
       // a multiple of 60 Hz stays locked to the display's refresh, any other rate advances on a fixed timeline to still reach 60 fps
       lastDraw = Math.abs(now - lastDraw - FRAME_MS) < 1 ? now : Math.max(lastDraw + FRAME_MS, now - FRAME_MS);
       draw(now);
+    };
+
+    // read at mount, on the window resize event and when the observer reports the box changed, not per mouse move, because pinch zoom in Safari changes the window values without a resize
+    const readWindow = () => {
+      halfWidth = window.innerWidth / 2;
+      halfHeight = window.innerHeight / 2;
+      windowShape = window.innerWidth / window.innerHeight;
     };
 
     const resize = () => {
@@ -197,15 +206,17 @@ export default function BackgroundWave () {
       // setting either one reallocates the buffer even when the value is the same, and the window event and the observer both land here
       if (canvas.width !== width) canvas.width = width;
       if (canvas.height !== canvasHeight) canvas.height = canvasHeight;
-      // read here and not per event, because pinch zoom in Safari changes these without a resize
-      halfWidth = window.innerWidth / 2;
-      halfHeight = window.innerHeight / 2;
       canvas.style.top = `${top}px`;
       canvas.style.height = `${canvasHeight}px`;
       // keeps the projection of the full viewport while only part of it has pixels
       gl.viewport(-SIDE_REACH, canvasHeight + top - height, width + 2 * SIDE_REACH, height);
-      // the shape follows the window including a classic scrollbar, and the factor undoes the wider clip volume
-      gl.uniformMatrix4fv(uniforms.projection, false, perspective((window.innerWidth / window.innerHeight) * ((width + 2 * SIDE_REACH) / width)));
+      // the shape follows the window including a classic scrollbar
+      // the rubber band of a pinch zoom out makes the visual viewport wider than the box, and there the shape follows the box
+      // the visual viewport leaves out a classic scrollbar, and the 1 px margin covers clientWidth rounding at browser zoom
+      const view = window.visualViewport;
+      const shape = view && view.width - width > 1 ? width / height : windowShape;
+      // the factor undoes the wider clip volume
+      gl.uniformMatrix4fv(uniforms.projection, false, perspective(shape * ((width + 2 * SIDE_REACH) / width)));
       gl.uniform1f(uniforms.focal, height / (2 * Math.tan((FOV * Math.PI) / 360)));
       // changing the size clears the canvas, so it is redrawn straight away
       draw(reducedMotion ? 0 : window.performance.now());
@@ -258,6 +269,15 @@ export default function BackgroundWave () {
       if (!reducedMotion) frame = window.requestAnimationFrame(tick);
     };
 
+    const handleWindowResize = () => {
+      readWindow();
+      resize();
+    };
+    // a context restore or the header alone also lands in resize, and under zoom the window values are smaller, so neither rereads them
+    const handleObserved = (entries) => {
+      if (entries.some((entry) => entry.target === box)) readWindow();
+      resize();
+    };
     const handleMouse = (event) => {
       mouseX = event.clientX - halfWidth;
       mouseY = event.clientY - halfHeight;
@@ -277,10 +297,11 @@ export default function BackgroundWave () {
       window.cancelAnimationFrame(frame);
     };
 
+    readWindow();
     start();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', handleWindowResize);
     // the header eases to its new height after a breakpoint, so the canvas has to follow it
-    const headerObserver = window.ResizeObserver && header ? new window.ResizeObserver(resize) : null;
+    const headerObserver = window.ResizeObserver && header ? new window.ResizeObserver(handleObserved) : null;
     if (headerObserver) {
       headerObserver.observe(header);
       headerObserver.observe(box);
@@ -292,7 +313,7 @@ export default function BackgroundWave () {
     canvas.addEventListener('webglcontextrestored', start);
     return () => {
       window.cancelAnimationFrame(frame);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', handleWindowResize);
       if (headerObserver) headerObserver.disconnect();
       window.removeEventListener('mousemove', handleMouse);
       if (motionQuery.removeEventListener) motionQuery.removeEventListener('change', handleMotionChange);
