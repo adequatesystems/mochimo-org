@@ -16,12 +16,49 @@ export function Reveal ({ children, delay = 0, sx }) {
     const rect = node.getBoundingClientRect();
     if (rect.top < window.innerHeight * 0.92) return undefined; // already on screen: never hide
     setState('hidden');
+    let width = window.innerWidth;
+    let settling = 0;
+    const reveal = () => {
+      setState('shown');
+      observer.disconnect();
+      tallObserver.disconnect();
+      window.removeEventListener('resize', onResize);
+      node.removeEventListener('focusin', onFocus);
+      cancelAnimationFrame(settling);
+    };
     const show = ([entry]) => {
-      if (entry.isIntersecting) {
-        setState('shown');
-        observer.disconnect();
-        tallObserver.disconnect();
-      }
+      if (entry.isIntersecting) reveal();
+    };
+    // Rotating a phone can put a hidden block on screen with no scroll, so check again when the width changes
+    // Height alone is skipped because the iOS toolbar changes it during a scroll
+    const onResize = () => {
+      if (window.innerWidth === width) return;
+      width = window.innerWidth;
+      const box = node.getBoundingClientRect();
+      if (box.top < window.innerHeight * 0.92 && box.bottom > 0) reveal();
+    };
+    // Tab can land on a link in a hidden block, and the focus scroll is smooth, so wait for it to stop
+    // An observer usually fires during that scroll, so the block still fades in on screen
+    const onFocus = () => {
+      if (settling) return;
+      const start = performance.now();
+      let y = window.scrollY;
+      let still = 0;
+      const check = () => {
+        if (window.scrollY === y) {
+          still += 1;
+        } else {
+          still = 0;
+          y = window.scrollY;
+        }
+        if (still >= 4 || performance.now() - start > 1500) {
+          // Focus with no scroll, or a fast burst of Tabs, can leave the block off screen, so leave it to the observers then
+          settling = 0;
+          const box = node.getBoundingClientRect();
+          if (box.top < window.innerHeight && box.bottom > 0) reveal();
+        } else settling = requestAnimationFrame(check);
+      };
+      settling = requestAnimationFrame(check);
     };
     const observer = new IntersectionObserver(show, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     // 15% of a very tall block can be more than fits on a short screen, so the threshold above never passes
@@ -29,9 +66,14 @@ export function Reveal ({ children, delay = 0, sx }) {
     const tallObserver = new IntersectionObserver(show, { rootMargin: '0px 0px -50% 0px' });
     observer.observe(node);
     tallObserver.observe(node);
+    window.addEventListener('resize', onResize);
+    node.addEventListener('focusin', onFocus);
     return () => {
       observer.disconnect();
       tallObserver.disconnect();
+      window.removeEventListener('resize', onResize);
+      node.removeEventListener('focusin', onFocus);
+      cancelAnimationFrame(settling);
     };
   }, []);
 
@@ -47,6 +89,9 @@ export function Reveal ({ children, delay = 0, sx }) {
           ? `opacity 800ms ${REVEAL_EASE} ${delay}ms, transform 800ms ${REVEAL_EASE} ${delay}ms, filter 800ms ${REVEAL_EASE} ${delay}ms`
           : 'none',
         willChange: hidden ? 'opacity, transform, filter' : 'auto',
+        // The observers do not run for print, so a block not yet scrolled to would print blank
+        // No transition helps a block caught mid fade print in full in some browsers, but not in Safari's print
+        '@media print': { opacity: 1, transform: 'none', filter: 'none', transition: 'none' },
         ...sx
       }}
     >{children}
