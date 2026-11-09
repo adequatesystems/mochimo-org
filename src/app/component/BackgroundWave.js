@@ -1,3 +1,4 @@
+// @refresh reset
 import { useEffect, useRef } from 'react';
 
 const AMOUNTX = 60;
@@ -10,6 +11,8 @@ const FRAME_MS = 1000 / 60;
 const LOOP_SECONDS = 20 * Math.PI;
 // no dot reaches past this fraction of the viewport height on any screen up to 8K, so the canvas stops here
 const CANVAS_BOTTOM = 0.46;
+// some drivers drop a wide point whole once its center leaves the clip volume, so the clip volume reaches past the canvas sides
+const SIDE_REACH = 64;
 
 const VERTEX_SHADER = `
   precision highp float;
@@ -41,8 +44,7 @@ const VERTEX_SHADER = `
     gl_Position.xy *= -1.0;
 
     float fromTop = 0.5 - 0.5 * gl_Position.y / gl_Position.w;
-    float fade = fromTop < 0.45 ? mix(1.0, 0.5, fromTop / 0.45) : mix(0.5, 0.0, (fromTop - 0.45) / 0.35);
-    opacity = 0.26 * clamp(fade, 0.0, 1.0);
+    opacity = 0.26 * clamp(mix(1.0, 0.5, fromTop / 0.45), 0.0, 1.0);
 
     // the sprite faces along the ray to the camera, so its shading frame is built around that ray
     vec3 toCamera = normalize(-viewPosition.xyz);
@@ -68,6 +70,8 @@ const VERTEX_SHADER = `
   }
 `;
 
+// the mint #15DC96 in linear color, at the light's intensity of 1.5 and with its highlight, is the vec3 passed to toneMap
+// toneMap is the ACES filmic curve, and the pow line after it is the sRGB transfer function without its linear toe
 const FRAGMENT_SHADER = `
   precision mediump float;
   varying vec3 lightDirection;
@@ -148,9 +152,11 @@ function cameraView (mouseX, mouseY) {
 }
 
 export default function BackgroundWave () {
+  const boxRef = useRef(null);
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const box = boxRef.current;
     const canvas = canvasRef.current;
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     let reducedMotion = motionQuery.matches;
@@ -158,8 +164,11 @@ export default function BackgroundWave () {
     let uniforms = null;
     let frame = 0;
     let lastDraw = 0;
+    let halfWidth = 0;
+    let halfHeight = 0;
     let mouseX = 0;
     let mouseY = 0;
+    const header = document.querySelector('header');
 
     const draw = (now) => {
       gl.uniform1f(uniforms.time, (now / 1000) % LOOP_SECONDS);
@@ -178,20 +187,25 @@ export default function BackgroundWave () {
 
     const resize = () => {
       if (!uniforms) return;
-      // one canvas pixel per CSS pixel, as in the three.js version
-      const width = canvas.clientWidth;
-      const height = window.innerHeight;
+      // one canvas pixel per CSS pixel, the resolution the wave has always drawn at
+      // measured from the fixed box, because window.innerHeight in Safari shrinks with pinch zoom
+      const width = box.clientWidth;
+      const height = box.clientHeight;
       // the canvas starts below the header, so nothing animates behind the header's backdrop blur
-      const header = document.querySelector('header');
       const top = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
       const canvasHeight = Math.max(Math.round(height * CANVAS_BOTTOM) - top, 1);
-      canvas.width = width;
-      canvas.height = canvasHeight;
+      // setting either one reallocates the buffer even when the value is the same, and the window event and the observer both land here
+      if (canvas.width !== width) canvas.width = width;
+      if (canvas.height !== canvasHeight) canvas.height = canvasHeight;
+      // read here and not per event, because pinch zoom in Safari changes these without a resize
+      halfWidth = window.innerWidth / 2;
+      halfHeight = window.innerHeight / 2;
       canvas.style.top = `${top}px`;
       canvas.style.height = `${canvasHeight}px`;
       // keeps the projection of the full viewport while only part of it has pixels
-      gl.viewport(0, canvasHeight + top - height, width, height);
-      gl.uniformMatrix4fv(uniforms.projection, false, perspective(width / height));
+      gl.viewport(-SIDE_REACH, canvasHeight + top - height, width + 2 * SIDE_REACH, height);
+      // the shape follows the window including a classic scrollbar, and the factor undoes the wider clip volume
+      gl.uniformMatrix4fv(uniforms.projection, false, perspective((window.innerWidth / window.innerHeight) * ((width + 2 * SIDE_REACH) / width)));
       gl.uniform1f(uniforms.focal, height / (2 * Math.tan((FOV * Math.PI) / 360)));
       // changing the size clears the canvas, so it is redrawn straight away
       draw(reducedMotion ? 0 : window.performance.now());
@@ -220,7 +234,7 @@ export default function BackgroundWave () {
         view: gl.getUniformLocation(program, 'view'),
         projection: gl.getUniformLocation(program, 'projection')
       };
-      // back rows first, so nearer dots paint over farther ones without a depth buffer
+      // back rows first, so that without EXT_blend_minmax nearer dots paint over farther ones
       const grid = new Float32Array(AMOUNTX * AMOUNTZ * 2);
       let index = 0;
       for (let iz = 0; iz < AMOUNTZ; iz++) {
@@ -245,9 +259,8 @@ export default function BackgroundWave () {
     };
 
     const handleMouse = (event) => {
-      if (event.isPrimary === false) return;
-      mouseX = event.clientX - window.innerWidth / 2;
-      mouseY = event.clientY - window.innerHeight / 2;
+      mouseX = event.clientX - halfWidth;
+      mouseY = event.clientY - halfHeight;
     };
     const handleMotionChange = () => {
       reducedMotion = motionQuery.matches;
@@ -267,9 +280,11 @@ export default function BackgroundWave () {
     start();
     window.addEventListener('resize', resize);
     // the header eases to its new height after a breakpoint, so the canvas has to follow it
-    const header = document.querySelector('header');
     const headerObserver = window.ResizeObserver && header ? new window.ResizeObserver(resize) : null;
-    if (headerObserver) headerObserver.observe(header);
+    if (headerObserver) {
+      headerObserver.observe(header);
+      headerObserver.observe(box);
+    }
     if (!reducedMotion) window.addEventListener('mousemove', handleMouse);
     // Safari before 14 has no addEventListener on a media query list
     if (motionQuery.addEventListener) motionQuery.addEventListener('change', handleMotionChange);
@@ -289,19 +304,22 @@ export default function BackgroundWave () {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={boxRef}
       aria-hidden
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        display: 'block',
-        width: '100%',
-        height: `${CANVAS_BOTTOM * 100}%`,
-        zIndex: 0,
-        pointerEvents: 'none'
-      }}
-    />
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, pointerEvents: 'none' }}
+    >
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          display: 'block',
+          width: '100%',
+          height: `${CANVAS_BOTTOM * 100}%`
+        }}
+      />
+    </div>
   );
 }
