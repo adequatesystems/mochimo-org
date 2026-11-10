@@ -46,7 +46,9 @@ export default function FAQ () {
       <PageHero title='Frequently Asked Questions' lede='Supply, launch history, quantum resistance, proof of stake, and storage.' />
 
       <Reveal delay={80}>
-        <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5} sx={{ margin: 0 }}>
+        {/* While fonts load, cards can wrap past the right edge for a moment, and iPad Safari then zooms the page out.
+            Clipping on screen stops that. Print is left alone, because there the clip would cut cards off */}
+        <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5} sx={{ margin: 0, '@media screen': { overflowX: 'clip' } }}>
           <Card question='Does Mochimo run on proof of stake?'>
             Yes. Mochimo now runs on proof of stake. Mining and proof of work
             are retired, and more resources about proof of stake are coming
