@@ -47,8 +47,12 @@ export default function FAQ () {
 
       <Reveal delay={80}>
         {/* While fonts load, cards can wrap past the right edge for a moment, and iPad Safari then zooms the page out.
-            Clipping on screen stops that. Print is left alone, because there the clip would cut cards off */}
-        <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5} sx={{ margin: 0, '@media screen': { overflowX: 'clip' } }}>
+            Clipping on screen stops that. The clip is screen only, because in print it would cut cards off.
+            In print the column layout loses cards that cross a page break, so print lists the cards one after another */}
+        <Masonry
+          columns={{ xs: 1, sm: 2, lg: 3 }} spacing={2.5}
+          sx={{ margin: 0, '@media screen': { overflowX: 'clip' }, '@media print': { display: 'block', height: 'auto', '& > *': { width: 'auto' } } }}
+        >
           <Card question='Does Mochimo run on proof of stake?'>
             Yes. Mochimo now runs on proof of stake. Mining and proof of work
             are retired, and more resources about proof of stake are coming
