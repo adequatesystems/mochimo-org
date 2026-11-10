@@ -3,6 +3,8 @@ import { Box, Container, Typography } from '@mui/material';
 import { tokens, fx, mono, display } from 'theme';
 
 const REVEAL_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+// Only Safari's engine prints a block mid fade as it looks, so other browsers keep the fade running on screen
+const FINISH_FOR_PRINT = typeof navigator !== 'undefined' && /AppleWebKit/.test(navigator.userAgent) && !/Chrome\/|Chromium\/|Edg\//.test(navigator.userAgent);
 
 export function Reveal ({ children, delay = 0, sx }) {
   const ref = useRef(null);
@@ -77,6 +79,20 @@ export function Reveal ({ children, delay = 0, sx }) {
     };
   }, []);
 
+  // Safari prints a block caught mid fade as it looks at that moment, so finish the fade when printing starts
+  useEffect(() => {
+    const node = ref.current;
+    if (!FINISH_FOR_PRINT || state !== 'shown' || !node || typeof node.getAnimations !== 'function') return undefined;
+    const finish = () => node.getAnimations().forEach((a) => a.finish());
+    const stop = () => window.removeEventListener('beforeprint', finish);
+    window.addEventListener('beforeprint', finish);
+    const timer = setTimeout(stop, delay + 1000);
+    return () => {
+      clearTimeout(timer);
+      stop();
+    };
+  }, [state, delay]);
+
   const hidden = state === 'hidden';
   return (
     <Box
@@ -90,7 +106,7 @@ export function Reveal ({ children, delay = 0, sx }) {
           : 'none',
         willChange: hidden ? 'opacity, transform, filter' : 'auto',
         // The observers do not run for print, so a block not yet scrolled to would print blank
-        // No transition helps a block caught mid fade print in full in some browsers, but not in Safari's print
+        // No transition helps a block caught mid fade print in full in most browsers; Safari needs the print handler above
         '@media print': { opacity: 1, transform: 'none', filter: 'none', transition: 'none' },
         ...sx
       }}
