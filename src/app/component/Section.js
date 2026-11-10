@@ -27,6 +27,9 @@ export function Reveal ({ children, delay = 0, sx }) {
       window.removeEventListener('resize', onResize);
       node.removeEventListener('focusin', onFocus);
       cancelAnimationFrame(settling);
+      if (viewport) viewport.removeEventListener('resize', onViewportResize);
+      clearTimeout(settle);
+      unpinch();
     };
     const show = ([entry]) => {
       if (entry.isIntersecting) reveal();
@@ -62,6 +65,36 @@ export function Reveal ({ children, delay = 0, sx }) {
       };
       settling = requestAnimationFrame(check);
     };
+    // A pinch zoom leaves the layout viewport larger than what is on screen, and the observers only see the layout viewport
+    // So while pinched, and only then, also check the visible area. Page Zoom keeps the two the same width once it settles
+    const viewport = window.visualViewport;
+    const pinched = () => viewport.width < document.documentElement.clientWidth - 1;
+    const onPinchedScroll = () => {
+      if (!pinched()) return;
+      const box = node.getBoundingClientRect();
+      const top = box.top + window.scrollY - viewport.pageTop;
+      const left = box.left + window.scrollX - viewport.pageLeft;
+      if (top < viewport.height * 0.92 && top + box.height > 0 && left < viewport.width && left + box.width > 0) reveal();
+    };
+    // Chrome sends no visualViewport scroll while the layout viewport carries the pinched view along, so listen to both
+    const unpinch = () => {
+      if (!viewport) return;
+      viewport.removeEventListener('scroll', onPinchedScroll);
+      window.removeEventListener('scroll', onPinchedScroll);
+    };
+    const checkPinch = () => {
+      if (pinched()) {
+        viewport.addEventListener('scroll', onPinchedScroll);
+        window.addEventListener('scroll', onPinchedScroll);
+        onPinchedScroll();
+      } else unpinch();
+    };
+    // Changing Page Zoom quickly can report one stale size on the way, so act once the size has settled
+    let settle = 0;
+    const onViewportResize = () => {
+      clearTimeout(settle);
+      settle = setTimeout(checkPinch, 100);
+    };
     const observer = new IntersectionObserver(show, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     // 15% of a very tall block can be more than fits on a short screen, so the threshold above never passes
     // This shows it once its top reaches mid screen, and also shows blocks over 2.8 screens tall a little sooner
@@ -70,12 +103,20 @@ export function Reveal ({ children, delay = 0, sx }) {
     tallObserver.observe(node);
     window.addEventListener('resize', onResize);
     node.addEventListener('focusin', onFocus);
+    // A route change while pinched mounts new blocks with no resize to come, so check once now
+    if (viewport) {
+      viewport.addEventListener('resize', onViewportResize);
+      checkPinch();
+    }
     return () => {
       observer.disconnect();
       tallObserver.disconnect();
       window.removeEventListener('resize', onResize);
       node.removeEventListener('focusin', onFocus);
       cancelAnimationFrame(settling);
+      if (viewport) viewport.removeEventListener('resize', onViewportResize);
+      clearTimeout(settle);
+      unpinch();
     };
   }, []);
 
